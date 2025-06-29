@@ -12,7 +12,6 @@ class CardComponent extends HTMLElement {
 
 
   connectedCallback() {
-    console.log(globalStyleSheet.cssRules);
     (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     this.render();
   }

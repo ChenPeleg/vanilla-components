@@ -1,13 +1,5 @@
-import styleUrl from '../style.css?url';
 
-const res = await fetch(styleUrl, {
-    headers : {
-        'Content-Type': 'text/css'
-    }
-});
-const css = await res.text();
-
+import markdownString from '../generated/tailwind-input.css?raw'
 const cssStyleSheet = new CSSStyleSheet();
-cssStyleSheet.replaceSync(css);
-console.log(css);
+cssStyleSheet.replaceSync(markdownString);
 export const globalStyleSheet = cssStyleSheet;
