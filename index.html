@@ -1,16 +1,15 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite + TS</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <h1 class="text-3xl font-bold underline  ">
-      Hello world!
-    </h1>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+<head>
+    <meta charset="UTF-8"/>
+    <link href="/vite.svg" rel="icon" type="image/svg+xml"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <script src="/src/imports/imported-components.ts" type="module"></script>
+    <title>Custom elements</title>
+</head>
+<body>
+<div id="app"></div>
+<card-component header="card-header" text="text"></card-component>
+<script src="/src/main.ts" type="module"></script>
+</body>
 </html>
