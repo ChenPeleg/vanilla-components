@@ -9,7 +9,7 @@ class CardComponent extends HTMLElement implements CustomElement {
         this.attachShadow({mode: 'open'});
     }
 
-    static get observedAttributes() {
+    static get  observedAttributes() {
         return ['header', 'text'];
     }
 

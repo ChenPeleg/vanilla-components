@@ -70,4 +70,5 @@ interface CustomElementMethods  {
 
 
 }
+
 export type CustomElement = Partial<CustomElementMethods>
