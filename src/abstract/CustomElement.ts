@@ -1,13 +1,16 @@
-export interface CustomElement  {
 
+interface CustomElementMethods  {
     /**
-     * Returns the list of attribute names to observe for changes. When one of these attributes changes, attributeChangedCallback will be invoked.
-     * This must be implemented as a static getter in subclasses.
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/CustomElementRegistry/define#observedattributes
+     * A static method that returns an array of attribute names to observe for changes.
+     * @static
+     * @return {string[]}
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/CustomElement/observedAttributes
      * @example
-     * static get observedAttributes() { return ['value', 'checked']; }
+     * static observedAttributes() {
+     *   return ['value', 'disabled'];
+     * }
      */
-      get observedAttributes(): string[]  ;
+    observedAttributes?(): string[]  ;
 
     /**
      * Called each time the element is added to the document.
@@ -18,7 +21,7 @@ export interface CustomElement  {
      *   this.render();
      * }
      */
-    connectedCallback(): void
+    connectedCallback?(): void
 
     /**
      * Called each time the element is removed from the document.
@@ -28,7 +31,7 @@ export interface CustomElement  {
      *   // Cleanup logic here
      * }
      */
-    disconnectedCallback(): void
+    disconnectedCallback?(): void
 
     /**
      * When defined, this is called instead of connectedCallback() and disconnectedCallback() each time the element is moved to a different place in the DOM via Element.moveBefore().
@@ -40,7 +43,7 @@ export interface CustomElement  {
      *   // Handle move logic here
      * }
      */
-    connectedMoveCallback(): void
+    connectedMoveCallback?(): void
 
     /**
      * Called each time the element is moved to a new document.
@@ -50,19 +53,20 @@ export interface CustomElement  {
      *   // Handle adoption logic here
      * }
      */
-    adoptedCallback(): void ;
+    adoptedCallback?(): void ;
 
     /**
      * Called when attributes are changed, added, removed, or replaced.
      * See Responding to attribute changes for more details about this callback.
-     * @see https://developer.mozilla.org/en-US/docs/Web/API/CustomElement/attributeChangedCallback
+     * @see https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#responding_to_attribute_changes
      * @example
-     * attributeChangedCallback(name, oldValue, newValue) {
+     * attributeChangedCallback(name :string, oldValue, newValue) {
      *   if (name === 'value') {
      *     this.render();
      *   }
      * }
      */
-    attributeChangedCallback(name: string, oldValue: string, newValue: string): void ;
+    attributeChangedCallback?(name: string, oldValue: string, newValue: string): void ;
 
 }
+export type CustomElement = Partial<CustomElementMethods>
