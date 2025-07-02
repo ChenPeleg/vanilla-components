@@ -1,5 +1,5 @@
 
-import markdownString from '../css/generated-tailwind.css?raw'
+import markdownString from '../style.css?inline'
 
 const cssStyleSheet = new CSSStyleSheet();
 cssStyleSheet.replaceSync(markdownString);
