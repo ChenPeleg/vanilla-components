@@ -9,7 +9,6 @@ class CardComponent extends CustomElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
-
   }
 
 

@@ -1,4 +1,4 @@
-export class CustomElement extends HTMLElement {
+export interface CustomElement  {
 
     /**
      * Returns the list of attribute names to observe for changes. When one of these attributes changes, attributeChangedCallback will be invoked.
@@ -7,7 +7,7 @@ export class CustomElement extends HTMLElement {
      * @example
      * static get observedAttributes() { return ['value', 'checked']; }
      */
-    static get observedAttributes(): string[] { return []; }
+      get observedAttributes(): string[]  ;
 
     /**
      * Called each time the element is added to the document.
@@ -18,7 +18,7 @@ export class CustomElement extends HTMLElement {
      *   this.render();
      * }
      */
-    connectedCallback(): void {}
+    connectedCallback(): void
 
     /**
      * Called each time the element is removed from the document.
@@ -28,7 +28,7 @@ export class CustomElement extends HTMLElement {
      *   // Cleanup logic here
      * }
      */
-    disconnectedCallback(): void {}
+    disconnectedCallback(): void
 
     /**
      * When defined, this is called instead of connectedCallback() and disconnectedCallback() each time the element is moved to a different place in the DOM via Element.moveBefore().
@@ -40,7 +40,7 @@ export class CustomElement extends HTMLElement {
      *   // Handle move logic here
      * }
      */
-    connectedMoveCallback(): void {}
+    connectedMoveCallback(): void
 
     /**
      * Called each time the element is moved to a new document.
@@ -50,7 +50,7 @@ export class CustomElement extends HTMLElement {
      *   // Handle adoption logic here
      * }
      */
-    adoptedCallback(): void {}
+    adoptedCallback(): void ;
 
     /**
      * Called when attributes are changed, added, removed, or replaced.
@@ -63,6 +63,6 @@ export class CustomElement extends HTMLElement {
      *   }
      * }
      */
-    attributeChangedCallback(name: string, oldValue: string, newValue: string): void {}
+    attributeChangedCallback(name: string, oldValue: string, newValue: string): void ;
 
 }
