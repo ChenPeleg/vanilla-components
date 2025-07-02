@@ -1,0 +1,40 @@
+{
+  "$schema": "http://json.schemastore.org/web-types",
+  "name": "vanilla-elements",
+  "version": "0.0.0",
+  "contributions": {
+    "html": {
+      "tags": [
+        {
+          "name": "card-component",
+          "description": "A card UI component with header and text attributes.",
+          "attributes": [
+            {
+              "name": "header",
+              "description": "Header text for the card."
+            },
+            {
+              "name": "text",
+              "description": "Main text content for the card."
+            }
+          ]
+        },
+        {
+          "name": "big-card-component",
+          "description": "A large card UI component with header and text attributes.",
+          "attributes": [
+            {
+              "name": "header",
+              "description": "Header text for the big card."
+            },
+            {
+              "name": "text",
+              "description": "Main text content for the big card."
+            }
+          ]
+        }
+      ]
+    }
+  }
+}
+
