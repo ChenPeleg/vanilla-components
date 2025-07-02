@@ -1,4 +1,4 @@
-import {globalStyleSheet} from '../styles/globalStyleSheets.ts';
+import {globalStyleSheet} from '../styles/tailwind-style-sheet.ts';
 
 class CardComponent extends HTMLElement {
   static get observedAttributes() {
@@ -12,7 +12,7 @@ class CardComponent extends HTMLElement {
 
 
   connectedCallback() {
-    (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
+     (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     this.render();
   }
 
@@ -24,6 +24,9 @@ class CardComponent extends HTMLElement {
     const header = this.getAttribute('header') || '';
     const text = this.getAttribute('text') || '';
     this.shadowRoot!.innerHTML = ` 
+ <style>
+ @import "tailwindcss";
+</style>
       <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white p-6">
         <div class="font-bold text-xl mb-2">${header}</div>
         <p class="text-gray-700 text-base">${text}</p>

@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview",
-    "generate": "npx @tailwindcss/cli -i ./src/style.css -o ./src/generated/tailwind-input.css"
+    "generate": "npx @tailwindcss/cli -i ./src/style.css -o src/generated/generated-tailwind.css"
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",
