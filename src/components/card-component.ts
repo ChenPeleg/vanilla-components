@@ -1,6 +1,7 @@
 import {globalStyleSheet} from '../styles/tailwind-style-sheet.ts';
+import {CustomElement} from '../abstract/CustomElement.ts';
 
-class CardComponent extends HTMLElement {
+class CardComponent extends CustomElement {
   static get observedAttributes() {
     return ['header', 'text'];
   }
@@ -8,15 +9,16 @@ class CardComponent extends HTMLElement {
   constructor() {
     super();
     this.attachShadow({ mode: 'open' });
+
   }
 
 
-  connectedCallback() {
+  connectedCallback():void {
      (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
     this.render();
   }
 
-  attributeChangedCallback() {
+  attributeChangedCallback(_name : string, _oldValue : string, _newValue : string) {
     this.render();
   }
 
