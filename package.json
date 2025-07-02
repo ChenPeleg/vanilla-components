@@ -15,5 +15,6 @@
     "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3",
     "vite": "^7.0.0"
-  }
+  },
+  "web-types": "./_tasks/web-types.json"
 }

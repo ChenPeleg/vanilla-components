@@ -37,7 +37,7 @@ export class RunOnFileChange {
         const fileChanged = process.argv[2];
         const changedFileResult = await this.getFileContent(fileChanged);
         if (changedFileResult.includes('run-on-file-change') ||
-            !changedFileResult.includes('@customElement')) {
+            !changedFileResult.includes('customElements.define')) {
             return;
         }
         const statement = this.buildImportStatement(fileChanged);
