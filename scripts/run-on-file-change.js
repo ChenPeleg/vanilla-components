@@ -1,4 +1,4 @@
-// @ts-check
+// @ts-checkImports
 /**
  * Script to add import statements for files with customElements.define on file change.
  * @module run-on-file-change

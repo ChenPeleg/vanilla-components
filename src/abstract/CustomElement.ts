@@ -14,7 +14,7 @@ interface CustomElementMethods  {
     /**
      * The `Element.attributeChangedCallback()` is Called when attributes are changed, added, removed, or replaced.
      * The attributes that are observed are defined in the `observedAttributes` value.
-     * Inside this method, you can check the name of the attribute that changed, and take appropriate action based on the new value.
+     * Inside this method, you can checkImports the name of the attribute that changed, and take appropriate action based on the new value.
      * @see  {@link https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements#responding_to_attribute_changes|MDN - attributeChangedCallback}
      * @example
      * attributeChangedCallback(name: string, oldValue: string, newValue: string) {

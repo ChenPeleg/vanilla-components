@@ -1,6 +1,6 @@
-// @ts-check
+// @ts-checkImports
 /**
- * Script to check that all files with customElements.define are imported in the import file,
+ * Script to checkImports that all files with customElements.define are imported in the import file,
  * and that there are no extra imports. Provides debug logging and returns import status.
  * @module run-on-startup
  */
@@ -14,6 +14,11 @@ export class RunOnStartup {
     static srcDir = path.join(process.cwd(), 'src');
     #debug = true;
 
+    /**
+     * Recursively get all files in a directory.
+     * @param {string} dir - Directory path
+     * @returns {Promise<string[]>} Array of file paths
+     */
     async getAllFiles(dir) {
         let files = [];
         const entries = await fs.readdir(dir, { withFileTypes: true });
@@ -28,36 +33,64 @@ export class RunOnStartup {
         return files;
     }
 
+    /**
+     * Check if a file contains a specific string.
+     * @param {string} filepath - File path
+     * @param {string} searchString - String to search for
+     * @returns {Promise<boolean>} True if found, else false
+     */
     async fileContains(filepath, searchString) {
         const content = await fs.readFile(filepath, 'utf8');
         return content.includes(searchString);
     }
 
+    /**
+     * Build an import statement for a given file.
+     * @param {string} file - File path
+     * @returns {string} Import statement
+     */
     buildImportStatement(file) {
         const relativePath = file.replaceAll('\\','/').split('src/')[1].replace(/\\/g, '/');
         return `import '../${relativePath}';`;
     }
 
+    /**
+     * Get the content of a file as a string.
+     * @param {string} filePath - File path
+     * @returns {Promise<string>} File content
+     */
     async getFileContent(filePath) {
         const data = await fs.readFile(filePath, 'utf8');
         return data.toString();
     }
 
+    /**
+     * Log info messages if debug is enabled.
+     * @param {...any} args - Arguments to log
+     */
     logInfo(...args) {
         if (this.#debug) {
             console.log(...args);
         }
     }
 
+    /**
+     * Log error messages if debug is enabled.
+     * @param {...any} args - Arguments to log
+     */
     logError(...args) {
         if (this.#debug) {
             console.error(...args);
         }
     }
 
-    async check() {
+    /**
+     * Check that all files with customElements.define are imported and no extra imports exist.
+     * @returns {Promise<{importsCorrect: boolean, requiredImports: string[]}>} Result object
+     */
+    async checkImports() {
         try {
-            this.logInfo('Starting check for customElements.define imports...');
+            this.logInfo('Starting checkImports for customElements.define imports...');
             const allFiles = await this.getAllFiles(RunOnStartup.srcDir);
             this.logInfo('All files found:', allFiles);
             const ceFiles = [];
@@ -89,7 +122,7 @@ export class RunOnStartup {
                 if (match) {
                     const relPath = match[1];
                     const absPath = path.join(RunOnStartup.srcDir, relPath);
-                    // Only check .ts files inside src
+                    // Only checkImports .ts files inside src
                     if (absPath.endsWith('.ts')) {
                         this.logInfo('Checking if extra import:', absPath);
                         // If this file does not contain customElements.define, it's extra
@@ -118,14 +151,31 @@ export class RunOnStartup {
             }
             return { importsCorrect, requiredImports };
         } catch (err) {
-            this.logError('Error in check function:', err);
-            console.error('Error in check function:', err);
+            this.logError('Error in checkImports function:', err);
+            console.error('Error in checkImports function:', err);
             process.exit(1);
+        }
+    }
+
+    /**
+     * Main function to check and fix imports if needed.
+     * @returns {Promise<void>}
+     */
+    async main() {
+        const result = await this.checkImports();
+        if (!result.importsCorrect) {
+            this.logInfo('Imports are incorrect. Rewriting import file...');
+            const importFileHeader = '// This file is auto-generated. Do not edit manually.\n';
+            const newContent = importFileHeader + result.requiredImports.join('\n') + '\n';
+            await fs.writeFile(RunOnStartup.importFile, newContent, 'utf8');
+            this.logInfo('Import file has been rewritten.');
+        } else {
+            this.logInfo('Imports are correct. No changes needed.');
         }
     }
 }
 
-new RunOnStartup().check().catch(err => {
-    console.error(err);
-    process.exit(1);
-});
+// Replace the old script entry point with main()
+(async () => {
+    await new RunOnStartup().main();
+})();
