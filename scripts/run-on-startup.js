@@ -178,7 +178,7 @@ export class RunOnStartup {
         const result = await this.checkImports();
         if (!result.importsCorrect) {
             this.logInfo('Imports are incorrect. Rewriting import file...');
-            const importFileHeader = '// This file is auto-generated. Do not edit manually.\n';
+            const importFileHeader = "/**\n * This file is auto-generated. Do not edit manually.\n */\n";
             const newContent = importFileHeader + result.requiredImports.join('\n') + '\n';
             await fs.writeFile(RunOnStartup.importFile, newContent, 'utf8');
             this.logInfo('Import file has been rewritten.');
