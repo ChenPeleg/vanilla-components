@@ -12,7 +12,7 @@ export class RunOnStartup {
 
     static importFile = path.join('src', 'imports', 'imported-components.ts');
     static srcDir = path.join(process.cwd(), 'src');
-    #debug = true;
+    #debug = false;
 
     /**
      * Recursively get all files in a directory.

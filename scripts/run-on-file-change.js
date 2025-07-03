@@ -8,7 +8,6 @@ import {appendFile, promises} from 'node:fs';
 
 export class RunOnFileChange {
     static importFile = 'src/imports/imported-components.ts';
-
     async addStringToFile(filePath, content) {
 
         try {
@@ -19,7 +18,6 @@ export class RunOnFileChange {
             console.error(`Error adding '${content}' to ${filePath}:`, error);
         }
     }
-
     buildImportStatement = (fileChanged) => {
         const relativePath = fileChanged.split('src/')[1];
         return `import '../${relativePath}';`;
