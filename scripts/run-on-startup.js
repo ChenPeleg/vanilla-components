@@ -1,3 +1,10 @@
+// @ts-check
+/**
+ * Script to check that all files with customElements.define are imported in the import file,
+ * and that there are no extra imports. Provides debug logging and returns import status.
+ * @module run-on-startup
+ */
+
 import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
@@ -64,6 +71,7 @@ export class RunOnStartup {
             this.logInfo('Import file content loaded.');
             const missingImports = [];
             const extraImports = [];
+            const requiredImports = ceFiles.map(file => this.buildImportStatement(file));
             // Find missing imports (files with customElements.define not imported)
             for (const file of ceFiles) {
                 const importStatement = this.buildImportStatement(file);
@@ -92,7 +100,8 @@ export class RunOnStartup {
                     }
                 }
             }
-            if (missingImports.length === 0 && extraImports.length === 0) {
+            const importsCorrect = missingImports.length === 0 && extraImports.length === 0;
+            if (importsCorrect) {
                 this.logInfo('All customElements.define files are correctly imported, and no extra imports found.');
                 console.log('All customElements.define files are correctly imported, and no extra imports found.');
             } else {
@@ -106,8 +115,8 @@ export class RunOnStartup {
                     console.log('Extra imports (should be removed):');
                     extraImports.forEach(i => console.log(i));
                 }
-                process.exit(1);
             }
+            return { importsCorrect, requiredImports };
         } catch (err) {
             this.logError('Error in check function:', err);
             console.error('Error in check function:', err);

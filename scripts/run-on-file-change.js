@@ -1,3 +1,9 @@
+// @ts-check
+/**
+ * Script to add import statements for files with customElements.define on file change.
+ * @module run-on-file-change
+ */
+
 import {appendFile, promises} from 'node:fs';
 
 export class RunOnFileChange {
@@ -53,4 +59,3 @@ export class RunOnFileChange {
 }
 
 new RunOnFileChange().runOnFileChange().then();
-
