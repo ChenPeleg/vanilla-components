@@ -1,27 +1,34 @@
 import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from './provider/AbstractBaseService.ts';
+import {makeBrandedType} from '../models/makeBrandedType.ts';
 
-export enum PWAStatus {
-    NotInstalled = 'NotInstalled', Installed = 'Installed', NotSupported = 'NotSupported'
-}
+export const PWAStatus = makeBrandedType({
+    NotInstalled: 'NotInstalled',
+    Installed: 'Installed',
+    NotSupported: 'NotSupported',
+}, 'pwaStatus');
+
+export type PWAStatus = (typeof PWAStatus)[keyof typeof PWAStatus];
 
 export class PWAService extends AbstractBaseService {
+
 
     constructor(provider: ServicesResolver) {
         super(provider);
 
     }
 
-    promiseCreatePWA():Promise<Event> {
-     return new Promise((resolve, _reject) => {
-         console.log('promiseCreatePWA');
-         window.addEventListener('beforeinstallprompt', (_event) => {
-             _event.preventDefault();
-             resolve((_event));
-         },{once: true});
-     })
+    promiseCreatePWA(): Promise<Event> {
+        return new Promise((resolve, _reject) => {
+            console.log('promiseCreatePWA');
+            window.addEventListener('beforeinstallprompt', (_event) => {
+                _event.preventDefault();
+                resolve((_event));
+            }, {once: true});
+        })
     }
-    checkIfCanInstallPWA():Promise<false| Event> {
+
+    checkIfCanInstallPWA(): Promise<false | Event> {
         return new Promise((resolve, _reject) => {
             const timeout = setTimeout(() => {
                 resolve(false);
@@ -31,9 +38,10 @@ export class PWAService extends AbstractBaseService {
                 _event.preventDefault();
                 clearTimeout(timeout);
                 resolve(_event);
-            } );
+            });
         })
     }
+
     promisifiedCheckForPWA(): Promise<PWAStatus> {
         return new Promise((resolve, _reject) => {
             if (this.isPwaSupported()) {
@@ -55,7 +63,7 @@ export class PWAService extends AbstractBaseService {
         return 'beforeinstallprompt' in window;
     }
 
-    private isInStandaloneMode = () => (window.matchMedia('(display-mode: standalone)').matches)   || document.referrer.includes('android-app://');
+    private isInStandaloneMode = () => (window.matchMedia('(display-mode: standalone)').matches) || document.referrer.includes('android-app://');
 
 
 }

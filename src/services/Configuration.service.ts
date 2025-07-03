@@ -1,6 +1,6 @@
 import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from './provider/AbstractBaseService.ts';
-import {Environment} from '../../models/Environment.ts';
+import {Environment} from '../models/Environment.ts';
 
 
 export class ConfigurationService extends AbstractBaseService {

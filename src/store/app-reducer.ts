@@ -1,14 +1,13 @@
 
-import {AttendanceStore} from '../models/AttendanceStore.ts';
-
-
 import {servicesProvider} from '../services/provider/ServicesProvider.ts';
 import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 
 
 import {StoreService} from '../services/Store.service.ts';
 import type {StoreReducer} from './factory/StoreFactory.ts';
-import {ActionType} from '../../models/AppAction.ts';
+import type {AttendanceStore} from '../models/AttendanceStore.ts';
+import {type AppAction} from '../models/AppAction.ts';
+import {ActionType} from '../models/ActionType.ts';
 
 
 export const appReducer: StoreReducer<AttendanceStore, AppAction> = (state: AttendanceStore, action: AppAction): AttendanceStore => {
@@ -20,10 +19,7 @@ export const appReducer: StoreReducer<AttendanceStore, AppAction> = (state: Atte
         case ActionType.checkInChild:
             return {
                 ...state,
-                attendance: state.attendance.map(child => child.id === action.payload.id ? {
-                    ...child,
-                    checkedIn: true
-                } : child)
+
             }
         case ActionType.checkOutChild:
             return {
@@ -43,7 +39,7 @@ export const appReducer: StoreReducer<AttendanceStore, AppAction> = (state: Atte
                 lastUpdated: getLastUpdateTimeStamp()
             }
         case ActionType.addChild:
-            let childName = action.payload;
+
 
             return {
                 ...state,
@@ -64,8 +60,7 @@ export const appReducer: StoreReducer<AttendanceStore, AppAction> = (state: Atte
         case ActionType.clearAllData:
             const initialStoreState = servicesProvider.getService(StoreService).initialState;
             const keepState = {
-                sortType: state.sortType,
-                sortOrder: state.sortOrder,
+
                 childrenDisplayType: state.childrenDisplayType
             }
 

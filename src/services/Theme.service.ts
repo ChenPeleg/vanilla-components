@@ -1,10 +1,15 @@
 import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from './provider/AbstractBaseService.ts';
 import {LocalStorageService} from './LocalStorage.service.ts';
+import {makeBrandedType} from '../models/makeBrandedType.ts';
 
-export enum AppColorTheme {
-    Light = 'light', Dark = 'dark', System = 'system'
-}
+export const AppColorTheme = makeBrandedType({
+    Light: 'light',
+    Dark: 'dark',
+    System: 'system',
+}, 'appColorTheme');
+
+export type AppColorTheme = (typeof AppColorTheme)[keyof typeof AppColorTheme];
 
 export class ThemeService extends AbstractBaseService {
     static THEME_LS_KEY = 'attendance_theme';

@@ -1,10 +1,11 @@
 import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from './provider/AbstractBaseService.ts';
 import {LocalStorageService} from './LocalStorage.service.ts';
-import {AttendanceStore} from '../models/AttendanceStore.ts';
-import {StoreFactory, StoreReducer} from '../store/factory/StoreFactory.ts';
-import {AppAction} from '../models/AppAction.ts';
-import {appReducer} from '../reducer/app-reducer.ts';
+import type {AttendanceStore} from '../models/AttendanceStore.ts';
+import {StoreFactory, type StoreReducer} from '../store/factory/StoreFactory.ts';
+import type {AppAction} from '../models/AppAction.ts';
+import {appReducer} from '../store/app-reducer.ts';
+
 
 
 export class StoreService extends AbstractBaseService {
