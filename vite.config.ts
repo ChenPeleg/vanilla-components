@@ -5,7 +5,6 @@ import {exec} from 'node:child_process';
 export default defineConfig({
     plugins: [
         tailwindcss(),
-
         {
             name: 'run-script-on-startup',
             configureServer() {
