@@ -2,8 +2,10 @@ import { promises as fs } from 'node:fs';
 import path from 'node:path';
 
 export class RunOnStartup {
+
     static importFile = path.join('src', 'imports', 'imported-components.ts');
     static srcDir = path.join(process.cwd(), 'src');
+    #debug = true;
 
     async getAllFiles(dir) {
         let files = [];
@@ -25,8 +27,6 @@ export class RunOnStartup {
     }
 
     buildImportStatement(file) {
-        console.log(file)
-
         const relativePath = file.replaceAll('\\','/').split('src/')[1].replace(/\\/g, '/');
         return `import '../${relativePath}';`;
     }
@@ -36,29 +36,81 @@ export class RunOnStartup {
         return data.toString();
     }
 
+    logInfo(...args) {
+        if (this.#debug) {
+            console.log(...args);
+        }
+    }
+
+    logError(...args) {
+        if (this.#debug) {
+            console.error(...args);
+        }
+    }
+
     async check() {
-        const allFiles = await this.getAllFiles(RunOnStartup.srcDir);
-        const ceFiles = [];
-        for (const file of allFiles) {
-            if (file.endsWith('.ts') && await this.fileContains(file, 'customElements.define')) {
-                ceFiles.push(file);
+        try {
+            this.logInfo('Starting check for customElements.define imports...');
+            const allFiles = await this.getAllFiles(RunOnStartup.srcDir);
+            this.logInfo('All files found:', allFiles);
+            const ceFiles = [];
+            for (const file of allFiles) {
+                if (file.endsWith('.ts') && await this.fileContains(file, 'customElements.define')) {
+                    this.logInfo('File with customElements.define found:', file);
+                    ceFiles.push(file);
+                }
             }
-        }
-        const importFileContent = await this.getFileContent(RunOnStartup.importFile);
-        const missingImports = [];
-
-        for (const file of ceFiles) {
-
-            const importStatement = this.buildImportStatement(file);
-            if (!importFileContent.includes(importStatement)) {
-                missingImports.push(importStatement);
+            const importFileContent = await this.getFileContent(RunOnStartup.importFile);
+            this.logInfo('Import file content loaded.');
+            const missingImports = [];
+            const extraImports = [];
+            // Find missing imports (files with customElements.define not imported)
+            for (const file of ceFiles) {
+                const importStatement = this.buildImportStatement(file);
+                this.logInfo('Checking if import exists for:', importStatement);
+                if (!importFileContent.includes(importStatement)) {
+                    this.logInfo('Missing import:', importStatement);
+                    missingImports.push(importStatement);
+                }
             }
-        }
-        if (missingImports.length === 0) {
-            console.log('All customElements.define files are imported.');
-        } else {
-            console.log('Missing imports:');
-            missingImports.forEach(i => console.log(i));
+            // Find extra imports (imported files that do not contain customElements.define)
+            const importLines = importFileContent.split('\n').map(l => l.trim()).filter(l => l.startsWith('import'));
+            for (const line of importLines) {
+                // Extract the relative path from the import statement
+                const match = line.match(/import ['"]\.\.\/(.*)['"]/);
+                if (match) {
+                    const relPath = match[1];
+                    const absPath = path.join(RunOnStartup.srcDir, relPath);
+                    // Only check .ts files inside src
+                    if (absPath.endsWith('.ts')) {
+                        this.logInfo('Checking if extra import:', absPath);
+                        // If this file does not contain customElements.define, it's extra
+                        if (!ceFiles.includes(absPath)) {
+                            this.logInfo('Extra import found:', line);
+                            extraImports.push(line);
+                        }
+                    }
+                }
+            }
+            if (missingImports.length === 0 && extraImports.length === 0) {
+                this.logInfo('All customElements.define files are correctly imported, and no extra imports found.');
+                console.log('All customElements.define files are correctly imported, and no extra imports found.');
+            } else {
+                if (missingImports.length > 0) {
+                    this.logInfo('Missing imports:', missingImports);
+                    console.log('Missing imports:');
+                    missingImports.forEach(i => console.log(i));
+                }
+                if (extraImports.length > 0) {
+                    this.logInfo('Extra imports (should be removed):', extraImports);
+                    console.log('Extra imports (should be removed):');
+                    extraImports.forEach(i => console.log(i));
+                }
+                process.exit(1);
+            }
+        } catch (err) {
+            this.logError('Error in check function:', err);
+            console.error('Error in check function:', err);
             process.exit(1);
         }
     }
