@@ -7,7 +7,22 @@ export default defineConfig({
         tailwindcss(),
 
         {
+            name: 'run-script-on-startup',
+            configureServer() {
+                exec('node scripts/run-on-startup.js', (err, _stdout, stderr) => {
+                    if (err) {
+                        console.error(`Error executing startup script: ${err}`);
+                        return;
+                    }
+                    if (stderr) {
+                        console.error(`Startup script error output: ${stderr}`);
+                    }
+                    console.log(_stdout);
+                });
+            }
+        },
 
+        {
             name: 'run-script-on-change',
             handleHotUpdate({ file }) {
                 // Add your script execution logic here
