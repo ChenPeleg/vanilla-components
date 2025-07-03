@@ -4,5 +4,5 @@ export const Environment = {
     Test: 'test',
 }
 
-export type Environment =   typeof  Environment[keyof typeof Environment];
+export type Environment = typeof Environment[keyof typeof Environment];
 
