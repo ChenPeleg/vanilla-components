@@ -85,8 +85,8 @@ export class RunOnStartup {
     }
 
     /**
-     * Check that all files with customElements.define are imported and no extra imports exist.
-     * @returns {Promise<{importsCorrect: boolean, requiredImports: string[]}>} Result object
+     * Check that all files with customElements.define are imported, no extra imports exist, and no duplicates.
+     * @returns {Promise<{importsCorrect: boolean, requiredImports: string[], duplicateImports: string[]}>} Result object
      */
     async checkImports() {
         try {
@@ -133,10 +133,23 @@ export class RunOnStartup {
                     }
                 }
             }
-            const importsCorrect = missingImports.length === 0 && extraImports.length === 0;
+            // Check for duplicate imports
+            const importCount = {};
+            for (const line of importLines) {
+                importCount[line] = (importCount[line] || 0) + 1;
+            }
+            const duplicateImports = Object.entries(importCount)
+                .filter(([_, count]) => count > 1)
+                .map(([line]) => line);
+            if (duplicateImports.length > 0) {
+                this.logInfo('Duplicate imports found:', duplicateImports);
+                console.log('Duplicate imports found:');
+                duplicateImports.forEach(i => console.log(i));
+            }
+            const importsCorrect = missingImports.length === 0 && extraImports.length === 0 && duplicateImports.length === 0;
             if (importsCorrect) {
-                this.logInfo('All customElements.define files are correctly imported, and no extra imports found.');
-                console.log('All customElements.define files are correctly imported, and no extra imports found.');
+                this.logInfo('All customElements.define files are correctly imported, no extra or duplicate imports found.');
+                console.log('All customElements.define files are correctly imported, no extra or duplicate imports found.');
             } else {
                 if (missingImports.length > 0) {
                     this.logInfo('Missing imports:', missingImports);
@@ -149,7 +162,7 @@ export class RunOnStartup {
                     extraImports.forEach(i => console.log(i));
                 }
             }
-            return { importsCorrect, requiredImports };
+            return { importsCorrect, requiredImports, duplicateImports };
         } catch (err) {
             this.logError('Error in checkImports function:', err);
             console.error('Error in checkImports function:', err);
