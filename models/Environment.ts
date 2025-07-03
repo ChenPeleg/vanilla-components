@@ -4,6 +4,6 @@ export const Environment = makeBrandedType({
     Development: "development",
     Production: "production",
     Test: "test",
-}, 'environment')  ;
+}, 'environment');
 
 export type Environment = (typeof Environment)[keyof typeof Environment];

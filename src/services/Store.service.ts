@@ -1,18 +1,10 @@
 import {ServicesResolver} from './provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from './provider/AbstractBaseService.ts';
 import {LocalStorageService} from './LocalStorage.service.ts';
-import {AttendanceStore, ChildrenDisplayType, DisplayType} from '../models/AttendanceStore.ts';
+import {AttendanceStore} from '../models/AttendanceStore.ts';
 import {StoreFactory, StoreReducer} from '../store/factory/StoreFactory.ts';
 import {AppAction} from '../models/AppAction.ts';
 import {appReducer} from '../reducer/app-reducer.ts';
-import {SortOrder, SortType} from '../models/SortType.ts';
-import {childrenBaseData} from '../data/childrenPistachioData.ts';
-import {PresentToday} from '../models/presentToday.ts';
-import {ChildStatus} from '../models/ChildStatus.ts';
-import {Environment} from '../models/Environment.ts';
-import {ConfigurationService} from './Configuration.service.ts';
-import {childrenTestData} from '../data/childrenTestData.ts';
-import {TimeAndDateService} from './TimeAndDate.service.ts';
 
 
 export class StoreService extends AbstractBaseService {
@@ -54,58 +46,14 @@ export class StoreService extends AbstractBaseService {
         if (!stateFromLocalStorage) {
             return null;
         }
-        return this.resetChildrenStateIfADayHasPassed(stateFromLocalStorage);
+
     }
 
-    private resetChildrenStateIfADayHasPassed(state: AttendanceStore) {
-        const lastUpdated = state.lastUpdated;
-        const currentTime = this.servicesResolver.getService(TimeAndDateService).createTimestamp();
-        const hasDateChanged = this.servicesResolver.getService(TimeAndDateService).hasDateChangedBetweenTimestamps(lastUpdated, currentTime);
-        if (hasDateChanged) {
-            return {
-                ...state,
-                attendance: state.attendance.map(child => ({
-                    ...child,
-                    presentToday: PresentToday.Yes,
-                    checkedIn: false
-                })),
-                lastUpdated: currentTime
-            }
-        }
-        return state;
-    }
 
     private createInitialStoreState() {
-        const initialState: AttendanceStore = {
-            sortType: SortType.Class,
-            sortOrder: SortOrder.Ascending,
-            display: DisplayType.Attendance,
-            attendance: this.getChildrenData(),
-            childrenDisplayType: ChildrenDisplayType.List,
-            lastUpdated: 0,
-            history: []
-        }
+        const initialState: any = {}
         return initialState;
     }
 
-    private getChildrenData() {
-        return this.getChildrenBaseData().map(child => ({
-            ...child,
-            presentToday: PresentToday.Yes,
-            checkedIn: false
-        })) as ChildStatus[];
-    }
-
-    private getChildrenBaseData() {
-        switch (this.servicesResolver.getService(ConfigurationService).environment) {
-            case Environment.Test:
-                return childrenTestData;
-            case Environment.Production:
-            case Environment.Development:
-            default:
-                return childrenBaseData
-        }
-
-    }
 
 }
