@@ -49,7 +49,7 @@ export class RunOnFileChange {
         const statement = this.buildImportStatement(fileChanged);
         const importFilePath = RunOnFileChange.importFile;
         const importFileContent = await this.getFileContent(importFilePath);
-        if (importFileContent.includes(statement)) {
+        if (importFileContent.includes(statement) || statement.includes('undefined')) {
             return;
         }
         await this.addStringToFile(importFilePath, `${statement}\n`);
