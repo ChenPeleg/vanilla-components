@@ -1,4 +1,4 @@
-// @ts-checkImports
+// @ts-check
 /**
  * Script to checkImports that all files with customElements.define are imported in the import file,
  * and that there are no extra imports. Provides debug logging and returns import status.
@@ -149,8 +149,7 @@ export class RunOnStartup {
             const importsCorrect = missingImports.length === 0 && extraImports.length === 0 && duplicateImports.length === 0;
             if (importsCorrect) {
                 this.logInfo('All customElements.define files are correctly imported, no extra or duplicate imports found.');
-                console.log('All customElements.define files are correctly imported, no extra or duplicate imports found.');
-            } else {
+             } else {
                 if (missingImports.length > 0) {
                     this.logInfo('Missing imports:', missingImports);
                     console.log('Missing imports:');
