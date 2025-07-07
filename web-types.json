@@ -4,10 +4,14 @@
   "version": "1.0.0",
   "contributions": {
     "html": {
-      "tags": [
+      "elements": [
         {
           "name": "card-component",
-          "description": "A card UI component with header and text attributes.",
+          "description": "A card UI component with header and text attributes. ",
+          "source": {
+            "module": "./src/components/molecules/card-component.ts",
+            "symbol": "CardComponent"
+          },
           "attributes": [
             {
               "name": "header",
@@ -22,6 +26,7 @@
         {
           "name": "big-card-component",
           "description": "A large card UI component with header and text attributes.",
+          "source": { "module": "./src/components/molecules/big-card-component.ts" },
           "attributes": [
             {
               "name": "header",
@@ -36,6 +41,7 @@
         {
           "name": "nav-bar",
           "description": "A navigation bar component with header and text attributes.",
+          "source": { "module": "./src/components/organism/nav-bar.ts" },
           "attributes": [
             {
               "name": "header",
@@ -50,6 +56,7 @@
         {
           "name": "main-content",
           "description": "A main content component with header and text attributes.",
+          "source": { "module": "./src/components/organism/main-content.ts" },
           "attributes": [
             {
               "name": "header",
@@ -64,6 +71,7 @@
         {
           "name": "app-root",
           "description": "The root application component with header and text attributes.",
+          "source": { "module": "./src/components/organism/root.ts" },
           "attributes": [
             {
               "name": "header",

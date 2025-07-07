@@ -25,6 +25,7 @@ class AppRoot extends HTMLElement implements CustomElement {
 
         this.shadowRoot!.innerHTML = `  
       <div class="h-screen w-screen">
+      <card-component></card-component>
          <nav-bar></nav-bar>
          <main-content></main-content>
       </div>
