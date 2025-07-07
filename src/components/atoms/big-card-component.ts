@@ -1,4 +1,4 @@
-import {globalStyleSheet} from '../styles/tailwind-style-sheet.ts';
+import {globalStyleSheet} from '../../styles/tailwind-style-sheet.ts';
 
 class NavigationBar extends HTMLElement {
   static get observedAttributes() {
