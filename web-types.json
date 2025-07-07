@@ -32,6 +32,48 @@
               "description": "Main text content for the big card."
             }
           ]
+        },
+        {
+          "name": "nav-bar",
+          "description": "A navigation bar component with header and text attributes.",
+          "attributes": [
+            {
+              "name": "header",
+              "description": "Header text for the navigation bar."
+            },
+            {
+              "name": "text",
+              "description": "Main text content for the navigation bar."
+            }
+          ]
+        },
+        {
+          "name": "main-content",
+          "description": "A main content component with header and text attributes.",
+          "attributes": [
+            {
+              "name": "header",
+              "description": "Header text for the main content."
+            },
+            {
+              "name": "text",
+              "description": "Main text content for the main content."
+            }
+          ]
+        },
+        {
+          "name": "app-root",
+          "description": "The root application component with header and text attributes.",
+          "attributes": [
+            {
+              "name": "header",
+              "description": "Header text for the app root."
+            },
+            {
+              "name": "text",
+              "description": "Main text content for the app root."
+            }
+          ]
         }
       ]
     }
