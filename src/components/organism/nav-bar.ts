@@ -33,5 +33,5 @@ class NavigationBar extends HTMLElement implements CustomElement {
     }
 }
 
-customElements.define('big-card-component', NavigationBar);
+customElements.define('nav-bar', NavigationBar);
 

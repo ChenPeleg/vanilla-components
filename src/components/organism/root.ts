@@ -1,7 +1,7 @@
 import {globalStyleSheet} from '../../common/tailwind-style-sheet.ts';
 import type {CustomElement} from '../../base/CustomElement.ts';
 
-class NavigationBar extends HTMLElement implements CustomElement {
+class AppRoot extends HTMLElement implements CustomElement {
     static get observedAttributes() {
         return ['header', 'text'];
     }
@@ -33,5 +33,5 @@ class NavigationBar extends HTMLElement implements CustomElement {
     }
 }
 
-customElements.define('big-card-component', NavigationBar);
+customElements.define('app-root', AppRoot);
 
