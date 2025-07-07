@@ -1,6 +1,7 @@
 import {globalStyleSheet} from '../../styles/tailwind-style-sheet.ts';
+import type {CustomElement} from '../../abstract/CustomElement.ts';
 
-class NavigationBar extends HTMLElement {
+class NavigationBar extends HTMLElement implements CustomElement {
   static get observedAttributes() {
     return ['header', 'text'];
   }

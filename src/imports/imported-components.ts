@@ -3,5 +3,6 @@
  * @readonly
  * @module imported-components
  */
-import '../components/atoms/big-card-component.ts';
 import '../components/atoms/card-component.ts';
+import '../components/molecules/big-card-component.ts';
+import '../components/organism/nav-bar.ts';
