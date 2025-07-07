@@ -23,12 +23,19 @@ class NavigationBar extends HTMLElement implements CustomElement {
 
     render() {
         const header = this.getAttribute('header') || '';
-        const text = this.getAttribute('text') || '';
         this.shadowRoot!.innerHTML = `  
-      <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white p-6">
-        <div class="font-bold text-xl mb-2">${header}</div>
-        <p class="text-gray-700 text-base">${text}</p>
-      </div>
+       <nav class="bg-gray-800 p-4">
+            <div class="container mx-auto flex justify-between items-center">
+                <div class="text-white
+                    font-bold text-xl">${header}</div>
+                <div class="text-gray-300">
+                    <a href="#" class="hover:text-white px-3 py-2">Home</a>
+                    <a href="#" class="hover:text-white px-3 py-2">About</a>
+                    <a href="#" class="hover:text-white px-3 py-2">Contact</a>
+                </div>
+            </div>
+        </nav>
+        
     `;
     }
 }

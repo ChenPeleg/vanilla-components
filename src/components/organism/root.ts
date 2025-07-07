@@ -24,8 +24,8 @@ class AppRoot extends HTMLElement implements CustomElement {
     render() {
 
         this.shadowRoot!.innerHTML = `  
-      <div class="h-screen w-screen">
-      <card-component></card-component>
+      <div class="h-screen w-screen bg-amber-200">
+     
          <nav-bar></nav-bar>
          <main-content></main-content>
       </div>
