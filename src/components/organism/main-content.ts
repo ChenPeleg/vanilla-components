@@ -19,6 +19,9 @@ class MainContent extends HTMLElement implements CustomElement {
     attributeChangedCallback() {
         this.render();
     }
+    click() {
+        console.log('Button clicked!');
+    }
 
     render() {
         this.shadowRoot!.innerHTML = `  
@@ -31,8 +34,9 @@ class MainContent extends HTMLElement implements CustomElement {
              <logo-component></logo-component>
            </div>
            <div class="flex-1 bg-blue-300">
-            
-         </div> 
+           <panel-state></panel-state>
+          
+           </div> 
        </div>
       </main>
     `;

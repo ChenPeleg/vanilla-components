@@ -3,7 +3,7 @@ import type {CustomElement} from '../../base/CustomElement.ts';
 
 
 
-class AppButton extends HTMLButtonElement implements CustomElement {
+class AppButton extends HTMLElement implements CustomElement {
     constructor() {
         super();
         this.attachShadow({mode: 'open'});
@@ -25,7 +25,7 @@ class AppButton extends HTMLButtonElement implements CustomElement {
     render() {
         const _class = this.getAttribute('class') || '';
         this.shadowRoot!.innerHTML = `   
-        <button class="${_class} px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 transition duration-200">
+        <button class="${_class} px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 transition duration-200">
             <slot></slot>
         </button>
     `;
