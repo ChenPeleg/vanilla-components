@@ -24,7 +24,7 @@ class NavigationBar extends HTMLElement implements CustomElement {
     render() {
         const header = this.getAttribute('header') || '';
         this.shadowRoot!.innerHTML = `  
-       <nav class="bg-gray-800 p-4">
+       <nav class="bg-teal-900 p-4 shadow-2xl">
             <div class="container mx-auto flex justify-between items-center">
                 <div class="text-white
                     font-bold text-xl">${header}</div>
