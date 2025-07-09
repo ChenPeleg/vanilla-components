@@ -3,23 +3,22 @@ import type {CustomElement} from './CustomElement.ts';
 
 
 export class BaseElement extends HTMLElement implements CustomElement {
+    static formAssociated = true;
+    protected internals  : ElementInternals;
     protected actionCallback =  (_result: any) =>   {
     };
-    protected update  ()   {
-
-    }
+    protected update  ()   {}
 
     constructor() {
         super();
         this.attachShadow({mode: 'open'});
+        this.internals = this.attachInternals();
+
     }
 
     $<T extends HTMLElement>(selector: string): T {
         return this.shadowRoot?.querySelector(selector) as T
     }
-
-
-
     connectedCallback(): void {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
         this.render();
@@ -31,9 +30,6 @@ export class BaseElement extends HTMLElement implements CustomElement {
     render() {
         throw `[BaseElement] ${this.constructor.name} render method must be implemented in the derived class.`
     }
-
-
 }
 
-// customElements.define('base-element', BaseElement);
 
