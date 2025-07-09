@@ -1,5 +1,5 @@
 import {globalStyleSheet} from '../core/tailwind-style-sheet.ts';
-import type {CustomElement} from '../base/CustomElement.ts';
+import type {CustomElement} from './CustomElement.ts';
 
 
 export class BaseElement extends HTMLElement implements CustomElement {
@@ -10,6 +10,9 @@ export class BaseElement extends HTMLElement implements CustomElement {
 
     $<T extends HTMLElement>(selector: string): T {
         return this.shadowRoot?.querySelector(selector) as T
+    }
+     a () {
+
     }
 
 
