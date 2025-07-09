@@ -3,6 +3,9 @@ import type {CustomElement} from './CustomElement.ts';
 
 
 export class BaseElement extends HTMLElement implements CustomElement {
+    protected actionCallback = <T extends Object>(_result: T) =>   {
+    };
+
     constructor() {
         super();
         this.attachShadow({mode: 'open'});

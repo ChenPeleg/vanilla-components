@@ -3,12 +3,14 @@ import {BaseElement} from '../../base/base-element.ts';
 
 export class ToggleButton extends BaseElement {
 
-    protected _clickHandler: (result: { isActive: boolean }) =>   {
-    };
-
     static get observedAttributes() {
         return ['class', 'isActive'];
     }
+
+    actionCallback = (_result: {
+        isActive: boolean;
+    }) => {
+    };
 
     connectedCallback(): void {
         super.connectedCallback();
@@ -16,20 +18,10 @@ export class ToggleButton extends BaseElement {
             const isActive = this.getAttribute('isActive') === 'true';
             this.setAttribute('isActive', String(!isActive));
             this.update();
-
-            this.clickHandler({isActive})
+            this.actionCallback({isActive})
         });
     }
 
-    set clickHandler(callBack : typeof this._clickHandler ) {
-        if (typeof callBack !== 'function') {
-            throw new Error('clickHandler must be a function');
-        }
-        this._clickHandler = callBack;
-    };
-    get clickHandler():  (typeof this._clickHandler)   {
-        return this._clickHandler ;
-    }
 
     update() {
         const isActive = this.getAttribute('isActive') === 'true';
