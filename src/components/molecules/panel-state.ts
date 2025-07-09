@@ -26,8 +26,7 @@ class PanelState extends BaseElement {
         <div class="flex flex-col items-center justify-center p-4 h-96 bg-amber-100">
         <div class="flex flex-col items-center justify-center bg-amber-50/80   shadow-lg rounded-lg p-6 w-full max-w-md gap-6">
             <div id="active-state"> 
-             
-             </div>
+            </div>
             <toggle-button>   </toggle-button> <span class="text-blue-300">Toggle</span>
         </div>
         </div> 
