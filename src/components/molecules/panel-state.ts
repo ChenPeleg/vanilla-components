@@ -37,7 +37,7 @@ class PanelState extends BaseElement {
                             State is <span id="active-state"></span>
                         </span>
                         <span>
-                           State is <span id="active-state"></span>
+                           Text is <span id="text-from-input"></span>
                         </span>
 
                     </div>
@@ -55,6 +55,7 @@ class PanelState extends BaseElement {
     update() {
         const activeStateDiv = this.$('#active-state');
         activeStateDiv.textContent = ` ${this.state.isActive ? 'Active' : 'Not active'}`;
+        this.$('#text-from-input').textContent = (this.$<TextInput>('text-input')?.value || 'No input provided');
     }
 }
 

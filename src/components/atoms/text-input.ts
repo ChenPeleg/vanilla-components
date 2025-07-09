@@ -4,6 +4,14 @@ export class TextInput extends BaseElement {
     static get observedAttributes() {
         return ['class', 'defaultValue'];
     }
+    public get value() {
+        return this.$<HTMLInputElement>('input').value;
+    }
+    public set value(newValue: string) {
+        this.$<HTMLInputElement>('input').value = newValue;
+        this.setAttribute('value', newValue);
+
+    }
 
 
     inputCallback = (_result: { value: string }) => {
@@ -28,6 +36,7 @@ export class TextInput extends BaseElement {
 
     update() {
         const value = this.$<HTMLInputElement>('input').value;
+        this.setAttribute('value', value);
         this.inputCallback({value})
     }
 
