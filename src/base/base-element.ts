@@ -3,7 +3,9 @@ import type {CustomElement} from './CustomElement.ts';
 
 
 export class BaseElement extends HTMLElement implements CustomElement {
-    static formAssociated = true;
+    static get formAssociated  () {
+       return  true
+    };
     protected internals: ElementInternals;
 
     constructor() {
