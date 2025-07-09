@@ -27,22 +27,27 @@ class PanelState extends BaseElement {
 
 
     render() {
-        this.shadowRoot!.innerHTML = `  
+
+        // language=HTML
+        this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center p-4 h-96 bg-amber-100">
                 <div class="flex flex-col items-center justify-center bg-amber-50/80 shadow-lg rounded-lg p-6 w-full max-w-md gap-6">
                     <div>
                         <span>
                             State is <span id="active-state"></span>
                         </span>
-                        <span>Panel State</span>
-                    </div>  
+                        <span>
+                           State is <span id="active-state"></span>
+                        </span>
+
+                    </div>
                     <div>
                         <text-input></text-input>
                     </div>
                     <toggle-button></toggle-button>
                     <span class="text-blue-300">Toggle</span>
                 </div>
-            </div> 
+            </div>
         `;
         this.update();
     }
