@@ -18,8 +18,7 @@ class PanelState extends BaseElement {
             this.state.isActive = result.isActive;
             this.update();
         }
-        this.$<TextInput>('text-input').inputCallback = (result: { value: string }) => {
-            console.log('Input value:', result.value);
+        this.$<TextInput>('text-input').inputCallback = () => {
             this.update();
         };
 
@@ -32,7 +31,7 @@ class PanelState extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center p-4 h-96 bg-amber-100">
                 <div class="flex flex-col items-center justify-center bg-amber-50/80 shadow-lg rounded-lg p-6 w-full max-w-md gap-6">
-                    <div>
+                    <div class="flex flex-col items-center justify-center gap-2">
                         <span>
                             State is <span id="active-state"></span>
                         </span>
