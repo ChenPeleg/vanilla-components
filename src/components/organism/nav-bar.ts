@@ -17,9 +17,6 @@ class NavigationBar extends HTMLElement implements CustomElement {
         this.render();
     }
 
-    attributeChangedCallback() {
-        this.render();
-    }
 
     render() {
         const header = this.getAttribute('header') || '';

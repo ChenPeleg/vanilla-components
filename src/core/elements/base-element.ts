@@ -25,6 +25,9 @@ export class BaseElement extends HTMLElement implements CustomElement {
     }
 
     attributeChangedCallback(_name: string, _oldValue: string, _newValue: string) {
+        if (_newValue === _oldValue) {
+            return;
+        }
         this.update()
     }
 
