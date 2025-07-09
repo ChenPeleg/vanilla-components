@@ -1,6 +1,5 @@
 import {globalStyleSheet} from '../../core/tailwind-style-sheet.ts';
 import type {CustomElement} from '../../base/CustomElement.ts';
-import vanillaLogo from '../../assets/images/vanilla-logo.png';
 
 class PanelState extends HTMLElement implements CustomElement {
     constructor() {
