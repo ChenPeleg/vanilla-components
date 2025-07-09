@@ -82,6 +82,53 @@
               "description": "Main text content for the app root."
             }
           ]
+        },
+        {
+          "name": "logo-component",
+          "description": "A logo display component for Vanilla Custom Elements.",
+          "source": { "module": "./src/components/molecules/logo-component.ts" },
+          "attributes": []
+        },
+        {
+          "name": "app-button",
+          "description": "A styled button component.",
+          "source": { "module": "./src/components/atoms/app-button.ts" },
+          "attributes": [
+            {
+              "name": "class",
+              "description": "CSS classes for styling the button."
+            }
+          ]
+        },
+        {
+          "name": "panel-state",
+          "description": "A panel state component with header and text attributes.",
+          "source": { "module": "./src/components/molecules/panel-state.ts" },
+          "attributes": [
+            {
+              "name": "header",
+              "description": "Header text for the panel."
+            },
+            {
+              "name": "text",
+              "description": "Main text content for the panel."
+            }
+          ]
+        },
+        {
+          "name": "toggle-button",
+          "description": "A toggle button component with class and isActive attributes.",
+          "source": { "module": "./src/components/atoms/toggle-button.ts" },
+          "attributes": [
+            {
+              "name": "class",
+              "description": "CSS classes for styling the toggle button."
+            },
+            {
+              "name": "isActive",
+              "description": "Boolean attribute to indicate if the toggle is active. Accepts 'true' or 'false'."
+            }
+          ]
         }
       ]
     }
