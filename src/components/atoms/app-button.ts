@@ -1,26 +1,16 @@
-import {globalStyleSheet} from '../../core/tailwind-style-sheet.ts';
-import type {CustomElement} from '../../base/CustomElement.ts';
+import {BaseElement} from '../../base/base-element.ts';
 
 
+class AppButton extends BaseElement {
 
-class AppButton extends HTMLElement implements CustomElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: 'open'});
-    }
-
-    static get  observedAttributes() {
-        return ['class' ];
+    static get observedAttributes() {
+        return ['class'];
     }
 
     connectedCallback(): void {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-        this.render();
+        super.connectedCallback();
     }
 
-    attributeChangedCallback(_name: string, _oldValue: string, _newValue: string) {
-        this.render();
-    }
 
     render() {
         const _class = this.getAttribute('class') || '';

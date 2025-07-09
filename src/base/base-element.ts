@@ -5,6 +5,9 @@ import type {CustomElement} from './CustomElement.ts';
 export class BaseElement extends HTMLElement implements CustomElement {
     protected actionCallback =  (_result: any) =>   {
     };
+    protected update  ()   {
+
+    }
 
     constructor() {
         super();
@@ -14,14 +17,15 @@ export class BaseElement extends HTMLElement implements CustomElement {
     $<T extends HTMLElement>(selector: string): T {
         return this.shadowRoot?.querySelector(selector) as T
     }
-     a () {
 
-    }
 
 
     connectedCallback(): void {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
         this.render();
+    }
+    attributeChangedCallback(_name: string, _oldValue: string, _newValue: string) {
+        this.update()
     }
 
     render() {
