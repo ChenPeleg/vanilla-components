@@ -3,7 +3,7 @@ import type {CustomElement} from '../../base/CustomElement.ts';
 
 
 
-class ToggleButton extends HTMLElement implements CustomElement {
+export class ToggleButton extends HTMLElement implements CustomElement {
     constructor() {
         super();
         this.attachShadow({mode: 'open'});
@@ -20,6 +20,7 @@ class ToggleButton extends HTMLElement implements CustomElement {
             const isActive = this.getAttribute('isActive') === 'true';
             this.setAttribute('isActive', String(!isActive));
             this.update()
+            this.clickHandler({isActive})
 
         });
     }
