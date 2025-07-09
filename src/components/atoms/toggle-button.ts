@@ -30,9 +30,7 @@ class ToggleButton extends HTMLElement implements CustomElement {
         <button class="${_class} px-4 py-2 bg-blue-500 text-white rounded-full cursor-pointer hover:bg-blue-600 transition duration-200 flex items-center justify-center">
             <span class="w-6 h-6 bg-white rounded-full ${isActive ? 'translate-x-4' : ''} transition-transform"></span>
             <slot></slot>
-        </button>
-      
-      
+        </button> 
     `;
     }
 }
