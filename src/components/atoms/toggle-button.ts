@@ -15,10 +15,26 @@ class ToggleButton extends HTMLElement implements CustomElement {
 
     connectedCallback(): void {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-        this.setInnerHTML();
+        this.render();
+        this.addEventListener('click', () => {
+            const isActive = this.getAttribute('isActive') === 'true';
+            this.setAttribute('isActive', String(!isActive));
+            this.update()
+
+        });
+    }
+    update() {
+        const isActive = this.getAttribute('isActive') === 'true';
+        const toggleButton = this.shadowRoot?.querySelector('button');
+        if (toggleButton) {
+            const toggleCircle = toggleButton.querySelector('span');
+            if (toggleCircle) {
+                toggleCircle.classList.toggle('translate-x-4', isActive);
+            }
+        }
 
     }
-    setInnerHTML() {
+    render() {
         const _class = this.getAttribute('class') || '';
         const isActive = this.getAttribute('isActive') === 'true';
         (this.shadowRoot as ShadowRoot).innerHTML  = `   
@@ -39,10 +55,7 @@ class ToggleButton extends HTMLElement implements CustomElement {
         this.update();
     }
 
-    update() {
 
-
-    }
 }
 
 customElements.define('toggle-button', ToggleButton);
