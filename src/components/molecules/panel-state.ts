@@ -25,7 +25,7 @@ class PanelState extends BaseElement {
     }
 
 
-    render() {
+    renderTemplate() {
 
         // language=HTML
         this.shadowRoot!.innerHTML = `

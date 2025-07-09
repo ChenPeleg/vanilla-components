@@ -12,7 +12,7 @@ class AppButton extends BaseElement {
     }
 
 
-    render() {
+    renderTemplate() {
         const _class = this.getAttribute('class') || '';
         this.shadowRoot!.innerHTML = `   
         <button class="${_class} px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 transition duration-200">

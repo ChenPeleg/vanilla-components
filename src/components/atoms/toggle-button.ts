@@ -28,7 +28,7 @@ export class ToggleButton extends BaseElement {
         this.$<HTMLSpanElement>('#toggle-nob').classList.toggle('translate-x-4', isActive);
     }
 
-    render() {
+    renderTemplate() {
         const _class = this.getAttribute('class') || '';
         const isActive = this.getAttribute('isActive') === 'true';
         (this.shadowRoot as ShadowRoot).innerHTML = `   
