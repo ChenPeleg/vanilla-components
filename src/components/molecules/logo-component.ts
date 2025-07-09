@@ -1,34 +1,14 @@
-import {globalStyleSheet} from '../../core/tailwind-style-sheet.ts';
-import type {CustomElement} from '../../base/CustomElement.ts';
 import vanillaLogo from '../../assets/images/vanilla-logo.png';
+import {BaseElement} from '../../base/base-element.ts';
 
-class LogoComponent extends HTMLElement implements CustomElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: 'open'});
-    }
+class LogoComponent extends BaseElement {
 
-    static get observedAttributes() {
-        return ['header', 'text'];
-    }
-
-    connectedCallback() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-        this.render();
-    }
-
-    attributeChangedCallback() {
-        this.render();
-    }
-
-    render() {
-
+    renderTemplate() {
         this.shadowRoot!.innerHTML = `  
         <div class="flex flex-col items-center justify-center p-4">
         <img src="${vanillaLogo}" alt="Vaniall Logo" class="w-80 h-80  ">
         <h1 class="text-3xl font-bold text-gray-800 mt-4">Vanilla Custom Elements </h1>
-        </div>
-     
+        </div> 
     `;
     }
 }

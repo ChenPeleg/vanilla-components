@@ -1,29 +1,9 @@
-import {globalStyleSheet} from '../../core/tailwind-style-sheet.ts';
-import type {CustomElement} from '../../base/CustomElement.ts';
+import {BaseElement} from '../../base/base-element.ts';
 
-class MainContent extends HTMLElement implements CustomElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: 'open'});
-    }
+class MainContent extends BaseElement {
 
-    static get observedAttributes() {
-        return ['header', 'text'];
-    }
 
-    connectedCallback() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-        this.render();
-    }
-
-    attributeChangedCallback() {
-        this.render();
-    }
-    click() {
-        console.log('Button clicked!');
-    }
-
-    render() {
+    renderTemplate() {
         this.shadowRoot!.innerHTML = `  
        <main class="overflow-hidden bg-slate-200  w-full h-full">
        <div class="flex flex-row   justify-center h-full">
