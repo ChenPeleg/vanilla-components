@@ -25,19 +25,19 @@ class PanelState extends BaseElement {
         this.shadowRoot!.innerHTML = `  
         <div class="flex flex-col items-center justify-center p-4 h-96 bg-amber-100">
         <div class="flex flex-col items-center justify-center bg-amber-50/80   shadow-lg rounded-lg p-6 w-full max-w-md gap-6">
-          <div id="active-state"> This is ${this.state.isActive ? 'Active' : 'Not active'} </div>
-            <toggle-button> a </toggle-button>
+            <div id="active-state"> 
+             
+             </div>
+            <toggle-button>   </toggle-button> <span class="text-blue-300">Toggle</span>
         </div>
         </div> 
     `;
+        this.update();
     }
 
     update() {
-
-        const activeStateDiv = this.shadowRoot?.querySelector('#active-state');
-        if (activeStateDiv) {
-            activeStateDiv.textContent = `This is ${this.state.isActive ? 'Active' : 'Not active'}`;
-        }
+        const activeStateDiv = this.$('#active-state');
+        activeStateDiv.textContent = `This is ${this.state.isActive ? 'Active' : 'Not active'}`;
     }
 }
 
