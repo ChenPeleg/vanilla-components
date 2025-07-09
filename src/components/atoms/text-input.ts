@@ -1,4 +1,4 @@
-import {BaseElement} from '../../base/base-element.ts';
+import {BaseElement} from '../../core/elements/base-element.ts';
 
 export class TextInput extends BaseElement {
     static get observedAttributes() {

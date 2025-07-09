@@ -1,4 +1,4 @@
-import {BaseElement} from '../../base/base-element.ts';
+import {BaseElement} from '../../core/elements/base-element.ts';
 
 
 class CardComponent extends BaseElement {
@@ -13,7 +13,7 @@ class CardComponent extends BaseElement {
         const header = this.getAttribute('header') || '';
         const text = this.getAttribute('text') || '';
         this.shadowRoot!.innerHTML = `  
-      <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white p-6">
+      <div class="transition-all cursor-pointer max-w-sm rounded overflow-hidden shadow-md hover:shadow-2xl bg-white p-6">
         <div class="font-bold text-xl mb-2">${header}</div>
         <p class="text-gray-700 text-base">${text}</p>
       </div>

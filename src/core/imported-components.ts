@@ -3,7 +3,6 @@
  * @readonly
  * @module imported-components
  */
-import '../base/base-element.ts';
 import '../components/atoms/app-button.ts';
 import '../components/atoms/card-component.ts';
 import '../components/atoms/text-input.ts';

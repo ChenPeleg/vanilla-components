@@ -1,4 +1,4 @@
-import {globalStyleSheet} from '../core/tailwind-style-sheet.ts';
+import {globalStyleSheet} from '../tailwind-style-sheet.ts';
 import type {CustomElement} from './CustomElement.ts';
 
 
