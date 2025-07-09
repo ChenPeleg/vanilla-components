@@ -21,7 +21,6 @@ class PanelState extends HTMLElement implements CustomElement {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
         this.render();
         (this.shadowRoot?.querySelector('toggle-button') as ToggleButton).actionCallback = (result: { isActive: boolean }) => {
-
             this.state.isActive = result.isActive;
             this.update();
         }
