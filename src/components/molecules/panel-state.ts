@@ -1,8 +1,8 @@
 import {globalStyleSheet} from '../../core/tailwind-style-sheet.ts';
-import type {CustomElement} from '../../base/CustomElement.ts';
 import {ToggleButton} from '../atoms/toggle-button.ts';
+import {BaseElement} from '../../base/base-element.ts';
 
-class PanelState extends HTMLElement implements CustomElement {
+class PanelState extends BaseElement {
     private state = {
         isActive: false,
     }
@@ -20,7 +20,7 @@ class PanelState extends HTMLElement implements CustomElement {
 
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
         this.render();
-        (this.shadowRoot?.querySelector('toggle-button') as ToggleButton).actionCallback = (result: { isActive: boolean }) => {
+        (this.$('toggle-button') as ToggleButton).actionCallback = (result: { isActive: boolean }) => {
             this.state.isActive = result.isActive;
             this.update();
         }
