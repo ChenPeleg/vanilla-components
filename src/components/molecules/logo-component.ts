@@ -7,8 +7,7 @@ class LogoComponent extends BaseElement {
     }
 
     renderTemplate() {
-        const width = this.getAttribute('width') || '220';
-        //language=HTML
+        const width = this.getAttribute('width') || 200
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center p-4 ">
                 <img style="width: ${width}px" src="${vanillaLogo}" alt="Vanilla Logo">
