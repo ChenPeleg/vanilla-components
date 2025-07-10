@@ -7,11 +7,11 @@ class LogoComponent extends BaseElement {
     }
 
     renderTemplate() {
-        const width = this.getAttribute('width') || 200
+        const width = this.getAttribute('width') || 100
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center p-4 ">
                 <img style="width: ${width}px" src="${vanillaLogo}" alt="Vanilla Logo">
-                <h1 class="font-agbalumo text-4xl font-bold text-gray-800 mt-4 text-center">Vanilla Custom Elements </h1
+                <h1 class="font-agbalumo text-3xl font-bold text-gray-800 mt-4 text-center">Vanilla Custom Elements </h1
             </div>
         `;
     }
