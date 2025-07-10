@@ -1,4 +1,4 @@
-import {ServicesResolver} from '../core/provider/ServiceResolverClass.ts';
+import {ServicesResolver} from '../_core/provider/ServiceResolverClass.ts';
 import {LocalStorageService} from './LocalStorage.service.ts';
 import {TimeAndDateService} from './TimeAndDate.service.ts';
 import {ThemeService} from './Theme.service.ts';

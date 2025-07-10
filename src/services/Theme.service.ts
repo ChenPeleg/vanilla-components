@@ -1,5 +1,5 @@
-import {ServicesResolver} from '../core/provider/ServiceResolverClass.ts';
-import {AbstractBaseService} from '../core/provider/AbstractBaseService.ts';
+import {ServicesResolver} from '../_core/provider/ServiceResolverClass.ts';
+import {AbstractBaseService} from '../_core/provider/AbstractBaseService.ts';
 import {LocalStorageService} from './LocalStorage.service.ts';
 import {makeBrandedType} from '../models/makeBrandedType.ts';
 
