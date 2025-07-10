@@ -32,6 +32,11 @@ export class BaseElement extends HTMLElement implements CustomElement {
         this.update()
     }
 
+    /**
+     * This is used by the parent element to subscribe to changes in the child element.
+     * The parent element can override it.
+     * @param _result
+     */
     public actionCallback = (_result: any) => {
     };
 
