@@ -36,9 +36,8 @@ export class ToggleButton extends BaseElement {
                         class=" w-14 px-2 py-2 relative bg-blue-500 text-white rounded-full cursor-pointer hover:bg-blue-600 transition duration-200 flex items-start justify-start">
                 <span id="toggle-nob"
                       class="w-6 h-6 bg-white rounded-full relative left-0 ${isActive ? 'translate-x-4' : ''} transition-transform"></span>
-
                 </button>
-                <lable for="toggle-button" class="text-white">
+                <lable for="toggle-button" class=" ">
                     <slot></slot>
                 </lable>
             </div>

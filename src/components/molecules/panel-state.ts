@@ -6,8 +6,6 @@ class PanelState extends BaseElement {
     private state = {
         isActive: false,
     }
-
-
     static get observedAttributes() {
         return ['header', 'text'];
     }
@@ -24,13 +22,11 @@ class PanelState extends BaseElement {
 
     }
 
-
     renderTemplate() {
-
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center p-4 h-96 bg-amber-100 ">
-                <div class="flex flex-col items-center justify-center bg-amber-50/80 shadow-lg rounded-lg p-6 w-full max-w-md gap-6">
+                <div class="flex flex-col items-start justify-start bg-amber-50/80 shadow-lg rounded-lg p-6 w-full max-w-md gap-6">
                     <div class="flex flex-col items-center justify-center gap-2">
                         <span>
                             State is <span id="active-state"></span>
@@ -38,13 +34,12 @@ class PanelState extends BaseElement {
                         <span>
                            Text is <span id="text-from-input"></span>
                         </span>
-
                     </div>
                     <div>
                         <text-input></text-input>
                     </div>
                     <toggle-button>
-                        <span class=" ">Toggle</span>
+                        <span id="toggle-button-text" class="">Toggle</span>
                     </toggle-button>
 
                 </div>
@@ -54,8 +49,8 @@ class PanelState extends BaseElement {
     }
 
     update() {
-        const activeStateDiv = this.$('#active-state');
-        activeStateDiv.textContent = ` ${this.state.isActive ? 'Active' : 'Not active'}`;
+        this.$('#active-state').textContent = ` ${this.state.isActive ? 'Active' : 'Not active'}`;
+        this.$('#toggle-button-text').textContent = ` ${this.state.isActive ? 'Active' : 'Not active'}`
         this.$('#text-from-input').textContent = (this.$<TextInput>('text-input')?.value || 'No input provided');
     }
 }
