@@ -1,7 +1,16 @@
 import {BaseElement} from '../../_core/elements/base-element.ts';
 
 class HeroSection extends BaseElement {
-
+    content = [{
+        header: 'The Challenge',
+        text: 'Build a front end web site with zero dependencies (dev-dependencies are allowed)'
+    }, {
+        header: 'The Solution',
+        text: 'Use Vanilla Custom Elements to build a front end web site with zero dependencies'
+    }, {
+        header: 'The Result',
+        text: 'A front end web site that is fast, lightweight and easy to maintain'
+    }]
     renderTemplate() {
         this.shadowRoot!.innerHTML = `  
         <div class="flex flex-col items-center justify-center p-4 agbalumo-regular">
