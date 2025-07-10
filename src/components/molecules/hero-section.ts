@@ -6,21 +6,22 @@ class HeroSection extends BaseElement {
         text: 'Build a front end web site with zero dependencies (dev-dependencies are allowed)'
     }, {
         header: 'The Solution',
-        text: 'Use Vanilla Custom Elements to build a front end web site with zero dependencies'
+        text: 'Use Vanilla Custom Elements (with Vite Typescript and TailwindCSS) to build a front end web site with zero dependencies'
     }, {
         header: 'The Result',
         text: 'A front end web site that is fast, lightweight and easy to maintain'
     }]
+
     renderTemplate() {
-        this.shadowRoot!.innerHTML = `  
-        <div class="flex flex-col items-center justify-center p-4 agbalumo-regular">
-       <logo-component></logo-component>
-             <div class="w-3/4 flex flex-row justify-center items-center text-gray-700 text-lg font-semibold"> 
-               Tools and practices to build a custom elements website in ${new Date().getFullYear()}
-             </div>
-             
-        </div> 
-    `;
+        //language=HTML
+        this.shadowRoot!.innerHTML = `
+            <div class="flex flex-col items-center justify-center p-4 agbalumo-regular">
+                <logo-component></logo-component>
+                <div class="w-3/4 flex flex-row justify-center items-center text-gray-700 text-lg font-semibold">
+                    Tools and practices to build a custom elements website in ${new Date().getFullYear()}
+                </div> 
+            </div>
+        `;
     }
 }
 
