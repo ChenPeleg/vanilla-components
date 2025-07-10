@@ -1,4 +1,4 @@
-import vanillaLogo from '../../assets/images/vanilla-logo.png';
+import vanillaLogo from '../../assets/images/vanilla-flower.png';
 import {BaseElement} from '../../_core/elements/base-element.ts';
 
 class LogoComponent extends BaseElement {
