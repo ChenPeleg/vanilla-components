@@ -16,7 +16,7 @@ class PanelState extends BaseElement {
             this.state.isActive = result.isActive;
             this.update();
         }
-        this.$<TextInput>('text-input').inputCallback = () => {
+        this.$<TextInput>('text-input').actionCallback = () => {
             this.update();
         };
 

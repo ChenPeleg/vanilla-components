@@ -4,7 +4,7 @@ import {BaseElement} from '../../_core/elements/base-element.ts';
 export class ToggleButton extends BaseElement {
 
     static get observedAttributes() {
-        return ['isActive'];
+        return ['defaultValue' ];
     }
 
     actionCallback = (_result: {
@@ -14,17 +14,23 @@ export class ToggleButton extends BaseElement {
 
     connectedCallback(): void {
         super.connectedCallback();
+        this.setAttribute('value', this.getAttribute('defaultValue') || 'false');
+
+
         this.$('button').addEventListener('click', () => {
-            const isActive = this.getAttribute('isActive') === 'true';
-            this.setAttribute('isActive', String(!isActive));
+            const newValue = this.getAttribute('isActive') !== 'true';
+
+            this.setAttribute('isActive', String(newValue));
+            this.$('button').setAttribute('data-active', String(newValue));
+
             this.update();
-            this.actionCallback({isActive})
+            this.actionCallback({isActive: newValue})
         });
     }
 
     update() {
         const isActive = this.getAttribute('isActive') === 'true';
-        this.$<HTMLSpanElement>('#toggle-nob').classList.toggle('translate-x-4', isActive);
+        this.$<HTMLSpanElement>('#toggle-nob').classList.toggle('translate-x-4' ,isActive);
     }
 
     renderTemplate() {
@@ -32,10 +38,10 @@ export class ToggleButton extends BaseElement {
         // language=HTML
         (this.shadowRoot as ShadowRoot).innerHTML = `
             <div class="flex items-center justify-center h-full">
-                <button id="toggle-button"
-                        class=" w-14 px-2 py-2 relative bg-blue-500 text-white rounded-full cursor-pointer hover:bg-blue-600 transition duration-200 flex items-start justify-start">
+                <button id="toggle-button" data-active="${isActive}"
+                        class="w-14 px-2 py-2 relative data-[active=true]:bg-blue-500 shadow  bg-blue-500/30  text-white rounded-full cursor-pointer hover:shadow-lg transition duration-200 flex items-start justify-start">
                 <span id="toggle-nob"
-                      class="w-6 h-6 bg-white rounded-full relative left-0 ${isActive ? 'translate-x-4' : ''} transition-transform"></span>
+                      class="w-6 h-6 bg-white rounded-full relative right-0 ${isActive ? '' : 'translate-x-4'} transition-transform"></span>
                 </button>
                 <lable for="toggle-button" class=" ">
                     <slot></slot>
