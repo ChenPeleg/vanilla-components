@@ -27,7 +27,6 @@ export class ToggleButton extends BaseElement {
     update() {
         const isActive = this.getAttribute('isActive') === 'true';
         this.$('button').setAttribute('data-active', String(isActive));
-
         this.$<HTMLSpanElement>('#toggle-nob').classList.toggle('translate-x-4' ,isActive);
         this.actionCallback({isActive: isActive})
     }
