@@ -14,31 +14,29 @@ export class ToggleButton extends BaseElement {
 
     connectedCallback(): void {
         super.connectedCallback();
-        console.log(this.getAttribute('defaultValue'));
         this.setAttribute('isActive', this.getAttribute('defaultValue') || 'false');
-
-
+        this.update();
         this.$('button').addEventListener('click', () => {
             const newValue = this.getAttribute('isActive') !== 'true';
-
             this.setAttribute('isActive', String(newValue));
-            this.$('button').setAttribute('data-active', String(newValue));
-
             this.update();
-            this.actionCallback({isActive: newValue})
+
         });
     }
 
     update() {
         const isActive = this.getAttribute('isActive') === 'true';
+        this.$('button').setAttribute('data-active', String(isActive));
+
         this.$<HTMLSpanElement>('#toggle-nob').classList.toggle('translate-x-4' ,isActive);
+        this.actionCallback({isActive: isActive})
     }
 
     renderTemplate() {
         const isActive = this.getAttribute('isActive') === 'true';
         // language=HTML
         (this.shadowRoot as ShadowRoot).innerHTML = `
-            <div class="flex items-center justify-center h-full">
+            <div class="flex items-center justify-center h-full gap-3">
                 <button id="toggle-button" data-active="${isActive}"
                         class="w-14 px-2 py-2 relative data-[active=true]:bg-blue-500 shadow  bg-blue-500/30  text-white rounded-full cursor-pointer hover:shadow-lg transition duration-200 flex items-start justify-start">
                 <span id="toggle-nob"
