@@ -9,6 +9,7 @@ class HeroSection extends BaseElement {
              <div class="w-3/4 flex flex-row justify-center items-center text-gray-700 text-lg font-semibold"> 
                Tools and practices to build a custom elements website in ${new Date().getFullYear()}
              </div>
+             
         </div> 
     `;
     }
