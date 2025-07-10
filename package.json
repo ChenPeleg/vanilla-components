@@ -8,7 +8,7 @@
     "build": "tsc && vite build",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
-    "tailwind-watch": "npx @tailwindcss/cli -i ./src/style.css -o src/css/generated-tailwind.css"
+    "test" : "tsc  "
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",
@@ -16,6 +16,7 @@
     "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3",
     "vite": "^7.0.0"
+
   },
   "web-types": "./web-types.json"
 }
