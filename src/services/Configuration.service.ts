@@ -1,5 +1,5 @@
-import {ServicesResolver} from './provider/ServiceResolverClass.ts';
-import {AbstractBaseService} from './provider/AbstractBaseService.ts';
+import {ServicesResolver} from '../_global/provider/ServiceResolverClass.ts';
+import {AbstractBaseService} from '../_global/provider/AbstractBaseService.ts';
 import {Environment} from '../models/Environment.ts';
 
 

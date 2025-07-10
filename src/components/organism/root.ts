@@ -1,16 +1,15 @@
-import {globalStyleSheet} from '../../core/tailwind-style-sheet.ts';
-import type {CustomElement} from '../../base/CustomElement.ts';
+import {globalStyleSheet} from '../../_core/tailwind-style-sheet.ts';
+import type {CustomElement} from '../../_core/elements/CustomElement.ts';
 
 class AppRoot extends HTMLElement implements CustomElement {
-    static get observedAttributes() {
-        return [ ];
-    }
-
     constructor() {
         super();
-        this.attachShadow({ mode: 'open' });
+        this.attachShadow({mode: 'open'});
     }
 
+    static get observedAttributes() {
+        return [];
+    }
 
     connectedCallback() {
         (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
@@ -24,8 +23,7 @@ class AppRoot extends HTMLElement implements CustomElement {
     render() {
 
         this.shadowRoot!.innerHTML = `  
-      <div class="h-screen w-screen bg-amber-200">
-     
+      <div class="h-screen w-screen overflow-hidden "> 
          <nav-bar></nav-bar>
          <main-content></main-content>
       </div>

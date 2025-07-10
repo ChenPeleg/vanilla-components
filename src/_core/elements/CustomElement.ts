@@ -1,5 +1,13 @@
 interface CustomElementMethods  {
     /**
+     * The property `formAssociated` is a static boolean value that indicates whether the custom element will be seen with `ElementInternals`.
+     * @static
+     * @see  {@link https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/attachInternals|MDN - is}
+     * @example
+     * static formAssociated = true;
+     */
+    formAssociated?()   : boolean;
+    /**
      * The `Element.observedAttributes` A static value (or a static getter) that returns an array of attribute names to observe for changes.These attributes will trigger the `attributeChangedCallback` method when they are changed, added, removed, or replaced.
      * @static
      * @return {string[]}

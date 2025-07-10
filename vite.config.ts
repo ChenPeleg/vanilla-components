@@ -3,6 +3,8 @@ import tailwindcss from '@tailwindcss/vite'
 import {exec} from 'node:child_process';
 
 export default defineConfig({
+    base: "",
+    publicDir: "public",
     plugins: [
         tailwindcss(),
         {

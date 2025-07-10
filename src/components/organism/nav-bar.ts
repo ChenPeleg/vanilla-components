@@ -1,5 +1,5 @@
-import {globalStyleSheet} from '../../core/tailwind-style-sheet.ts';
-import type {CustomElement} from '../../base/CustomElement.ts';
+import {globalStyleSheet} from '../../_core/tailwind-style-sheet.ts';
+import type {CustomElement} from '../../_core/elements/CustomElement.ts';
 
 class NavigationBar extends HTMLElement implements CustomElement {
     static get observedAttributes() {
@@ -17,14 +17,11 @@ class NavigationBar extends HTMLElement implements CustomElement {
         this.render();
     }
 
-    attributeChangedCallback() {
-        this.render();
-    }
 
     render() {
         const header = this.getAttribute('header') || '';
         this.shadowRoot!.innerHTML = `  
-       <nav class="bg-gray-800 p-4">
+       <nav class="bg-teal-900 p-4 shadow-2xl">
             <div class="container mx-auto flex justify-between items-center">
                 <div class="text-white
                     font-bold text-xl">${header}</div>

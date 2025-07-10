@@ -1,10 +1,10 @@
 
-import {servicesProvider} from '../services/provider/ServicesProvider.ts';
+import {servicesProvider} from '../services/ServicesProvider.ts';
 import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 
 
 import {StoreService} from '../services/Store.service.ts';
-import type {StoreReducer} from './factory/StoreFactory.ts';
+import type {StoreReducer} from '../_global/StoreFactory.ts';
 import type {AttendanceStore} from '../models/AttendanceStore.ts';
 import {type AppAction} from '../models/AppAction.ts';
 import {ActionType} from '../models/ActionType.ts';

@@ -1,34 +1,24 @@
-import {globalStyleSheet} from '../../core/tailwind-style-sheet.ts';
-import type {CustomElement} from '../../base/CustomElement.ts';
+import {BaseElement} from '../../_core/elements/base-element.ts';
 
-class MainContent extends HTMLElement implements CustomElement {
-    static get observedAttributes() {
-        return ['header', 'text'];
-    }
-
-    constructor() {
-        super();
-        this.attachShadow({ mode: 'open' });
-    }
+class MainContent extends BaseElement {
 
 
-    connectedCallback() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-        this.render();
-    }
-
-    attributeChangedCallback() {
-        this.render();
-    }
-
-    render() {
-        const header = this.getAttribute('header') || '';
-        const text = this.getAttribute('text') || '';
+    renderTemplate() {
         this.shadowRoot!.innerHTML = `  
-      <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white p-6">
-        <div class="font-bold text-xl mb-2">${header}</div>
-        <p class="text-gray-700 text-base">${text}</p>
-      </div>
+       <main class="overflow-hidden bg-slate-200  w-full h-full">
+       <div class="flex flex-row   justify-center h-full">
+           <div class="flex-1 bg-amber-200 flex flex-col items-center justify-center">
+             <card-component header="Card Header" text="This is a card component"></card-component>
+           </div>
+           <div class="flex-1 bg-green-400"> 
+             <logo-component></logo-component>
+           </div>
+           <div class="flex-1 bg-blue-300">
+           <panel-state></panel-state>
+          
+           </div> 
+       </div>
+      </main>
     `;
     }
 }

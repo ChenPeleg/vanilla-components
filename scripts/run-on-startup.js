@@ -5,7 +5,7 @@
  * @module run-on-startup
  */
 
-import { promises as fs } from 'node:fs';
+import {promises as fs} from 'node:fs';
 import path from 'node:path';
 
 export class RunOnStartup {
@@ -21,7 +21,7 @@ export class RunOnStartup {
      */
     async getAllFiles(dir) {
         let files = [];
-        const entries = await fs.readdir(dir, { withFileTypes: true });
+        const entries = await fs.readdir(dir, {withFileTypes: true});
         for (const entry of entries) {
             const fullPath = path.join(dir, entry.name);
             if (entry.isDirectory()) {
@@ -50,7 +50,7 @@ export class RunOnStartup {
      * @returns {string} Import statement
      */
     buildImportStatement(file) {
-        const relativePath = file.replaceAll('\\','/').split('src/')[1].replace(/\\/g, '/');
+        const relativePath = file.replaceAll('\\', '/').split('src/')[1].replace(/\\/g, '/');
         return `import '../${relativePath}';`;
     }
 
@@ -95,7 +95,8 @@ export class RunOnStartup {
             this.logInfo('All files found:', allFiles);
             const ceFiles = [];
             for (const file of allFiles) {
-                if (file.endsWith('.ts') && await this.fileContains(file, 'customElements.define')) {
+                if (file.endsWith('.ts') &&
+                    await this.fileContains(file, 'customElements.define')) {
                     this.logInfo('File with customElements.define found:', file);
                     ceFiles.push(file);
                 }
@@ -146,10 +147,11 @@ export class RunOnStartup {
                 console.log('Duplicate imports found:');
                 duplicateImports.forEach(i => console.log(i));
             }
-            const importsCorrect = missingImports.length === 0 && extraImports.length === 0 && duplicateImports.length === 0;
+            const importsCorrect = missingImports.length === 0 && extraImports.length ===
+                0 && duplicateImports.length === 0;
             if (importsCorrect) {
                 this.logInfo('All customElements.define files are correctly imported, no extra or duplicate imports found.');
-             } else {
+            } else {
                 if (missingImports.length > 0) {
                     this.logInfo('Missing imports:', missingImports);
                     console.log('Missing imports:');
@@ -161,7 +163,7 @@ export class RunOnStartup {
                     extraImports.forEach(i => console.log(i));
                 }
             }
-            return { importsCorrect, requiredImports, duplicateImports };
+            return {importsCorrect, requiredImports, duplicateImports};
         } catch (err) {
             this.logError('Error in checkImports function:', err);
             console.error('Error in checkImports function:', err);
@@ -178,7 +180,8 @@ export class RunOnStartup {
         if (!result.importsCorrect) {
             this.logInfo('Imports are incorrect. Rewriting import file...');
             const importFileHeader = "/**\n * This file is auto-generated. Do not edit manually.\n * @readonly\n * @module imported-components\n */\n";
-            const newContent = importFileHeader + result.requiredImports.join('\n') + '\n';
+            const newContent = importFileHeader + result.requiredImports.join('\n') +
+                '\n';
             await fs.writeFile(RunOnStartup.importFile, newContent, 'utf8');
             this.logInfo('Import file has been rewritten.');
         } else {
@@ -187,7 +190,5 @@ export class RunOnStartup {
     }
 }
 
-// Replace the old script entry point with main()
-(async () => {
-    await new RunOnStartup().main();
-})();
+await new RunOnStartup().main()
+

@@ -1,32 +1,19 @@
-import {globalStyleSheet} from '../../core/tailwind-style-sheet.ts';
-import type {CustomElement} from '../../base/CustomElement.ts';
+import {BaseElement} from '../../_core/elements/base-element.ts';
 
 
+class CardComponent extends BaseElement {
 
-class CardComponent extends HTMLElement implements CustomElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: 'open'});
-    }
 
-    static get  observedAttributes() {
+    static get observedAttributes() {
         return ['header', 'text'];
     }
 
-    connectedCallback(): void {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-        this.render();
-    }
 
-    attributeChangedCallback(_name: string, _oldValue: string, _newValue: string) {
-        this.render();
-    }
-
-    render() {
+    renderTemplate() {
         const header = this.getAttribute('header') || '';
         const text = this.getAttribute('text') || '';
         this.shadowRoot!.innerHTML = `  
-      <div class="max-w-sm rounded overflow-hidden shadow-lg bg-white p-6">
+      <div class="transition-all cursor-pointer max-w-sm rounded overflow-hidden shadow-md hover:shadow-2xl bg-white p-6">
         <div class="font-bold text-xl mb-2">${header}</div>
         <p class="text-gray-700 text-base">${text}</p>
       </div>
