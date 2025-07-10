@@ -12,3 +12,4 @@ import '../components/molecules/panel-state.ts';
 import '../components/organism/main-content.ts';
 import '../components/organism/nav-bar.ts';
 import '../components/organism/root.ts';
+import '../components/molecules/hero-section.ts';
