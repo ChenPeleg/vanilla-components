@@ -3,9 +3,6 @@ import type {CustomElement} from './CustomElement.ts';
 
 
 export class BaseElement extends HTMLElement implements CustomElement {
-    static get formAssociated  () {
-       return  true
-    };
     protected internals: ElementInternals;
 
     constructor() {
@@ -14,6 +11,10 @@ export class BaseElement extends HTMLElement implements CustomElement {
         this.internals = this.attachInternals();
 
     }
+
+    static get formAssociated() {
+        return true
+    };
 
     $<T extends HTMLElement>(selector: string): T {
         return this.shadowRoot?.querySelector(selector) as T
@@ -31,7 +32,7 @@ export class BaseElement extends HTMLElement implements CustomElement {
         this.update()
     }
 
-    protected actionCallback = (_result: any) => {
+    public actionCallback = (_result: any) => {
     };
 
     protected update() {

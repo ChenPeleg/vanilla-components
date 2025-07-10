@@ -38,7 +38,7 @@ class PanelState extends BaseElement {
                     <div>
                         <text-input></text-input>
                     </div>
-                    <toggle-button>
+                    <toggle-button defaultValue="true">
                         <span id="toggle-button-text" class="">Toggle</span>
                     </toggle-button>
 

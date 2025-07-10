@@ -120,15 +120,48 @@
           "description": "A toggle button component with class and isActive attributes.",
           "source": { "module": "./src/components/atoms/toggle-button.ts" },
           "attributes": [
+        
             {
-              "name": "class",
-              "description": "CSS classes for styling the toggle button."
-            },
-            {
-              "name": "isActive",
+              "name": "defaultValue",
               "description": "Boolean attribute to indicate if the toggle is active. Accepts 'true' or 'false'."
             }
           ]
+        },
+        {
+          "name": "text-input",
+          "description": "A text input component with value and defaultValue attributes.",
+          "source": { "module": "./src/components/atoms/text-input.ts",
+            "symbol": ""
+          },
+          "attributes": [
+            {
+              "name": "defaultValue",
+              "description": "The default value for the input."
+            },
+            {
+              "name": "value",
+              "description": "The current value of the input."
+            }
+          ],
+          "events": [
+            {
+              "name": "input",
+              "description": "Fired when the input value changes."
+            }
+          ],
+          "properties": [
+            {
+              "name": "value",
+              "description": "The current value of the input.",
+              "type": "string"
+            }
+          ]
+        },
+        {
+          "name": "hero-section",
+          "description": "A hero section component displaying main site information.",
+          "source": { "module": "./src/components/molecules/hero-section.ts" },
+          "attributes": []
         }
       ]
     }
