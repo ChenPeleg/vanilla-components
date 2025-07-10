@@ -8,15 +8,16 @@ export class AppButton extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
         this.$<HTMLButtonElement>('button').addEventListener('click', () => {
+            if (this.getAttribute('disabled') === 'true') {
+                return;
+            }
             this.actionCallback({clicked: true});
         });
     }
     update () {
-
         const isDisabled = this.getAttribute('disabled') === 'true';
         this.$<HTMLButtonElement>('button').disabled = isDisabled;
         this.$<HTMLButtonElement>('button').setAttribute('aria-disabled', String(isDisabled));
-
     }
     renderTemplate() {
         const _class = this.getAttribute('class') || '';
