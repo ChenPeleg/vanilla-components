@@ -1,4 +1,5 @@
 // @ts-check
+
 /**
  * Script to checkImports that all files with customElements.define are imported in the import file,
  * and that there are no extra imports. Provides debug logging and returns import status.
@@ -6,12 +7,12 @@
  */
 
 import {promises as fs} from 'node:fs';
-import path from 'node:path';
+import {join} from 'node:path';
 
 export class RunOnStartup {
 
-    static importFile = path.join('src', 'imports', 'imported-components.ts');
-    static srcDir = path.join(process.cwd(), 'src');
+    static importFile = join('src', '_core', 'imported-components.ts');
+    static srcDir = join(process.cwd(), 'src');
     #debug = false;
 
     /**
@@ -23,7 +24,7 @@ export class RunOnStartup {
         let files = [];
         const entries = await fs.readdir(dir, {withFileTypes: true});
         for (const entry of entries) {
-            const fullPath = path.join(dir, entry.name);
+            const fullPath =  join(dir, entry.name);
             if (entry.isDirectory()) {
                 files = files.concat(await this.getAllFiles(fullPath));
             } else if (entry.isFile()) {
@@ -122,7 +123,7 @@ export class RunOnStartup {
                 const match = line.match(/import ['"]\.\.\/(.*)['"]/);
                 if (match) {
                     const relPath = match[1];
-                    const absPath = path.join(RunOnStartup.srcDir, relPath);
+                    const absPath =  join(RunOnStartup.srcDir, relPath);
                     // Only checkImports .ts files inside src
                     if (absPath.endsWith('.ts')) {
                         this.logInfo('Checking if extra import:', absPath);
@@ -190,5 +191,5 @@ export class RunOnStartup {
     }
 }
 
-await new RunOnStartup().main()
+await new RunOnStartup().main();
 
