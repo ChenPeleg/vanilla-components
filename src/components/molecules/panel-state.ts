@@ -4,7 +4,7 @@ import type {TextInput} from '../atoms/text-input.ts';
 
 class PanelState extends BaseElement {
     private state = {
-        isActive: false,
+        isActive: true,
     }
     static get observedAttributes() {
         return ['header', 'text'];
@@ -38,7 +38,7 @@ class PanelState extends BaseElement {
                     <div>
                         <text-input></text-input>
                     </div>
-                    <toggle-button defaultValue="true">
+                    <toggle-button defaultValue="${this.state.isActive.toString()}">
                         <span id="toggle-button-text" class="">Toggle</span>
                     </toggle-button>
 

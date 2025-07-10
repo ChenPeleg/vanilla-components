@@ -14,7 +14,8 @@ export class ToggleButton extends BaseElement {
 
     connectedCallback(): void {
         super.connectedCallback();
-        this.setAttribute('value', this.getAttribute('defaultValue') || 'false');
+        console.log(this.getAttribute('defaultValue'));
+        this.setAttribute('isActive', this.getAttribute('defaultValue') || 'false');
 
 
         this.$('button').addEventListener('click', () => {
