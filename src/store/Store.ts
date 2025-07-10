@@ -1,4 +1,4 @@
-import {servicesProvider} from '../services/provider/ServicesProvider.ts';
+import {servicesProvider} from '../services/ServicesProvider.ts';
 import {StoreService} from '../services/Store.service.ts';
 
 

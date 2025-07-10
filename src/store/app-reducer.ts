@@ -1,5 +1,5 @@
 
-import {servicesProvider} from '../services/provider/ServicesProvider.ts';
+import {servicesProvider} from '../services/ServicesProvider.ts';
 import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 
 

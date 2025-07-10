@@ -1,5 +1,5 @@
-import {ServicesResolver} from './provider/ServiceResolverClass.ts';
-import {AbstractBaseService} from './provider/AbstractBaseService.ts';
+import {ServicesResolver} from '../core/provider/ServiceResolverClass.ts';
+import {AbstractBaseService} from '../core/provider/AbstractBaseService.ts';
 
 export class LocalStorageService extends AbstractBaseService {
     public static readonly STORE_SETTINGS = 'attendance_Store_Settings';

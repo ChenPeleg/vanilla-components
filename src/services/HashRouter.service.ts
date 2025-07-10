@@ -1,5 +1,5 @@
-import { AbstractBaseService } from './provider/AbstractBaseService.ts';
-import { ServicesResolver } from './provider/ServiceResolverClass.ts';
+import { AbstractBaseService } from '../core/provider/AbstractBaseService.ts';
+import { ServicesResolver } from '../core/provider/ServiceResolverClass.ts';
 
 export class HashRouterService extends AbstractBaseService {
     private routes: Map<string, () => void>;
