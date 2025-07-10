@@ -10,8 +10,11 @@ class MainContent extends BaseElement {
            <div class="flex-1 bg-amber-200 flex flex-col items-center justify-center">
              <card-component header="Card Header" text="This is a card component"></card-component>
            </div>
-           <div class="flex-1 bg-green-400"> 
+           <div class="flex-1 bg-green-400 flex flex-col items-center justify-start"> 
              <logo-component></logo-component>
+             <div class="w-3/4 flex flex-row justify-center items-center text-gray-700 text-lg font-semibold"> 
+               Tools and practices to build a custom elements website in ${new Date().getFullYear()}
+             </div>
            </div>
            <div class="flex-1 bg-blue-300">
            <panel-state></panel-state>

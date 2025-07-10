@@ -10,9 +10,7 @@ export class TextInput extends BaseElement {
     public set value(newValue: string) {
         this.$<HTMLInputElement>('input').value = newValue;
         this.setAttribute('value', newValue);
-
     }
-
 
     inputCallback = (_result: { value: string }) => {
     };
@@ -31,7 +29,7 @@ export class TextInput extends BaseElement {
         (this.shadowRoot as ShadowRoot).innerHTML = `
         <input type="text" class="${this.getAttribute('class') || ''} px-4 py-2 border rounded focus:outline-none focus:ring-2 focus:ring-blue-500 transition duration-200" 
         value="${this.getAttribute('defaultValue') || ''}" />
-        `
+        `;
     }
 
     update() {

@@ -7,7 +7,7 @@ class LogoComponent extends BaseElement {
         this.shadowRoot!.innerHTML = `  
         <div class="flex flex-col items-center justify-center p-4 agbalumo-regular">
         <img src="${vanillaLogo}" alt="Vaniall Logo" class="w-80 h-80  ">
-        <h1 class="text-3xl font-bold text-gray-800 mt-4">Vanilla Custom Elements </h1>
+        <h1 class="text-4xl font-bold text-gray-800 mt-4 text-center">Vanilla Custom Elements </h1>
         </div> 
     `;
     }

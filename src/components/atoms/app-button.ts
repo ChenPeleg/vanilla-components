@@ -2,16 +2,15 @@ import {BaseElement} from '../../_core/elements/base-element.ts';
 
 
 class AppButton extends BaseElement {
-
     static get observedAttributes() {
         return ['class'];
     }
-
     connectedCallback(): void {
         super.connectedCallback();
+        this.$<HTMLButtonElement>('button').addEventListener('click', () => {
+            this.actionCallback({clicked: true});
+        });
     }
-
-
     renderTemplate() {
         const _class = this.getAttribute('class') || '';
         this.shadowRoot!.innerHTML = `   
