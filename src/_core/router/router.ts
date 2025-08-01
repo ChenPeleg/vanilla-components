@@ -2,7 +2,7 @@ export type RouteObject = {
     path: string
     index?: boolean
     children?: RouteObject[]
-    callback: (params?: any) => string;
+    element: (params?: any) => string;
 }
 
 
@@ -10,11 +10,20 @@ export class Router {
     private routes: Map<string, RouteObject>;
     private currentPath: string;
     private readonly isHashRouter: boolean;
+    private _state : {
+        route: RouteObject | null,
+        params : any
+    }
 
     constructor({routes, isHashRouter = false} : {
         routes?: RouteObject[],
         isHashRouter?: boolean
     }) {
+        this._state   = {
+            route : null,
+            params : {}
+
+        }
         this.routes = new Map();
         if (routes) {
             routes.forEach(route => this.registerRoute(route));
@@ -28,6 +37,9 @@ export class Router {
         } else {
             window.addEventListener('popstate', this.handleRouteChange.bind(this));
         }
+    }
+    public get state(): { route: RouteObject | null, params: any } {
+        return this._state;
     }
 
     public registerRoute(route: RouteObject): Router {
@@ -57,9 +69,7 @@ export class Router {
 
         if (match) {
             const { route, params } = match;
-            if (route.callback) {
-                route.callback(params);
-            }
+            this._state =    { route, params };
         }
     }
 
