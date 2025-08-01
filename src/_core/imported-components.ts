@@ -11,7 +11,7 @@ import '../components/molecules/logo-component.ts';
 import '../components/molecules/panel-state.ts';
 import '../components/organism/main-content.ts';
 import '../components/organism/nav-bar.ts';
-import '../components/organism/root.ts';
+import '../root.ts';
 import '../components/molecules/hero-section.ts';
 import '../_core/router/router-outlet.ts';
 import '../pages/home-page.ts';
