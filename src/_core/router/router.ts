@@ -53,7 +53,6 @@ export class Router {
     private handleRouteChange(): void {
         this.currentPath = this.isHashRouter ? window.location.hash.slice(1) || '/' : window.location.pathname || '/';
 
-        // Find matching route
         let match = this.findMatchingRoute(this.currentPath);
 
         if (match) {
@@ -65,7 +64,7 @@ export class Router {
     }
 
     private findMatchingRoute(path: string): { route: RouteObject, params: any } | null {
-        // Try exact match first
+
         if (this.routes.has(path)) {
             return {
                 route: this.routes.get(path)!,
@@ -73,7 +72,6 @@ export class Router {
             };
         }
 
-        // Check for parameterized routes
         for (const [routePath, routeObj] of this.routes.entries()) {
             const params = this.matchRouteWithParams(routePath, path);
             if (params) {
