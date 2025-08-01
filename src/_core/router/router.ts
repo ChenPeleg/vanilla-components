@@ -1,98 +1,114 @@
+export type RouteObject = {
+    path: string
+    parameters?:  Record<string, any>
+    id: string
+    index: true
+    children?: RouteObject[]
+    element?: HTMLElement | string;
+    callback?: (params?: any) => void;
+}
 
- export class Router {
-   private routes: Map<string, (params?: any) => void>;
-   private currentPath: string;
-   private useHash: boolean;
 
-   constructor(useHash = false) {
-     this.routes = new Map();
-     this.currentPath = '';
-     this.useHash = useHash;
+export class Router {
+    private routes: Map<string, RouteObject>;
+    private currentPath: string;
+    private readonly isHashRouter: boolean;
 
-     // Set up event listeners
-     if (this.useHash) {
-       window.addEventListener('hashchange', this.handleRouteChange.bind(this));
-     } else {
-       window.addEventListener('popstate', this.handleRouteChange.bind(this));
-     }
-   }
+    constructor(isHashRouter = false) {
+        this.routes = new Map();
+        this.currentPath = '';
+        this.isHashRouter = isHashRouter;
 
-   // Register a route
-   public on(path: string, callback: (params?: any) => void): Router {
-     this.routes.set(path, callback);
-     return this;
-   }
+        // Set up event listeners
+        if (this.isHashRouter) {
+            window.addEventListener('hashchange', this.handleRouteChange.bind(this));
+        } else {
+            window.addEventListener('popstate', this.handleRouteChange.bind(this));
+        }
+    }
 
-   // Start the router
-   public init(): void {
-     this.handleRouteChange();
-   }
+    // Register a route
+    public on(path: string, callback: (params?: any) => void): Router {
+        this.routes.set(path, callback);
+        return this;
+    }
 
-   // Navigate to a specific route
-   public navigate(path: string): void {
-     if (this.useHash) {
-       window.location.hash = path;
-     } else {
-       window.history.pushState(null, '', path);
-       this.handleRouteChange();
-     }
-   }
+    // Start the router
+    public init(): void {
+        this.handleRouteChange();
+    }
 
-   private handleRouteChange(): void {
-     this.currentPath = this.useHash
-       ? window.location.hash.slice(1) || '/'
-       : window.location.pathname || '/';
+    // Navigate to a specific route
+    public navigate(path: string): void {
+        if (this.isHashRouter) {
+            window.location.hash = path;
+        } else {
+            window.history.pushState(null, '', path);
+            this.handleRouteChange();
+        }
+    }
 
-     // Find matching route
-     let match = this.findMatchingRoute(this.currentPath);
+    private handleRouteChange(): void {
+        this.currentPath = this.isHashRouter ? window.location.hash.slice(1) || '/' : window.location.pathname || '/';
 
-     if (match) {
-       const { handler, params } = match;
-       handler(params);
-     }
-   }
+        // Find matching route
+        let match = this.findMatchingRoute(this.currentPath);
 
-   private findMatchingRoute(path: string): { handler: (params?: any) => void, params: any } | null {
-     // Try exact match first
-     if (this.routes.has(path)) {
-       return {
-         handler: this.routes.get(path)!,
-         params: {}
-       };
-     }
+        if (match) {
+            const {
+                handler,
+                params
+            } = match;
+            handler(params);
+        }
+    }
 
-     // Check for parameterized routes
-     for (const [routePath, handler] of this.routes.entries()) {
-       const params = this.matchRouteWithParams(routePath, path);
-       if (params) {
-         return { handler, params };
-       }
-     }
+    private findMatchingRoute(path: string): { handler: (params?: any) => void, params: any } | null {
+        // Try exact match first
+        if (this.routes.has(path)) {
+            return {
+                handler: this.routes.get(path)!,
+                params: {}
+            };
+        }
 
-     return null;
-   }
+        // Check for parameterized routes
+        for (const [routePath, handler] of this.routes.entries()) {
+            const params = this.matchRouteWithParams(routePath, path);
+            if (params) {
+                return {
+                    handler,
+                    params
+                };
+            }
+        }
 
-   private matchRouteWithParams(routePath: string, path: string): any | null {
-     // Convert route pattern to regex
-     const paramNames: string[] = [];
-     const regexPattern = routePath
-       .replace(/:\w+/g, (match) => {
-         paramNames.push(match.slice(1));
-         return '([^/]+)';
-       })
-       .replace(/\//g, '\\/');
+        return null;
+    }
 
-     const regex = new RegExp(`^${regexPattern}$`);
-     const matches = path.match(regex);
+    private matchRouteWithParams(routePath: string, path: string): any | null {
+        // Convert route pattern to regex
+        const paramNames: string[] = [];
+        const regexPattern = routePath
+            .replace(/:\w+/g, (match) => {
+                paramNames.push(match.slice(1));
+                return '([^/]+)';
+            })
+            .replace(/\//g, '\\/');
 
-     if (!matches) return null;
+        const regex = new RegExp(`^${regexPattern}$`);
+        const matches = path.match(regex);
 
-     const params: { [key: string]: string } = {};
-     paramNames.forEach((name, index) => {
-       params[name] = matches[index + 1];
-     });
+        if (!matches) {
+            return null;
+        }
 
-     return params;
-   }
- }
+        const params: { [key: string]: string } = {};
+        paramNames.forEach((name, index) => {
+            params[name] = matches[index + 1];
+        });
+
+        return params;
+    }
+}
 
