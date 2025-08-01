@@ -12,7 +12,7 @@ export const routes : RouteObject[] = [
         element: ( ) => `<main-layout><home-page></home-page></main-layout>`
     },
     {
-        path : '/about',
+        path : '*',
         element: ( ) => `<main-layout><about-page></about-page></main-layout>`
     }
 

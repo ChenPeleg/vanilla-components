@@ -109,6 +109,11 @@ export class Router {
                 route: this.routes.get(path)!,
                 params: {}
             };
+        } else if (this.routes.has('*')  ) {
+            return {
+                route: this.routes.get('*')!,
+                params: {}
+            };
         }
 
         for (const [routePath, routeObj] of this.routes.entries()) {
