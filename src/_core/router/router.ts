@@ -4,16 +4,17 @@ export type RouteObject = {
     children?: RouteObject[]
     element: (params?: any) => string;
 }
+export type RouterState = {
+    route: RouteObject | null;
+    params : any
+}
 
 
 export class Router {
     private routes: Map<string, RouteObject>;
     private currentPath: string;
     private readonly isHashRouter: boolean;
-    private _state : {
-        route: RouteObject | null,
-        params : any
-    }
+    private _state : RouterState
 
     constructor({routes, isHashRouter = false} : {
         routes?: RouteObject[],
@@ -31,15 +32,20 @@ export class Router {
         this.currentPath = '';
         this.isHashRouter = isHashRouter;
 
-        // Set up event listeners
         if (this.isHashRouter) {
             window.addEventListener('hashchange', this.handleRouteChange.bind(this));
         } else {
             window.addEventListener('popstate', this.handleRouteChange.bind(this));
         }
     }
+    private _routeChangeCallback (state : RouterState) : RouterState  {
+        return  state
+    }
     public get state(): { route: RouteObject | null, params: any } {
         return this._state;
+    }
+    public set changeCallback (callback: (state: RouterState) => RouterState) {
+        this._routeChangeCallback = callback
     }
 
     public registerRoute(route: RouteObject): Router {
@@ -47,12 +53,11 @@ export class Router {
         return this;
     }
 
-    // Start the router
+
     public init(): void {
         this.handleRouteChange();
     }
 
-    // Navigate to a specific route
     public navigate(path: string): void {
         if (this.isHashRouter) {
             window.location.hash = path;
@@ -70,7 +75,11 @@ export class Router {
         if (match) {
             const { route, params } = match;
             this._state =    { route, params };
+        } else {
+            this._state = { route: null, params: {} };
         }
+        this._routeChangeCallback(this._state)
+
     }
 
     private findMatchingRoute(path: string): { route: RouteObject, params: any } | null {
