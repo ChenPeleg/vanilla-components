@@ -41,7 +41,7 @@ export class Router {
     private _routeChangeCallback (state : RouterState) : RouterState  {
         return  state
     }
-    public get state(): { route: RouteObject | null, params: any } {
+    public get state(): RouterState {
         return this._state;
     }
     public set changeCallback (callback: (state: RouterState) => RouterState) {

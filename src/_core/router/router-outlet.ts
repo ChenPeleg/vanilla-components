@@ -1,32 +1,29 @@
 import {BaseElement} from '../elements/base-element.ts';
+import {servicesProvider} from '../../services/ServicesProvider.ts';
+import {HashRouterService} from '../../services/HashRouter.service.ts';
+import type {Subscription} from '../../models/Subscription.ts';
 
 
 export class RouterOutlet extends BaseElement {
+    private  readonly  servicesProvider = servicesProvider;
+    private subscription: Subscription;
 
     connectedCallback(): void {
         super.connectedCallback();
-        this.$<HTMLButtonElement>('button').addEventListener('click', () => {
-            if (this.$<HTMLButtonElement>('button').disabled) {
-                return;
-            }
-            this.actionCallback({clicked: true});
-        });
+        this.subscription = this.servicesProvider.getService(HashRouterService).sub
         this.update();
     }
 
     update() {
-        const isDisabled = this.getAttribute('disabled') === 'true';
-        console.log(isDisabled);
-        this.$<HTMLButtonElement>('button').disabled    = isDisabled//= isDisabled;
-        this.$<HTMLButtonElement>('button').setAttribute('aria-disabled', String(isDisabled));
     }
 
     renderTemplate() {
-        this.shadowRoot!.innerHTML = `   
-        <button class=" disabled:bg-blue-500/50 px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 transition duration-200"   >
-           Click Me!
-        </button>
-    `;
+        this.shadowRoot!.innerHTML = `<div class="contents" id="router-outlet"></div>`;
+    }
+    disconnectedCallback(){
+        if (this.subscription) {
+            this.subscription.unsubscribe();
+        }
     }
 }
 
