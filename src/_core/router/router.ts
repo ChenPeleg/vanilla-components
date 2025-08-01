@@ -1,9 +1,8 @@
 export type RouteObject = {
     path: string
-    id: string
-    index: true
+    index?: boolean
     children?: RouteObject[]
-    callback?: (params?: any) => string;
+    callback: (params?: any) => string;
 }
 
 

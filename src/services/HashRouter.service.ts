@@ -1,27 +1,19 @@
 import { AbstractBaseService } from '../_global/provider/AbstractBaseService.ts';
 import { ServicesResolver } from '../_global/provider/ServiceResolverClass.ts';
+import   {Router} from '../_core/router/router.ts';
+import {routes} from './routes.ts';
 
 export class HashRouterService extends AbstractBaseService {
-    private routes: Map<string, () => void>;
+    private readonly router: Router
 
     constructor(provider: ServicesResolver) {
         super(provider);
-        this.routes = new Map();
-        window.addEventListener('hashchange', this.handleHashChange.bind(this));
+        this.router = new Router({routes});
+    }
+    getRouter(): Router {
+        return this.router;
     }
 
-    public registerRoute(path: string, callback: () => void): void {
-        this.routes.set(path, callback);
-    }
 
-    private handleHashChange(): void {
-        const path = window.location.hash.slice(1);
-        const routeCallback = this.routes.get(path);
-        if (routeCallback) {
-            routeCallback();
-        } else {
-            console.warn(`No route registered for path: ${path}`);
-        }
-    }
 }
 
