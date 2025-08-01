@@ -10,7 +10,7 @@ export class HashRouterService extends AbstractBaseService {
 
     constructor(provider: ServicesResolver) {
         super(provider);
-        this.router = new Router({routes});
+        this.router = new Router({routes, isHashRouter: true});
         this.subscribers = [];
         this.router.changeCallback = (state: RouterState) => {
             this.setState(state);

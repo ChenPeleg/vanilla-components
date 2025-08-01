@@ -4,11 +4,16 @@ export const routes : RouteObject[] = [
     {
         path : '/',
         index: true,
-        element: ( ) => `<main-content></main-content>`
+        element: ( ) => `<main-layout><home-page></home-page></main-layout>`
+    },
+    {
+        path : '/home',
+        index: true,
+        element: ( ) => `<main-layout><home-page></home-page></main-layout>`
     },
     {
         path : '/about',
-        element: ( ) => `<about-page></about-page>`
+        element: ( ) => `<main-layout><about-page></about-page></main-layout>`
     }
 
 ]

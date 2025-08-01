@@ -22,10 +22,8 @@ class AppRoot extends HTMLElement implements CustomElement {
 
     render() {
         this.shadowRoot!.innerHTML = `  
-      <div class="h-screen w-screen overflow-hidden "> 
-         <nav-bar></nav-bar>
-         <router-outlet></router-outlet>
-         <main-content></main-content>
+      <div class="h-screen w-screen overflow-hidden ">  
+         <router-outlet></router-outlet> 
       </div>
     `;
     }

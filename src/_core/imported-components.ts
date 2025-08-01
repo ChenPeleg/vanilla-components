@@ -16,3 +16,4 @@ import '../components/molecules/hero-section.ts';
 import '../_core/router/router-outlet.ts';
 import '../pages/home-page.ts';
 import '../pages/about-page.ts';
+import '../pages/main.layout.ts';

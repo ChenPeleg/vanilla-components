@@ -73,9 +73,11 @@ export class Router {
         let match = this.findMatchingRoute(this.currentPath);
 
         if (match) {
+            console.log(match);
             const { route, params } = match;
             this._state =    { route, params };
         } else {
+            console.error(`No route found for path: ${this.currentPath}`);
             this._state = { route: null, params: {} };
         }
         this._routeChangeCallback(this._state)
