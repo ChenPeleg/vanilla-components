@@ -14,5 +14,5 @@ class AboutPage extends BaseElement {
     }
 }
 
-customElements.define('main-content', AboutPage);
+customElements.define('about-page', AboutPage);
 

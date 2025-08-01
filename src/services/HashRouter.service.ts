@@ -1,7 +1,7 @@
 import {AbstractBaseService} from '../_global/provider/AbstractBaseService.ts';
 import {ServicesResolver} from '../_global/provider/ServiceResolverClass.ts';
 import {Router, type RouterState} from '../_core/router/router.ts';
-import {routes} from './routes.ts';
+import {routes} from '../routes.ts';
 
 export class HashRouterService extends AbstractBaseService {
     private readonly router: Router

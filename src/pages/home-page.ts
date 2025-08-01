@@ -28,5 +28,5 @@ class HomePage extends BaseElement {
     }
 }
 
-customElements.define('main-content', HomePage);
+customElements.define('home-page', HomePage);
 
