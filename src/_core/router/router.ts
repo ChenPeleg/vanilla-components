@@ -3,8 +3,7 @@ export type RouteObject = {
     id: string
     index: true
     children?: RouteObject[]
-    element?: HTMLElement | string;
-    callback?: (params?: any) => void;
+    callback?: (params?: any) => string;
 }
 
 
@@ -13,8 +12,14 @@ export class Router {
     private currentPath: string;
     private readonly isHashRouter: boolean;
 
-    constructor(isHashRouter = false) {
+    constructor({routes, isHashRouter = false} : {
+        routes?: RouteObject[],
+        isHashRouter?: boolean
+    }) {
         this.routes = new Map();
+        if (routes) {
+            routes.forEach(route => this.registerRoute(route));
+        }
         this.currentPath = '';
         this.isHashRouter = isHashRouter;
 
@@ -26,9 +31,7 @@ export class Router {
         }
     }
 
-
-    // Register a route
-    public on(route: RouteObject): Router {
+    public registerRoute(route: RouteObject): Router {
         this.routes.set(route.path, route);
         return this;
     }
@@ -86,7 +89,7 @@ export class Router {
     }
 
     private matchRouteWithParams(routePath: string, path: string): any | null {
-        // Convert route pattern to regex
+
         const paramNames: string[] = [];
         const regexPattern = routePath
             .replace(/:\w+/g, (match) => {
