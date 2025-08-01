@@ -1,6 +1,5 @@
 export type RouteObject = {
     path: string
-    parameters?:  Record<string, any>
     id: string
     index: true
     children?: RouteObject[]
@@ -27,9 +26,10 @@ export class Router {
         }
     }
 
+
     // Register a route
-    public on(path: string, callback: (params?: any) => void): Router {
-        this.routes.set(path, callback);
+    public on(route: RouteObject): Router {
+        this.routes.set(route.path, route);
         return this;
     }
 
@@ -55,29 +55,28 @@ export class Router {
         let match = this.findMatchingRoute(this.currentPath);
 
         if (match) {
-            const {
-                handler,
-                params
-            } = match;
-            handler(params);
+            const { route, params } = match;
+            if (route.callback) {
+                route.callback(params);
+            }
         }
     }
 
-    private findMatchingRoute(path: string): { handler: (params?: any) => void, params: any } | null {
+    private findMatchingRoute(path: string): { route: RouteObject, params: any } | null {
         // Try exact match first
         if (this.routes.has(path)) {
             return {
-                handler: this.routes.get(path)!,
+                route: this.routes.get(path)!,
                 params: {}
             };
         }
 
         // Check for parameterized routes
-        for (const [routePath, handler] of this.routes.entries()) {
+        for (const [routePath, routeObj] of this.routes.entries()) {
             const params = this.matchRouteWithParams(routePath, path);
             if (params) {
                 return {
-                    handler,
+                    route: routeObj,
                     params
                 };
             }
@@ -111,4 +110,3 @@ export class Router {
         return params;
     }
 }
-
