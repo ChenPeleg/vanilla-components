@@ -11,12 +11,13 @@ export class RouterOutlet extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
         this.subscription = this.servicesProvider.getService(HashRouterService).subscribe((routerState => {
+
             const outlet = this.$<HTMLDivElement>('#router-outlet');
             if (!outlet) {
                 throw new Error('Router outlet not found');
             }
             const html = routerState.route?.element();
-            outlet.innerText = html || '';
+            outlet.innerHTML = html || '';
         }))
         this.update();
     }
