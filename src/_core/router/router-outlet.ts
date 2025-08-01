@@ -17,6 +17,9 @@ export class RouterOutlet extends BaseElement {
                 throw new Error('Router outlet not found');
             }
             const html = routerState.route?.element();
+            if (outlet.innerHTML === html) {
+                return;
+            }
             outlet.innerHTML = html || '';
         }))
         this.update();
