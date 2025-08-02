@@ -9,7 +9,7 @@ class CardPanel extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <card-component  header="Card Header" text="This is a card component">
+            <card-component  header="Card Header" height="420px">
                 <p class="text-gray-700 text-base">
                     This is a simple card component that can be used to display content.
                 </p>

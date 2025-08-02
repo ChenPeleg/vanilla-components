@@ -8,7 +8,9 @@
         {
           "name": "app-button",
           "description": "A button component with optional class and disabled attributes.",
-          "source": { "module": "./src/components/atoms/app-button.ts" },
+          "source": { "module": "./src/components/atoms/app-button.ts",
+            "symbol": "app-button"
+          },
           "attributes": [
             { "name": "class", "description": "CSS classes for the button." },
             { "name": "disabled", "description": "Disables the button if set to true." }
