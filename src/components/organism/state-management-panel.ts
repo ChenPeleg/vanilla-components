@@ -2,7 +2,6 @@ import {ToggleButton} from '../atoms/toggle-button.ts';
 import {BaseElement} from '../../_core/elements/base-element.ts';
 import {AppButton} from '../atoms/app-button.ts';
 
-// import type {TextInput} from '../atoms/text-input.ts';
 
 class StateManagementPanel extends BaseElement {
     private state = {
