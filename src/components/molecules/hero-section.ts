@@ -16,8 +16,7 @@ class HeroSection extends BaseElement {
         //language=HTML
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center p-4 agbalumo-regular">
-                <logo-component></logo-component>
-             
+                <logo-component></logo-component> 
                 <div class="flex flex-col gap-4">
                     ${this.content.map(item => `
                         <div class="  bg-white/10   shadow-lg rounded-lg p-6  w-full max-w-md">
