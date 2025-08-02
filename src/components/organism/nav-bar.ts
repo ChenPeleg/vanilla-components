@@ -26,8 +26,8 @@ class NavigationBar extends HTMLElement implements CustomElement {
                 <div class="text-white
                     font-bold text-xl">${header}</div>
                 <div class="text-gray-300">
-                    <a href="#" class="hover:text-white px-3 py-2">Home</a>
-                    <a href="#" class="hover:text-white px-3 py-2">About</a>
+                    <a href="#/home" class="hover:text-white px-3 py-2">Home</a>
+                    <a href="#/about" class="hover:text-white px-3 py-2">About</a>
                     <a href="#" class="hover:text-white px-3 py-2">Contact</a>
                 </div>
             </div>

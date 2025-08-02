@@ -1,5 +1,5 @@
-import {globalStyleSheet} from '../../_core/tailwind-style-sheet.ts';
-import type {CustomElement} from '../../_core/elements/CustomElement.ts';
+import {globalStyleSheet} from './_core/tailwind-style-sheet.ts';
+import type {CustomElement} from './_core/elements/CustomElement.ts';
 
 class AppRoot extends HTMLElement implements CustomElement {
     constructor() {
@@ -21,11 +21,9 @@ class AppRoot extends HTMLElement implements CustomElement {
     }
 
     render() {
-
         this.shadowRoot!.innerHTML = `  
-      <div class="h-screen w-screen overflow-hidden "> 
-         <nav-bar></nav-bar>
-         <main-content></main-content>
+      <div class="h-screen w-screen overflow-hidden ">  
+         <router-outlet></router-outlet> 
       </div>
     `;
     }
