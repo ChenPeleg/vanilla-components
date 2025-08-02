@@ -1,8 +1,6 @@
 import {BaseElement} from '../../_core/elements/base-element.ts';
 
 class MainContent extends BaseElement {
-
-
     renderTemplate() {
         this.shadowRoot!.innerHTML = `  
        <main class="overflow-hidden bg-slate-200  w-full h-full">
