@@ -15,7 +15,7 @@ class HomePage extends BaseElement {
                         <hero-section></hero-section>
                     </div>
                     <div class="flex-1 bg-blue-300">
-                        <panel-state></panel-state>
+                        <state-management-panel></state-management-panel>
                     </div>
                 </div>
             </main>
