@@ -20,8 +20,9 @@ class CardComponent extends BaseElement {
     }
 
     update() {
-        this.$('#header').textContent = this.getAttribute('header') || '';
-        this.$('#card-root').style.height = this.getAttribute('height') || 'auto';
+        if (this.$('#card-root')) {
+            this.$('#card-root').style.height = this.getAttribute('height') || 'auto';
+        }
     }
 }
 
