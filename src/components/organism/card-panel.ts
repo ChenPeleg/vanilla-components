@@ -18,12 +18,13 @@ class CardPanel extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="flex flex-col items-center justify-center h-full gap-4 p-8"> 
-                <card-component id="card" header="Card Header" height="420px">
+            <div class="flex flex-col items-center justify-center h-full gap-4 p-8">
+                <card-component-folded id="card" header="When to use"  >
                     <p class="text-gray-700 text-base">
-                        This is a simple card component that can be used to display content.
+                        The most common use case for this when you have a site or some side project, that you want to showcase
+                        in a single page. The advantage of this approach is that you have nearly zero dependencies to maintain.
                     </p>
-                </card-component>
+                </card-component-folded>
             </div>
         `;
         this.update();

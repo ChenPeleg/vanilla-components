@@ -18,3 +18,4 @@ import '../pages/home-page.ts';
 import '../pages/about-page.ts';
 import '../pages/main.layout.ts';
 import '../components/organism/card-panel.ts';
+import '../components/molecules/card-component-folded.ts';
