@@ -17,6 +17,11 @@ class CardComponent extends BaseElement {
                 <slot></slot>
             </div>
         `;
+        this.update()
+    }
+    attributeChangedCallback(_name: string, _oldValue: string, _newValue: string) {
+        super.attributeChangedCallback(_name, _oldValue, _newValue);
+        console.log(_name, _newValue);
     }
 
     update() {

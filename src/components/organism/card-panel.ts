@@ -31,16 +31,14 @@ class CardPanel extends BaseElement {
 
     click() {
         this.state.isCardOpen = !this.state.isCardOpen;
+        this.update()
 
-        const card = this.$<HTMLElement>('#card') as HTMLElement;
-        card.setAttribute('height', this.state.isCardOpen ? '420px'  : '200px');
 
     }
 
     update() {
-        // const card = this.$<HTMLElement>('#card');
-
-
+        const card = this.$<HTMLElement>('#card') as HTMLElement;
+        card.setAttribute('height', this.state.isCardOpen ? '420px'  : '200px');
     }
 }
 
