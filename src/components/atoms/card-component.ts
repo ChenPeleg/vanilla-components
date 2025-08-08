@@ -19,10 +19,7 @@ class CardComponent extends BaseElement {
         `;
         this.update()
     }
-    attributeChangedCallback(_name: string, _oldValue: string, _newValue: string) {
-        super.attributeChangedCallback(_name, _oldValue, _newValue);
-        console.log(_name, _newValue);
-    }
+
 
     update() {
         if (this.$('#card-root')) {
