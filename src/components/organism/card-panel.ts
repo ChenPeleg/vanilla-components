@@ -13,18 +13,18 @@ class CardPanel extends BaseElement {
         this.$('card-component')?.addEventListener('click', () => {
             this.click()
         });
-
-
     }
 
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <card-component id="card" header="Card Header" height="420px">
-                <p class="text-gray-700 text-base">
-                    This is a simple card component that can be used to display content.
-                </p>
-            </card-component>
+            <div class="flex flex-col items-center justify-center h-full gap-4 p-8"> 
+                <card-component id="card" header="Card Header" height="420px">
+                    <p class="text-gray-700 text-base">
+                        This is a simple card component that can be used to display content.
+                    </p>
+                </card-component>
+            </div>
         `;
         this.update();
     }
@@ -38,7 +38,7 @@ class CardPanel extends BaseElement {
 
     update() {
         const card = this.$<HTMLElement>('#card') as HTMLElement;
-        card.setAttribute('height', this.state.isCardOpen ? '420px'  : '200px');
+        card.setAttribute('height', this.state.isCardOpen ? '420px' : '200px');
     }
 }
 

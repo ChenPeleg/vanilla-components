@@ -8,7 +8,7 @@ class HomePage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <main class="overflow-hidden bg-slate-200  w-full h-full">
                 <div class="flex flex-row   justify-center h-full">
-                    <div class="flex-1 bg-amber-200 flex flex-col items-center justify-center">
+                    <div class="flex-1 bg-amber-200 flex flex-col items-center justify-start">
                       <card-panel></card-panel>
                     </div>
                     <div class="flex-1 bg-green-400 flex flex-col items-center justify-start">
