@@ -3,15 +3,18 @@ import {BaseElement} from '../../_core/elements/base-element.ts';
 
 class CardPanel extends BaseElement {
     private state: {
-        isCardOpen: boolean,
+        openCard: false | 'when' | 'how'
     } = {
-        isCardOpen: false,
+        openCard: false,
     };
 
     connectedCallback() {
         super.connectedCallback();
-        this.$('card-component')?.addEventListener('click', () => {
-            this.click()
+        this.$('#card-when')?.addEventListener('click', () => {
+            this.clickCard('when')
+        });
+        this.$('#card-how')?.addEventListener('click', () => {
+            this.clickCard('how')
         });
     }
 
@@ -19,27 +22,31 @@ class CardPanel extends BaseElement {
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full gap-4 p-8">
-                <card-component-folded id="card" header="When to use"  >
+                <card-component id="card-when" header="When to use"  >
                     <p class="text-gray-700 text-base">
                         The most common use case for this when you have a site or some side project, that you want to showcase
                         in a single page. The advantage of this approach is that you have nearly zero dependencies to maintain.
                     </p>
-                </card-component-folded>
+                </card-component>
+                <card-component id="card-how" header="How to use"  >
+                    <p class="text-gray-700 text-base">
+                        The basic use of html custom elements is to create a new element, that can be used in your HTML.
+                        This get be tiresome. So this stack is actually a way to reduce the amount of boiler plate code you have to write.
+                    </p>
+                </card-component>
             </div>
         `;
         this.update();
     }
 
-    click() {
-        this.state.isCardOpen = !this.state.isCardOpen;
+    clickCard(card : 'how' | 'when'  ) {
+        this.state.openCard = card;
         this.update()
-
-
     }
 
     update() {
         const card = this.$<HTMLElement>('#card') as HTMLElement;
-        card.setAttribute('height', this.state.isCardOpen ? '420px' : '200px');
+        card.setAttribute('height', this.state.openCard ? '420px' : '200px');
     }
 }
 
