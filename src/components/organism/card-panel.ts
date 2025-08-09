@@ -29,9 +29,15 @@ class CardPanel extends BaseElement {
                     </p>
                 </card-component>
                 <card-component id="card-how" header="How to use"  >
-                    <p class="text-gray-700 text-base text-ellipsis block overflow-hidden">
+                    <p class="text-gray-700 text-base text-ellipsis block overflow-hidden  ">
                         The basic use of html custom elements is to create a new element, that can be used in your HTML.
                         This get be tiresome. So this stack is actually a way to reduce the amount of boiler plate code you have to write.
+                        The idea is to create a set of custom elements, that can be used in your HTML, that are already styled and ready to use.
+                        The custom elements are built on top of the Tailwind CSS framework, so you can use
+                        the utility classes to style your elements.
+                        The custom elements are built on top of the Tailwind CSS framework, so you can use
+                        the utility classes to style your elements.
+                    
                     </p>
                 </card-component>
             </div>
