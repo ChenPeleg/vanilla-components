@@ -17,5 +17,5 @@ import '../_core/router/router-outlet.ts';
 import '../pages/home-page.ts';
 import '../pages/about-page.ts';
 import '../pages/main.layout.ts';
-import '../components/organism/card-panel.ts';
+import '../components/organism/use-case-panel.ts';
 import '../components/molecules/card-component-folded.ts';

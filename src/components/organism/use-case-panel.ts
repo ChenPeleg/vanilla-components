@@ -1,7 +1,7 @@
 import {BaseElement} from '../../_core/elements/base-element.ts';
 
 
-class CardPanel extends BaseElement {
+class UseCasePanel extends BaseElement {
     private state: {
         openCard: false | 'when' | 'how'
     } = {
@@ -10,12 +10,12 @@ class CardPanel extends BaseElement {
 
     connectedCallback() {
         super.connectedCallback();
-        this.$('#card-when')?.addEventListener('click', () => {
-            this.clickCard('when')
-        });
-        this.$('#card-how')?.addEventListener('click', () => {
-            this.clickCard('how')
-        });
+        // this.$('#card-when')?.addEventListener('click', () => {
+        //     this.clickCard('when')
+        // });
+        // this.$('#card-how')?.addEventListener('click', () => {
+        //     this.clickCard('how')
+        // });
     }
 
     renderTemplate() {
@@ -40,10 +40,10 @@ class CardPanel extends BaseElement {
         this.update();
     }
 
-    clickCard(card : 'how' | 'when'  ) {
-        this.state.openCard = card;
-        this.update()
-    }
+    // clickCard(card : 'how' | 'when'  ) {
+    //     this.state.openCard = card;
+    //     this.update()
+    // }
 
     update() {
         const cardHow = this.$<HTMLElement>('#card-how') as HTMLElement;
@@ -57,4 +57,4 @@ class CardPanel extends BaseElement {
     }
 }
 
-customElements.define('card-panel', CardPanel);
+customElements.define('use-case-panel', UseCasePanel);
