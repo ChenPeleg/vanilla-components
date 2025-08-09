@@ -2,20 +2,10 @@ import {BaseElement} from '../../_core/elements/base-element.ts';
 
 
 class UseCasePanel extends BaseElement {
-    private state: {
-        openCard: false | 'when' | 'how'
-    } = {
-        openCard: false,
-    };
 
     connectedCallback() {
         super.connectedCallback();
-        // this.$('#card-when')?.addEventListener('click', () => {
-        //     this.clickCard('when')
-        // });
-        // this.$('#card-how')?.addEventListener('click', () => {
-        //     this.clickCard('how')
-        // });
+
     }
 
     renderTemplate() {
@@ -38,7 +28,7 @@ class UseCasePanel extends BaseElement {
                         </p>
                         <p class="text-gray-700 text-base text-ellipsis block overflow-hidden">
                             Check out:
-                        <ul class="  list-outside">
+                        <ul class=" list-disc list-inside flex flex-col gap-2 mt-3">
                             <li class="list-item">
                                 <a> The development (front-end) stack </a>
                             </li>
@@ -52,23 +42,7 @@ class UseCasePanel extends BaseElement {
                 </card-component>
             </div>
         `;
-        this.update();
-    }
 
-    // clickCard(card : 'how' | 'when'  ) {
-    //     this.state.openCard = card;
-    //     this.update()
-    // }
-
-    update() {
-        // const cardHow = this.$<HTMLElement>('#card-how') as HTMLElement;
-        // const cardWhen = this.$<HTMLElement>('#card-when') as HTMLElement;
-        // cardHow.setAttribute('max-height', this.state.openCard === 'how' ? '420px' : '200px');
-        // cardHow.setAttribute('height', this.state.openCard === 'how' ? '420px' : '200px');
-        // cardHow.classList.toggle('line-clamp-3', this.state.openCard !== 'how');
-        // cardWhen.setAttribute('max-height', this.state.openCard === 'when' ? '420px' : '200px');
-        // cardWhen.setAttribute('height', this.state.openCard === 'when' ? '420px' : '200px');
-        // cardWhen.classList.toggle('line-clamp-3', this.state.openCard !== 'when');
     }
 }
 
