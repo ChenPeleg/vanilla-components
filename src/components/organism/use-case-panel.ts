@@ -37,8 +37,16 @@ class UseCasePanel extends BaseElement {
                             write.
                         </p>
                         <p class="text-gray-700 text-base text-ellipsis block overflow-hidden">
-                          Check out:
-                            
+                            Check out:
+                        <ul class="  list-outside">
+                            <li class="list-item">
+                                <a> The development (front-end) stack </a>
+                            </li>
+                            <li class="list-item">
+                                <a> Base element </a>
+                            </li>
+
+                        </ul>
                         </p>
                     </article>
                 </card-component>
