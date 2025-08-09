@@ -11,7 +11,7 @@ class CardComponent extends BaseElement {
         const header = this.getAttribute('header') || '';
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div id="card-root"
+            <div id="card-root" 
                  class="transition-all cursor-pointer w-full rounded overflow-hidden shadow-md hover:shadow-2xl bg-white p-6">
                 <h1 id="header" class="font-bold text-xl mb-2">${header}</h1>
                 <slot></slot>
