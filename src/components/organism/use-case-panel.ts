@@ -23,7 +23,7 @@ class UseCasePanel extends BaseElement {
 
                         <p class="text-gray-700 text-base text-ellipsis block overflow-hidden">
                             The basic use of html custom elements is to create a new element, that can be used in your HTML.
-                            This get be tiresome. So this stack is actually a way to reduce the amount of boiler plate code you have to
+                            This get be tiresome. So this stack is actually a way to reduce the amount of boilerplate code you have to
                             write.
                         </p>
                         <p class="text-gray-700 text-base text-ellipsis block overflow-hidden">
@@ -34,6 +34,7 @@ class UseCasePanel extends BaseElement {
                             </li>
                             <li class="list-item">
                                 <a> Base element </a>
+
                             </li>
 
                         </ul>
