@@ -29,26 +29,10 @@ class CardPanel extends BaseElement {
                     </p>
                 </card-component>
                 <card-component id="card-how" header="How to use"  >
-                    <article class="  text-gray-700 text-base block overflow-hidden overflow-ellipsis">
+                    <p class="text-gray-700 text-base text-ellipsis block overflow-hidden">
                         The basic use of html custom elements is to create a new element, that can be used in your HTML.
                         This get be tiresome. So this stack is actually a way to reduce the amount of boiler plate code you have to write.
-                        <ul class="list-disc pl-5">
-                            <li>Define a custom element</li>
-                            <li>Use the custom element in your HTML</li>
-                            <li>Use the custom element in your JavaScript</li>
-                            <li>Use the custom element in your CSS</li>
-                        </ul>
-                        <p>
-                            The custom element can be used in your HTML like this:
-                        </p>
-                        <pre class="bg-gray-100 p-4 rounded">
-                            &lt;card-panel header="My Card Panel"&gt;
-                            &lt;/card-panel&gt;
-                        </pre>
-                        
-                    
-                    
-                    </article>
+                    </p>
                 </card-component>
             </div>
         `;
