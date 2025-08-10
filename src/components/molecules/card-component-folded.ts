@@ -8,7 +8,6 @@ class CardComponentFolded extends BaseElement {
     }
 
     renderTemplate() {
-        const header = this.getAttribute('header') || '';
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <card-component id="card-component-root" header="${this.getAttribute('header')}"  >

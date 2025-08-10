@@ -21,3 +21,4 @@ import '../pages/how-to-use-page.ts';
 import '../pages/main.layout.ts';
 import '../root.ts';
 import '../_core/router/router-outlet.ts';
+import '../components/molecules/code-gist.ts';
