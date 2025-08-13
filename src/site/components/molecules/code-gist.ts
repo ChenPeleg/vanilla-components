@@ -1,5 +1,5 @@
 //
-import {BaseElement} from '../../../src/_core/elements/base-element.ts';
+import {BaseElement} from '../../../_core/elements/base-element.ts';
 
 class CodeGist extends BaseElement {
     static get observedAttributes() {
