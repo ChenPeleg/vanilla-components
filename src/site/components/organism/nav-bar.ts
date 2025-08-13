@@ -1,5 +1,5 @@
-import {globalStyleSheet} from '../../_core/tailwind-style-sheet.ts';
-import type {CustomElement} from '../../_core/elements/CustomElement.ts';
+import {globalStyleSheet} from '../../../_core/tailwind-style-sheet.ts';
+import type {CustomElement} from '../../../_core/elements/CustomElement.ts';
 
 class NavigationBar extends HTMLElement implements CustomElement {
     static get observedAttributes() {
@@ -27,8 +27,8 @@ class NavigationBar extends HTMLElement implements CustomElement {
                     font-bold text-xl">${header}</div>
                 <div class="text-gray-300">
                     <a href="#/home" class="hover:text-white px-3 py-2">Home</a>
-                    <a href="#/about" class="hover:text-white px-3 py-2">About</a>
-                    <a href="#" class="hover:text-white px-3 py-2">Contact</a>
+                    <a href="#/how-to-use" class="hover:text-white px-3 py-2">How to use</a>
+                    <a href="#/examples" class="hover:text-white px-3 py-2">Examples</a> 
                 </div>
             </div>
         </nav>

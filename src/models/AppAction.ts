@@ -1,5 +1,5 @@
-import {ActionType} from './ActionType.ts';
+import {AppActionType} from '../store/app-action-type.ts';
 
 export type AppAction =
-    |   { type: ActionType ; payload: any; }
+    |   { type: AppActionType ; payload: any; }
 

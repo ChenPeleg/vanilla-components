@@ -18,7 +18,7 @@ export default defineConfig({
                     if (stderr) {
                         console.error(`Startup script error output: ${stderr}`);
                     }
-                    console.log(_stdout);
+
                 });
             }
         },

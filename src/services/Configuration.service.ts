@@ -1,10 +1,10 @@
 import {ServicesResolver} from '../_global/provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from '../_global/provider/AbstractBaseService.ts';
-import {Environment} from '../models/Environment.ts';
+import {EnvironmentType} from '../models/EnvironmentType.ts';
 
 
 export class ConfigurationService extends AbstractBaseService {
-    _environment: Environment;
+    _environment: EnvironmentType;
 
     constructor(provider: ServicesResolver) {
         super(provider);
@@ -22,13 +22,13 @@ export class ConfigurationService extends AbstractBaseService {
 
         switch (envVar) {
             case 'development':
-                return Environment.Development;
+                return EnvironmentType.Development;
             case 'production':
-                return Environment.Production;
+                return EnvironmentType.Production;
             case 'test':
-                return Environment.Test;
+                return EnvironmentType.Test;
             default:
-                return Environment.Production;
+                return EnvironmentType.Production;
         }
     }
 

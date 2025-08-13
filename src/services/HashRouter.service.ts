@@ -1,17 +1,32 @@
 import {AbstractBaseService} from '../_global/provider/AbstractBaseService.ts';
 import {ServicesResolver} from '../_global/provider/ServiceResolverClass.ts';
-import {Router, type RouterState} from '../_core/router/router.ts';
+import {type RouteObject, Router, type RouterState} from '../_core/router/router.ts';
 import {routes} from '../routes.ts';
 
 export class HashRouterService extends AbstractBaseService {
-    private readonly router: Router
+    private router: Router
     private subscribers: { cb: (newState: RouterState) => void, id: number }[];
     private subscriberId = 0;
 
     constructor(provider: ServicesResolver) {
         super(provider);
-        this.router = new Router({routes, isHashRouter: true});
+        this.router = new Router({
+            routes,
+            isHashRouter: true
+        });
         this.subscribers = [];
+        this.router.changeCallback = (state: RouterState) => {
+            this.setState(state);
+            return state;
+        }
+    }
+
+    updateRoutes(routes: RouteObject[]) {
+        this.router = new Router({
+            routes,
+            isHashRouter: true
+        });
+        // this.subscribers = [];
         this.router.changeCallback = (state: RouterState) => {
             this.setState(state);
             return state;

@@ -1,11 +1,9 @@
-import {BaseElement} from '../_core/elements/base-element.ts';
+import {BaseElement} from '../../../_core/elements/base-element.ts';
 
-class HomePage extends BaseElement {
-
-
+class MainContent extends BaseElement {
     renderTemplate() {
         this.shadowRoot!.innerHTML = `  
-            <main class="overflow-hidden bg-slate-200  w-full h-full">
+       <main class="overflow-hidden bg-slate-200  w-full h-full">
        <div class="flex flex-row   justify-center h-full">
            <div class="flex-1 bg-amber-200 flex flex-col items-center justify-center">
              <card-component header="Card Header" text="This is a card component"></card-component>
@@ -23,5 +21,5 @@ class HomePage extends BaseElement {
     }
 }
 
-customElements.define('home-page', HomePage);
+customElements.define('main-content', MainContent);
 

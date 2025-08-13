@@ -27,6 +27,9 @@ export class LocalStorageService extends AbstractBaseService {
         this._localStorage
             .setItem(key, JSON.stringify(value));
     }
+    clear(): void {
+        this._localStorage.clear();
+    }
 
     removeItem(key: string) {
         this._localStorage.removeItem(key);
