@@ -1,80 +1,30 @@
-
-import {_ServicesProvider} from '../services/_ServicesProvider.ts';
-import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
-
-
-import {StoreService} from '../services/Store.service.ts';
 import type {StoreReducer} from '../_global/StoreFactory.ts';
-import type {AttendanceStore} from '../models/AttendanceStore.ts';
+import type {AppStoreModel} from './app-store-model.ts';
 import {type AppAction} from '../models/AppAction.ts';
-import {ActionType} from '../models/ActionType.ts';
+import {AppActionType} from './app-action-type.ts';
+import {_ServicesProvider} from '../services/_ServicesProvider.ts';
+import {LocalStorageService} from '../services/LocalStorage.service.ts';
 
 
-export const appReducer: StoreReducer<AttendanceStore, AppAction> = (state: AttendanceStore, action: AppAction): AttendanceStore => {
-    const getLastUpdateTimeStamp = () => {
-        return _ServicesProvider.getService(TimeAndDateService).createTimestamp();
-    };
+export const appReducer: StoreReducer<AppStoreModel, AppAction> = (state: AppStoreModel, action: AppAction): AppStoreModel => {
+
+    const localStorage = _ServicesProvider.getService(LocalStorageService);
 
     switch (action.type) {
-        case ActionType.checkInChild:
+        case AppActionType.addOne:
             return {
                 ...state,
+                count: state.count + 1
+            };
 
-            }
-        case ActionType.checkOutChild:
+        case AppActionType.clearStorage:
+            localStorage.clear();
             return {
                 ...state,
-
-            }
-        case ActionType.childAbsentFromDay:
-            return {
-                ...state,
-                lastUpdated: getLastUpdateTimeStamp()
-            }
-        case ActionType.childPresentInDay:
-
-            return {
-                ...state,
-
-                lastUpdated: getLastUpdateTimeStamp()
-            }
-        case ActionType.addChild:
+                count: 0
+            };
 
 
-            return {
-                ...state,
-
-            }
-
-        case ActionType.changeDisplayedTab:
-            return {
-                ...state,
-                display: action.payload
-            }
-        case ActionType.completeList:
-
-            return {
-                ...state,
-
-            }
-        case ActionType.clearAllData:
-            const initialStoreState = _ServicesProvider.getService(StoreService).initialState;
-            const keepState = {
-
-                childrenDisplayType: state.childrenDisplayType
-            }
-
-            return {
-                ...initialStoreState, ...keepState
-
-            }
-
-
-        case ActionType.changeListOrGrid:
-            return {
-                ...state,
-                childrenDisplayType: action.payload
-            }
 
         default:
             return state;
