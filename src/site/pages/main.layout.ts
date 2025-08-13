@@ -1,4 +1,4 @@
-import {BaseElement} from '../_core/elements/base-element.ts';
+import {BaseElement} from '../../_core/elements/base-element.ts';
 
 class MainLayout extends BaseElement {
     renderTemplate() {

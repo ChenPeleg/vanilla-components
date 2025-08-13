@@ -5,9 +5,9 @@
  */
 import '../root.ts';
 import '../_core/router/router-outlet.ts';
-import '../pages/main.layout.ts';
-import '../pages/how-to-use-page.ts';
-import '../pages/home-page.ts';
+import '../site/pages/main.layout.ts';
+import '../site/pages/how-to-use-page.ts';
+import '../site/pages/home-page.ts';
 import '../site/components/atoms/card-component.ts';
 import '../site/components/atoms/header-2.ts';
 import '../site/components/molecules/hero-section.ts';
