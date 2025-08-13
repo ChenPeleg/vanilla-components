@@ -1,4 +1,4 @@
-import {BaseElement} from '../../src/_core/elements/base-element.ts';
+import {BaseElement} from '../../../src/_core/elements/base-element.ts';
 
 
 class CardComponentFolded extends BaseElement {

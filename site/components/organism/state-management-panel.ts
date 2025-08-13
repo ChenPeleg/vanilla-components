@@ -1,5 +1,5 @@
 import {ToggleButton} from '../atoms/toggle-button.ts';
-import {BaseElement} from '../../src/_core/elements/base-element.ts';
+import {BaseElement} from '../../../src/_core/elements/base-element.ts';
 import {AppButton} from '../atoms/app-button.ts';
 
 
