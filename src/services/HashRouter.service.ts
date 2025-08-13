@@ -26,7 +26,7 @@ export class HashRouterService extends AbstractBaseService {
             routes,
             isHashRouter: true
         });
-        this.subscribers = [];
+        // this.subscribers = [];
         this.router.changeCallback = (state: RouterState) => {
             this.setState(state);
             return state;

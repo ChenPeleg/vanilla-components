@@ -1,6 +1,8 @@
 import type {RouteObject} from '../../_core/router/router.ts';
-import {routes} from '../../routes.ts';
+
 import {appConfig} from '../../configuration/appConfig.ts';
+import {_ServicesProvider} from '../../services/_ServicesProvider.ts';
+import {HashRouterService} from '../../services/HashRouter.service.ts';
 
 export const overrideRoutes = () => {
     if (appConfig.environment === 'package') {
@@ -20,11 +22,7 @@ export const overrideRoutes = () => {
     }
 
     ]
-    routes.pop()
-    siteRoutes.forEach( ( route ) => {
-        routes.push(route)
-    })
-    console.log(routes)
-
+    const routerService = _ServicesProvider.getService(HashRouterService)
+    routerService.updateRoutes(siteRoutes)
 
 }
