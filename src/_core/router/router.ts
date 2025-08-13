@@ -82,7 +82,7 @@ export class Router {
         let match = this.findMatchingRoute(this.currentPath);
 
         if (match) {
-            console.log(match);
+
             const {
                 route,
                 params

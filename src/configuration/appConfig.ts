@@ -28,7 +28,7 @@ const getApplicationConfig = (envName: EnvironmentType): AppConfiguration => {
  * @type {import('../types/AppConfiguration').AppConfiguration}
  */
 
-export const appConfig = getApplicationConfig(import.meta.env.VITE_RUNTIME_ENVIRONMENT)
+export const appConfig = getApplicationConfig(  import.meta.env.VITE_MODE_NAME)
 
 /**
  * -------------------------------------------------------------
