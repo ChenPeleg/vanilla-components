@@ -4,6 +4,7 @@ import { testAppConfig } from './config.tests'
 import {stagingAppConfig} from './config.staging.ts';
 import   {EnvironmentType} from '../models/EnvironmentType.ts';
 import type {AppConfiguration} from '../models/AppConfiguration.ts';
+import {packageAppConfig} from './config.package.ts';
 
 const getApplicationConfig = (envName: EnvironmentType): AppConfiguration => {
   switch (envName) {
@@ -15,6 +16,8 @@ const getApplicationConfig = (envName: EnvironmentType): AppConfiguration => {
       return stagingAppConfig
     case 'test':
       return testAppConfig
+      case 'package':
+        return packageAppConfig
 
     default:
       return prodAppConfig
