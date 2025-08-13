@@ -5,6 +5,7 @@ import {_ServicesProvider} from '../../services/_ServicesProvider.ts';
 import {HashRouterService} from '../../services/HashRouter.service.ts';
 
 export const overrideRoutes = () => {
+
     if (appConfig.environment === 'package') {
         return;
     }
