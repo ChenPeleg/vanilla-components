@@ -1,4 +1,6 @@
 import {BaseElement} from '../../_core/elements/base-element.ts';
+import {overrideRoutes} from '../router/site-routes.ts';
+
 
 class MainLayout extends BaseElement {
     renderTemplate() {
@@ -14,3 +16,4 @@ class MainLayout extends BaseElement {
 
 customElements.define('main-layout', MainLayout);
 
+overrideRoutes()

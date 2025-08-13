@@ -22,3 +22,4 @@ import '../site/components/molecules/logo-component.ts';
 import '../site/components/atoms/text-input.ts';
 import '../site/components/atoms/app-button.ts';
 import '../site/components/organism/state-management-panel.ts';
+import '../app-page.ts';
