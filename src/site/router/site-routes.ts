@@ -3,7 +3,7 @@ import {routes} from '../../routes.ts';
 import {appConfig} from '../../configuration/appConfig.ts';
 
 export const overrideRoutes = () => {
-    if (appConfig.environment !== 'package') {
+    if (appConfig.environment === 'package') {
         return;
     }
     const siteRoutes: RouteObject[] = [{
@@ -21,5 +21,10 @@ export const overrideRoutes = () => {
 
     ]
     routes.pop()
-    routes.concat(siteRoutes)
+    siteRoutes.forEach( ( route ) => {
+        routes.push(route)
+    })
+    console.log(routes)
+
+
 }
