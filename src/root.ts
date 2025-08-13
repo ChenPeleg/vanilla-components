@@ -1,26 +1,9 @@
-import {globalStyleSheet} from './_core/tailwind-style-sheet.ts';
-import type {CustomElement} from './_core/elements/CustomElement.ts';
 
-class AppRoot extends HTMLElement implements CustomElement {
-    constructor() {
-        super();
-        this.attachShadow({mode: 'open'});
-    }
+import {BaseElement} from './_core/elements/base-element.ts';
 
-    static get observedAttributes() {
-        return [];
-    }
+class AppRoot extends BaseElement   {
 
-    connectedCallback() {
-        (this.shadowRoot as ShadowRoot).adoptedStyleSheets = [globalStyleSheet];
-        this.render();
-    }
-
-    attributeChangedCallback() {
-        this.render();
-    }
-
-    render() {
+    renderTemplate() {
         this.shadowRoot!.innerHTML = `  
       <div class="h-screen w-screen overflow-hidden ">  
          <router-outlet></router-outlet> 
