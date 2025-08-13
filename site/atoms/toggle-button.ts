@@ -1,4 +1,4 @@
-import {BaseElement} from '../../_core/elements/base-element.ts';
+import {BaseElement} from '../../src/_core/elements/base-element.ts';
 
 
 export class ToggleButton extends BaseElement {

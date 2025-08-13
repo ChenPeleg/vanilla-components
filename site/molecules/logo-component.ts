@@ -1,5 +1,5 @@
-import vanillaLogo from '../../assets/images/vanilla-flower.png';
-import {BaseElement} from '../../_core/elements/base-element.ts';
+import vanillaLogo from '../../src/assets/images/vanilla-flower.png';
+import {BaseElement} from '../../src/_core/elements/base-element.ts';
 
 class LogoComponent extends BaseElement {
     static get observedAttributes() {
