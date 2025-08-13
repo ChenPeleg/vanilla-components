@@ -4,11 +4,8 @@ import {BaseElement} from './_core/elements/base-element.ts';
 export class SimpleButton extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
-        this.$<HTMLButtonElement>('button').addEventListener('click', () => {
-            this.actionCallback({clicked: true});
-        });
+        this.$<HTMLButtonElement>('button').addEventListener('click', () => this.actionCallback({clicked: true}));
     }
-
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
@@ -18,6 +15,7 @@ export class SimpleButton extends BaseElement {
         `;
     }
 }
+
 customElements.define('simple-button', SimpleButton);
 
 
