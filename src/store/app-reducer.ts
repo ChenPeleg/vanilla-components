@@ -1,5 +1,5 @@
 
-import {servicesProvider} from '../services/ServicesProvider.ts';
+import {_ServicesProvider} from '../services/_ServicesProvider.ts';
 import {TimeAndDateService} from '../services/TimeAndDate.service.ts';
 
 
@@ -12,7 +12,7 @@ import {ActionType} from '../models/ActionType.ts';
 
 export const appReducer: StoreReducer<AttendanceStore, AppAction> = (state: AttendanceStore, action: AppAction): AttendanceStore => {
     const getLastUpdateTimeStamp = () => {
-        return servicesProvider.getService(TimeAndDateService).createTimestamp();
+        return _ServicesProvider.getService(TimeAndDateService).createTimestamp();
     };
 
     switch (action.type) {
@@ -58,7 +58,7 @@ export const appReducer: StoreReducer<AttendanceStore, AppAction> = (state: Atte
 
             }
         case ActionType.clearAllData:
-            const initialStoreState = servicesProvider.getService(StoreService).initialState;
+            const initialStoreState = _ServicesProvider.getService(StoreService).initialState;
             const keepState = {
 
                 childrenDisplayType: state.childrenDisplayType

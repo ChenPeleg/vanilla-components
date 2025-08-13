@@ -12,6 +12,6 @@ const ServicesProviderFactory = () => {
     provider.initServices();
     return provider;
 }
-export const servicesProvider = ServicesProviderFactory();
+export const _ServicesProvider = ServicesProviderFactory();
 
 
