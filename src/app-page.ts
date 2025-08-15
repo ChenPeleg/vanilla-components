@@ -1,6 +1,7 @@
 import {BaseElement} from './_core/elements/base-element.ts';
 
 import vanillaLogo from './assets/images/vanilla-flower.png';
+
 export class SimpleButton extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
@@ -38,17 +39,20 @@ class AppPage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <div class="flex flex-col items-center justify-center gap-12 w-full h-full  lg:max-w-3/4 p-4">
-
                     <img class="h-24" src="${vanillaLogo}" alt="Vanilla Logo">
-                        <h1 class="text-6xl font-bold text-gray-800 w-full text-center">
-                            Vanilla Elements
-                        </h1>
-                   
-                   
-                        <simple-button>
-                            Count is <span id="count-text"> 0 </span>
-                        </simple-button>
-                   
+                    <h1 class="text-6xl font-bold text-gray-800 w-full text-center">
+                        Vanilla Elements
+                    </h1>
+
+                    <simple-button>
+                        Count is <span id="count-text"> 0 </span>
+                    </simple-button>
+                    <p>
+                        
+                        Using  <a class="underline text-blue-500" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">Custom elements</a> and
+                        <a class="underline text-blue-500" href="https://tailwindcss.com/">TailWind</a>. <a class="underline text-blue-500" href="https://vite.dev/">Vite</a> and 
+                        <a class="underline text-blue-500" href="typecriptlang.org/">TypeScript</a> for development.
+                    </p>
                 </div>
             </div>
 
