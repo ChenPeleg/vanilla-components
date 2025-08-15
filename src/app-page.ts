@@ -1,11 +1,12 @@
 import {BaseElement} from './_core/elements/base-element.ts';
 
-
+import vanillaLogo from './assets/images/vanilla-flower.png';
 export class SimpleButton extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
         this.$<HTMLButtonElement>('button').addEventListener('click', () => this.actionCallback({clicked: true}));
     }
+
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
@@ -35,15 +36,22 @@ class AppPage extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="flex flex-col items-center justify-center p-4 h-96  ">
-                <div class="flex flex-col items-start justify-start bg-amber-50/80 shadow-lg rounded-lg p-6 w-full max-w-md gap-6">
-                    <div>
+            <div class="flex flex-col items-center justify-center h-full  w-full ">
+                <div class="flex flex-col items-center justify-center gap-12 w-full h-full  lg:max-w-3/4 p-4">
+
+                    <img class="h-24" src="${vanillaLogo}" alt="Vanilla Logo">
+                        <h1 class="text-6xl font-bold text-gray-800 w-full text-center">
+                            Vanilla Elements
+                        </h1>
+                   
+                   
                         <simple-button>
                             Count is <span id="count-text"> 0 </span>
                         </simple-button>
-                    </div>
+                   
                 </div>
             </div>
+
         `;
     }
 
