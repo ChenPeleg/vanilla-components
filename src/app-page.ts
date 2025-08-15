@@ -7,7 +7,6 @@ export class SimpleButton extends BaseElement {
         super.connectedCallback();
         this.$<HTMLButtonElement>('button').addEventListener('click', () => this.actionCallback({clicked: true}));
     }
-
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
@@ -43,12 +42,10 @@ class AppPage extends BaseElement {
                     <h1 class="text-6xl font-bold text-gray-800 w-full text-center">
                         Vanilla Elements
                     </h1>
-
                     <simple-button>
                         Count is <span id="count-text"> 0 </span>
                     </simple-button>
                     <p>
-                        
                         Using  <a class="underline text-blue-500" href="https://developer.mozilla.org/en-US/docs/Web/API/Web_components/Using_custom_elements">Custom elements</a> and
                         <a class="underline text-blue-500" href="https://tailwindcss.com/">TailWind</a>. <a class="underline text-blue-500" href="https://vite.dev/">Vite</a> and 
                         <a class="underline text-blue-500" href="typecriptlang.org/">TypeScript</a> for development.
@@ -60,7 +57,7 @@ class AppPage extends BaseElement {
     }
 
     update() {
-        this.$('#count-text').textContent = this.state.clicks.toString()
+        this.$<HTMLSpanElement>('#count-text').textContent = this.state.clicks.toString()
     }
 }
 
