@@ -39,7 +39,7 @@ class AppPage extends BaseElement {
         this.shadowRoot!.innerHTML = `
             <div class="flex flex-col items-center justify-center h-full  w-full ">
                 <div class="flex flex-col items-center justify-center gap-12 w-full h-full  lg:max-w-3/4 p-4">
-                    <img class="h-24" src="${vanillaLogo}" alt="Vanilla Logo">
+                    <img class="h-32" src="${vanillaLogo}" alt="Vanilla Logo">
                     <h1 class="text-6xl font-bold text-gray-800 w-full text-center">
                         Vanilla Elements
                     </h1>
