@@ -9,12 +9,16 @@ class VanillaElementsInstaller {
 
     static copyRecursive(src, dest) {
         if (VanillaElementsInstaller.exclude.includes(path.basename(src))) return;
+        if (!fs.existsSync(src)) return; // Prevent ENOENT error
         if (fs.statSync(src).isDirectory()) {
-            if (!fs.existsSync(dest)) fs.mkdirSync(dest);
+            if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
             for (const file of fs.readdirSync(src)) {
                 VanillaElementsInstaller.copyRecursive(path.join(src, file), path.join(dest, file));
             }
         } else {
+            // Ensure parent directory exists before copying
+            const parentDir = path.dirname(dest);
+            if (!fs.existsSync(parentDir)) fs.mkdirSync(parentDir, { recursive: true });
             fs.copyFileSync(src, dest);
         }
     }
