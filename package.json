@@ -1,15 +1,17 @@
 {
   "name": "vanilla-elements",
   "private": false,
-  "version": "0.2.0",
+  "version": "0.5.0",
   "type": "module",
   "main": "./package/install.js",
-  "bin":   "./package/install.js",
+  "bin": "./package/install.js",
   "engines": {
     "node": ">=18.0.0"
   },
   "files": [
-    "src/**/*", "package/**/*", "scripts/**"
+    "src/**/*",
+    "package/**/*",
+    "scripts/**"
   ],
   "keywords": [
     "web components",
@@ -34,7 +36,7 @@
     "build:site": "tsc && vite build --site",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
-    "test" : "tsc  "
+    "test": "tsc  "
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",
