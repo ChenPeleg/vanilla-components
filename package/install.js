@@ -5,10 +5,8 @@ import {basename, dirname, join, resolve} from 'path';
 import {fileURLToPath} from 'url';
 
 class VanillaElementsInstaller {
-    static spinner = ['|', '/', '-', '\\'];
-    static deleteChar = '\x1b[1D'; // Move cursor one character left
 
-    static exclude = ['.git', 'node_modules', 'package.json', 'package-lock.json',
+    static include = ['.git', 'node_modules', 'package.json', 'package-lock.json',
                       'package/install.js'];
 
     /**
@@ -18,7 +16,7 @@ class VanillaElementsInstaller {
      * @param {Array} list
      */
     static collectItemsToCopy(src, dest, list) {
-        if (VanillaElementsInstaller.exclude.includes(basename(src))) return;
+        if (VanillaElementsInstaller.include.includes(basename(src))) return;
         if (!existsSync(src)) return;
         if (statSync(src).isDirectory()) {
             // Add the directory itself
