@@ -49,6 +49,23 @@ class VanillaElementsInstaller {
         }
     }
 
+    static runStartupScript(destinationRoot, customPath) {
+        // Find and run run-on-startup.js from its own location
+        const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
+        if (existsSync(runOnStartupPath)) {
+            import('child_process').then(({ spawnSync }) => {
+                // Set cwd to the destination root, not scripts
+                const runDir = join(destinationRoot, customPath);
+                const result = spawnSync('node', [runOnStartupPath, '--quiet'], { stdio: 'inherit', cwd: runDir });
+                if (result.error) {
+                    console.error('Error running run-on-startup.js:', result.error);
+                }
+            });
+        } else {
+            console.warn(`run-on-startup.js not found at ${runOnStartupPath}`);
+        }
+    }
+
     /**
      * Run the installer to copy files from the package to the current working directory.
      * @param { string }customPath
@@ -61,7 +78,7 @@ class VanillaElementsInstaller {
         const destinationRoot = process.cwd();
         const fullDestination = resolve(destinationRoot, customPath);
 
-        // Check if destination is inside source
+
         if (!customPath && fullDestination.startsWith(sourceRoot + '\\') || (fullDestination !== sourceRoot && fullDestination.startsWith(sourceRoot + '/'))) {
             console.error('Error: Destination folder is inside the source folder. This may cause recursive copying and is not allowed.');
            customPath =   '../template'
@@ -73,7 +90,6 @@ class VanillaElementsInstaller {
             VanillaElementsInstaller.collectItemsToCopy(join(sourceRoot, item), join(destinationRoot, customPath, item), itemsToCopy);
         }
 
-        // Copy all items
         for (const item of itemsToCopy) {
            VanillaElementsInstaller.copyItem(item);
         }
@@ -82,19 +98,7 @@ class VanillaElementsInstaller {
             customPath
         })
 
-        // Find and run run-on-startup.js from its own location
-        const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
-        if (existsSync(runOnStartupPath)) {
-            const { spawnSync } = await import('child_process');
-            // Set cwd to the destination root, not scripts
-            const runDir = join(destinationRoot, customPath);
-            const result = spawnSync('node', [runOnStartupPath], { stdio: 'inherit', cwd: runDir });
-            if (result.error) {
-                console.error('Error running run-on-startup.js:', result.error);
-            }
-        } else {
-            console.warn(`run-on-startup.js not found at ${runOnStartupPath}`);
-        }
+        VanillaElementsInstaller.runStartupScript(destinationRoot, customPath);
     }
 }
 
