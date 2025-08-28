@@ -8,11 +8,12 @@ import {fileURLToPath} from 'url';
 const locationArg = process.argv[2] || '';
 
 class VanillaElementsInstaller {
-    static exclude = [  'node_modules',   'package-lock.json','web-types.json',
-                      'package','.github', '.idea' ,'_tasks' ,'example-site'];
-    static renameNpmIgnoreToGitIgnore ({
-        destinationRoot, customPath
-                                       }) {
+    exclude = [
+        'node_modules', 'package-lock.json', 'web-types.json', 'package',
+        '.github', '.idea', '_tasks', 'example-site'
+    ];
+
+    renameNpmIgnoreToGitIgnore({ destinationRoot, customPath }) {
         const npmignorePath = join(destinationRoot, customPath, '.npmignore');
         const gitignorePath = join(destinationRoot, customPath, '.gitignore');
         if (existsSync(npmignorePath)) {
@@ -26,43 +27,26 @@ class VanillaElementsInstaller {
      * @param {string} dest
      * @param {Array} list
      */
-    static collectItemsToCopy(src, dest, list) {
-        if (VanillaElementsInstaller.exclude.includes(basename(src))) return;
+    collectItemsToCopy(src, dest, list) {
+        if (this.exclude.includes(basename(src))) return;
         if (!existsSync(src)) return;
         if (statSync(src).isDirectory()) {
-            list.push({src, dest, isDir: true});
+            list.push({ src, dest, isDir: true });
             for (const file of readdirSync(src)) {
-                VanillaElementsInstaller.collectItemsToCopy(join(src, file), join(dest, file), list);
+                this.collectItemsToCopy(join(src, file), join(dest, file), list);
             }
         } else {
-            list.push({src, dest, isDir: false});
+            list.push({ src, dest, isDir: false });
         }
     }
 
-    static copyItem(item) {
+    copyItem(item) {
         if (item.isDir) {
-            if (!existsSync(item.dest)) mkdirSync(item.dest, {recursive: true});
+            if (!existsSync(item.dest)) mkdirSync(item.dest, { recursive: true });
         } else {
             const parentDir = dirname(item.dest);
-            if (!existsSync(parentDir)) mkdirSync(parentDir, {recursive: true});
+            if (!existsSync(parentDir)) mkdirSync(parentDir, { recursive: true });
             copyFileSync(item.src, item.dest);
-        }
-    }
-
-    static runStartupScript(destinationRoot, customPath) {
-        // Find and run run-on-startup.js from its own location
-        const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
-        if (existsSync(runOnStartupPath)) {
-            import('child_process').then(({ spawnSync }) => {
-                // Set cwd to the destination root, not scripts
-                const runDir = join(destinationRoot, customPath);
-                const result = spawnSync('node', [runOnStartupPath, '--quiet'], { stdio: 'inherit', cwd: runDir });
-                if (result.error) {
-                    console.error('Error running run-on-startup.js:', result.error);
-                }
-            });
-        } else {
-            console.warn(`run-on-startup.js not found at ${runOnStartupPath}`);
         }
     }
 
@@ -70,7 +54,7 @@ class VanillaElementsInstaller {
      * Run the installer to copy files from the package to the current working directory.
      * @param { string }customPath
      */
-    static async run(customPath = '') {
+    async run(customPath = '') {
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = dirname(__filename);
 
@@ -78,28 +62,40 @@ class VanillaElementsInstaller {
         const destinationRoot = process.cwd();
         const fullDestination = resolve(destinationRoot, customPath);
 
-
-        if (!customPath && fullDestination.startsWith(sourceRoot + '\\') || (fullDestination !== sourceRoot && fullDestination.startsWith(sourceRoot + '/'))) {
-            console.error('Error: Destination folder is inside the source folder. This may cause recursive copying and is not allowed.');
-           customPath =   '../template'
+        // Correct path check for Windows and POSIX
+        if (
+            (fullDestination !== sourceRoot &&
+                (fullDestination.startsWith(sourceRoot + '\\') || fullDestination.startsWith(sourceRoot + '/')))
+        ) {
+            // Quiet mode: suppress error output
+            return;
         }
 
         const itemsToCopy = [];
-
         for (const item of readdirSync(sourceRoot)) {
-            VanillaElementsInstaller.collectItemsToCopy(join(sourceRoot, item), join(destinationRoot, customPath, item), itemsToCopy);
+            this.collectItemsToCopy(join(sourceRoot, item), join(destinationRoot, customPath, item), itemsToCopy);
         }
 
         for (const item of itemsToCopy) {
-           VanillaElementsInstaller.copyItem(item);
+            this.copyItem(item);
         }
-        VanillaElementsInstaller.renameNpmIgnoreToGitIgnore({
-            destinationRoot,
-            customPath
-        })
+        this.renameNpmIgnoreToGitIgnore({ destinationRoot, customPath });
+        this.runStartupScript(destinationRoot, customPath);
+    }
 
-        VanillaElementsInstaller.runStartupScript(destinationRoot, customPath);
+    runStartupScript(destinationRoot, customPath) {
+        const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
+        if (existsSync(runOnStartupPath)) {
+            import('child_process').then(({ spawnSync }) => {
+                const runDir = join(destinationRoot, customPath);
+                spawnSync('node', [runOnStartupPath, '--quiet'], { stdio: 'inherit', cwd: runDir });
+                // Quiet mode: suppress error output
+            });
+        } else {
+            // Quiet mode: suppress warning output
+        }
     }
 }
 
-VanillaElementsInstaller.run(locationArg).then( ) ;
+const installer = new VanillaElementsInstaller();
+installer.run(locationArg).then();
