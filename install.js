@@ -3,6 +3,7 @@
 import {copyFileSync, existsSync, mkdirSync, readdirSync, statSync} from 'fs';
 import {basename, dirname, join, resolve} from 'path';
 import {fileURLToPath} from 'url';
+import {renameSync} from 'node:fs';
 
 // Parse optional CLI argument for location
 const locationArg = process.argv[2] || '';
@@ -12,10 +13,19 @@ class VanillaElementsInstaller {
         'node_modules', 'package-lock.json', 'web-types.json', 'package',
         '.github', '.idea', '_tasks', 'example-site'
     ];
+    locationArg;
+    destinationRoot;
+    customPath;
 
-    renameNpmIgnoreToGitIgnore({ destinationRoot, customPath }) {
-        const npmignorePath = join(destinationRoot, customPath, '.npmignore');
-        const gitignorePath = join(destinationRoot, customPath, '.gitignore');
+    constructor(locationArg = '', destinationRoot = process.cwd(), customPath = locationArg) {
+        this.locationArg = locationArg;
+        this.destinationRoot = destinationRoot;
+        this.customPath = customPath;
+    }
+
+    renameNpmIgnoreToGitIgnore() {
+        const npmignorePath = join(this.destinationRoot, this.customPath, '.npmignore');
+        const gitignorePath = join(this.destinationRoot, this.customPath, '.gitignore');
         if (existsSync(npmignorePath)) {
             renameSync(npmignorePath, gitignorePath);
         }
@@ -54,40 +64,38 @@ class VanillaElementsInstaller {
      * Run the installer to copy files from the package to the current working directory.
      * @param { string }customPath
      */
-    async run(customPath = '') {
+    async run() {
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = dirname(__filename);
-
         const sourceRoot = resolve(__dirname, '..');
-        const destinationRoot = process.cwd();
-        const fullDestination = resolve(destinationRoot, customPath);
+        const fullDestination = resolve(this.destinationRoot, this.customPath);
 
-        // Correct path check for Windows and POSIX
+
         if (
             (fullDestination !== sourceRoot &&
                 (fullDestination.startsWith(sourceRoot + '\\') || fullDestination.startsWith(sourceRoot + '/')))
         ) {
-            // Quiet mode: suppress error output
-            return;
+            this.customPath = '../template'
+
         }
 
         const itemsToCopy = [];
         for (const item of readdirSync(sourceRoot)) {
-            this.collectItemsToCopy(join(sourceRoot, item), join(destinationRoot, customPath, item), itemsToCopy);
+            this.collectItemsToCopy(join(sourceRoot, item), join(this.destinationRoot, this.customPath, item), itemsToCopy);
         }
 
         for (const item of itemsToCopy) {
             this.copyItem(item);
         }
-        this.renameNpmIgnoreToGitIgnore({ destinationRoot, customPath });
-        this.runStartupScript(destinationRoot, customPath);
+        this.renameNpmIgnoreToGitIgnore();
+        this.runStartupScript();
     }
 
-    runStartupScript(destinationRoot, customPath) {
-        const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
+    runStartupScript() {
+        const runOnStartupPath = join(this.destinationRoot, this.customPath, 'scripts', 'run-on-startup.js');
         if (existsSync(runOnStartupPath)) {
             import('child_process').then(({ spawnSync }) => {
-                const runDir = join(destinationRoot, customPath);
+                const runDir = join(this.destinationRoot, this.customPath);
                 spawnSync('node', [runOnStartupPath, '--quiet'], { stdio: 'inherit', cwd: runDir });
                 // Quiet mode: suppress error output
             });
@@ -97,5 +105,5 @@ class VanillaElementsInstaller {
     }
 }
 
-const installer = new VanillaElementsInstaller();
-installer.run(locationArg).then();
+const installer = new VanillaElementsInstaller(locationArg);
+installer.run().then();
