@@ -19,7 +19,11 @@ class VanillaElementsInstaller {
         }
     }
 
-    static run() {
+    /**
+     * Run the installer to copy files from the package to the current working directory.
+     * @param { string }customPath
+     */
+    static run(customPath = '') {
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = path.dirname(__filename);
 
@@ -29,7 +33,7 @@ class VanillaElementsInstaller {
         for (const item of fs.readdirSync(sourceRoot)) {
             VanillaElementsInstaller.copyRecursive(
                 path.join(sourceRoot, item),
-                path.join(destinationRoot, item)
+                path.join(destinationRoot, customPath, item)
             );
         }
     }
