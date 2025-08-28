@@ -3,6 +3,20 @@
   "private": true,
   "version": "1.0.0",
   "type": "module",
+  "main": "./package/install.js",
+  "bin":   "./package/install.js",
+  "engines": {
+    "node": ">=12.0.0"
+  },
+  "files": [
+    "src/**/*", "package/**/*", "scripts/**"
+  ],
+  "keywords": [
+    "web components",
+    "vanilla js",
+    "custom elements",
+    "ui components"
+  ],
   "scripts": {
     "dev": "vite --mode development",
     "dev:package": "vite --mode package",
