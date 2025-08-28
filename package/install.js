@@ -57,18 +57,14 @@ class VanillaElementsInstaller {
         // Copy all items
         for (const item of itemsToCopy) {
             VanillaElementsInstaller.copyItem(item);
-
         }
 
-        console.log(`\nVanilla Elements files have been copied to ${join(destinationRoot, customPath)}`);
-        console.log('You can now run "npm install" to install dependencies.');
-
-        // Run the run-on-startup.js script in the destination folder
+        // Find and run run-on-startup.js from its own location
         const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
         if (existsSync(runOnStartupPath)) {
-            // Use Node.js to run the script
             const { spawnSync } = await import('child_process');
-            const result = spawnSync('node', [runOnStartupPath], { stdio: 'inherit' });
+            const runDir = dirname(runOnStartupPath);
+            const result = spawnSync('node', [runOnStartupPath], { stdio: 'inherit', cwd: runDir });
             if (result.error) {
                 console.error('Error running run-on-startup.js:', result.error);
             }
