@@ -8,6 +8,22 @@
   "engines": {
     "node": ">=18.0.0"
   },
+  "scripts": {
+    "dev": "vite --mode development",
+    "dev:package": "vite --mode package",
+    "build": "tsc && vite build",
+    "build:site": "tsc && vite build --site",
+    "preview": "vite preview",
+    "run-on-start": "node ./scripts/run-on-startup.js",
+    "test": "tsc  "
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.1.11",
+    "@types/node": "^24.0.7",
+    "tailwindcss": "^4.1.11",
+    "typescript": "~5.8.3",
+    "vite": "^7.0.0"
+  },
   "files": [
     "src/**/*",
     "package/**/*",
@@ -29,21 +45,6 @@
     "url": "https://github.com/ChenPeleg/vanilla-elemetns/issues"
   },
   "homepage": "https://chenpeleg.github.io/vanilla-elemetns/",
-  "scripts": {
-    "dev": "vite --mode development",
-    "dev:package": "vite --mode package",
-    "build": "tsc && vite build",
-    "build:site": "tsc && vite build --site",
-    "preview": "vite preview",
-    "run-on-start": "node ./scripts/run-on-startup.js",
-    "test": "tsc  "
-  },
-  "devDependencies": {
-    "@tailwindcss/vite": "^4.1.11",
-    "@types/node": "^24.0.7",
-    "tailwindcss": "^4.1.11",
-    "typescript": "~5.8.3",
-    "vite": "^7.0.0"
-  },
+
   "web-types": "./web-types.json"
 }
