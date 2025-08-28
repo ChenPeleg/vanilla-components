@@ -62,9 +62,9 @@ class VanillaElementsInstaller {
         const fullDestination = resolve(destinationRoot, customPath);
 
         // Check if destination is inside source
-        if (fullDestination.startsWith(sourceRoot + '\\') || (fullDestination !== sourceRoot && fullDestination.startsWith(sourceRoot + '/'))) {
+        if (!customPath && fullDestination.startsWith(sourceRoot + '\\') || (fullDestination !== sourceRoot && fullDestination.startsWith(sourceRoot + '/'))) {
             console.error('Error: Destination folder is inside the source folder. This may cause recursive copying and is not allowed.');
-            return;
+           customPath =  join(sourceRoot, 'template');
         }
 
         const itemsToCopy = [];
@@ -77,7 +77,10 @@ class VanillaElementsInstaller {
         for (const item of itemsToCopy) {
            // VanillaElementsInstaller.copyItem(item);
         }
-        VanillaElementsInstaller.renameNpmIgnoreToGitIgnore()
+        VanillaElementsInstaller.renameNpmIgnoreToGitIgnore({
+            destinationRoot,
+            customPath
+        })
 
         // Find and run run-on-startup.js from its own location
         const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
