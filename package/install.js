@@ -5,9 +5,9 @@ import {basename, dirname, join, resolve} from 'path';
 import {fileURLToPath} from 'url';
 
 class VanillaElementsInstaller {
-
-    static include = ['.git', 'node_modules', 'package.json', 'package-lock.json',
-                      'package/install.js'];
+    static exclude = ['.git', 'node_modules', 'package.json', 'package-lock.json',
+                      'package/install.js','.github', '.idea'];
+    static include = ['src', 'package.json', 'README.md', 'LICENSE'];
 
     /**
      * Recursively collect all files and folders to copy, excluding those in the exclude list.
@@ -16,10 +16,9 @@ class VanillaElementsInstaller {
      * @param {Array} list
      */
     static collectItemsToCopy(src, dest, list) {
-        if (VanillaElementsInstaller.include.includes(basename(src))) return;
+        if (VanillaElementsInstaller.exclude.includes(basename(src))) return;
         if (!existsSync(src)) return;
         if (statSync(src).isDirectory()) {
-            // Add the directory itself
             list.push({src, dest, isDir: true});
             for (const file of readdirSync(src)) {
                 VanillaElementsInstaller.collectItemsToCopy(join(src, file), join(dest, file), list);
