@@ -8,7 +8,7 @@ import {fileURLToPath} from 'url';
 const locationArg = process.argv[2] || '';
 
 class VanillaElementsInstaller {
-    static exclude = ['.git', 'node_modules',   'package-lock.json','web-types.json',
+    static exclude = [  'node_modules',   'package-lock.json','web-types.json',
                       'package','.github', '.idea' ,'_tasks' ,'example-site'];
 
     /**
