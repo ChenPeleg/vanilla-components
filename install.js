@@ -59,6 +59,13 @@ class VanillaElementsInstaller {
 
         const sourceRoot = resolve(__dirname, '..');
         const destinationRoot = process.cwd();
+        const fullDestination = resolve(destinationRoot, customPath);
+
+        // Check if destination is inside source
+        if (fullDestination.startsWith(sourceRoot + '\\') || (fullDestination !== sourceRoot && fullDestination.startsWith(sourceRoot + '/'))) {
+            console.error('Error: Destination folder is inside the source folder. This may cause recursive copying and is not allowed.');
+            return;
+        }
 
         const itemsToCopy = [];
 
