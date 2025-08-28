@@ -1,8 +1,13 @@
 {
   "name": "vanilla-elements",
-  "private": true,
-  "version": "1.0.0",
+  "private": false,
+  "version": "0.5.0",
   "type": "module",
+  "main": "./package/install.js",
+  "bin": "./package/install.js",
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "scripts": {
     "dev": "vite --mode development",
     "dev:package": "vite --mode package",
@@ -10,7 +15,7 @@
     "build:site": "tsc && vite build --site",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
-    "test" : "tsc  "
+    "test": "tsc  "
   },
   "devDependencies": {
     "@tailwindcss/vite": "^4.1.11",
@@ -19,5 +24,27 @@
     "typescript": "~5.8.3",
     "vite": "^7.0.0"
   },
+  "files": [
+    "src/**/*",
+    "package/**/*",
+    "scripts/**"
+  ],
+  "keywords": [
+    "web components",
+    "vanilla js",
+    "custom elements",
+    "ui components"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChenPeleg/vanilla-elemetns.git"
+  },
+  "author": "Chen Peleg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChenPeleg/vanilla-elemetns/issues"
+  },
+  "homepage": "https://chenpeleg.github.io/vanilla-elemetns/",
+
   "web-types": "./web-types.json"
 }
