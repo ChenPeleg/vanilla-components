@@ -101,10 +101,7 @@ class VanillaElementsInstaller {
                     stdio: 'inherit',
                     cwd: runDir
                 });
-                // Quiet mode: suppress error output
             });
-        } else {
-            // Quiet mode: suppress warning output
         }
     }
 }
