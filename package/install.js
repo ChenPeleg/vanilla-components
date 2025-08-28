@@ -1,11 +1,15 @@
 #!/usr/bin/env node
 
-import { existsSync, statSync, readdirSync, mkdirSync, copyFileSync } from 'fs';
-import { join, basename, dirname, resolve } from 'path';
-import { fileURLToPath } from 'url';
+import {copyFileSync, existsSync, mkdirSync, readdirSync, statSync} from 'fs';
+import {basename, dirname, join, resolve} from 'path';
+import {fileURLToPath} from 'url';
 
 class VanillaElementsInstaller {
-    static exclude = ['.git', 'node_modules', 'package.json', 'package-lock.json', 'package/install.js'];
+    static spinner = ['|', '/', '-', '\\'];
+    static deleteChar = '\x1b[1D'; // Move cursor one character left
+
+    static exclude = ['.git', 'node_modules', 'package.json', 'package-lock.json',
+                      'package/install.js'];
 
     /**
      * Recursively collect all files and folders to copy, excluding those in the exclude list.
@@ -18,21 +22,21 @@ class VanillaElementsInstaller {
         if (!existsSync(src)) return;
         if (statSync(src).isDirectory()) {
             // Add the directory itself
-            list.push({ src, dest, isDir: true });
+            list.push({src, dest, isDir: true});
             for (const file of readdirSync(src)) {
                 VanillaElementsInstaller.collectItemsToCopy(join(src, file), join(dest, file), list);
             }
         } else {
-            list.push({ src, dest, isDir: false });
+            list.push({src, dest, isDir: false});
         }
     }
 
     static copyItem(item) {
         if (item.isDir) {
-            if (!existsSync(item.dest)) mkdirSync(item.dest, { recursive: true });
+            if (!existsSync(item.dest)) mkdirSync(item.dest, {recursive: true});
         } else {
             const parentDir = dirname(item.dest);
-            if (!existsSync(parentDir)) mkdirSync(parentDir, { recursive: true });
+            if (!existsSync(parentDir)) mkdirSync(parentDir, {recursive: true});
             copyFileSync(item.src, item.dest);
         }
     }
@@ -49,17 +53,18 @@ class VanillaElementsInstaller {
         const destinationRoot = process.cwd();
 
         const itemsToCopy = [];
+        console.log('copying files');
         for (const item of readdirSync(sourceRoot)) {
-            VanillaElementsInstaller.collectItemsToCopy(
-                join(sourceRoot, item),
-                join(destinationRoot,customPath, item),
-                itemsToCopy
-            );
+            VanillaElementsInstaller.collectItemsToCopy(join(sourceRoot, item), join(destinationRoot, customPath, item), itemsToCopy);
         }
-        console.log(itemsToCopy)
 
+        let spinnerIndex = 0;
         for (const item of itemsToCopy) {
-           // VanillaElementsInstaller.copyItem(item);
+            process.stdout.write(VanillaElementsInstaller.spinner[spinnerIndex]);
+            spinnerIndex = (spinnerIndex + 1) % VanillaElementsInstaller.spinner.length;
+            process.stdout.write(VanillaElementsInstaller.deleteChar);
+
+             VanillaElementsInstaller.copyItem(item);
         }
     }
 }
