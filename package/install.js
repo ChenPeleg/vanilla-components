@@ -7,19 +7,33 @@ import { fileURLToPath } from 'url';
 class VanillaElementsInstaller {
     static exclude = ['.git', 'node_modules', 'package.json', 'package-lock.json', 'package/install.js'];
 
-    static copyRecursive(src, dest) {
+    /**
+     * Recursively collect all files and folders to copy, excluding those in the exclude list.
+     * @param {string} src
+     * @param {string} dest
+     * @param {Array} list
+     */
+    static collectItemsToCopy(src, dest, list) {
         if (VanillaElementsInstaller.exclude.includes(path.basename(src))) return;
-        if (!fs.existsSync(src)) return; // Prevent ENOENT error
+        if (!fs.existsSync(src)) return;
         if (fs.statSync(src).isDirectory()) {
-            if (!fs.existsSync(dest)) fs.mkdirSync(dest, { recursive: true });
+            // Add the directory itself
+            list.push({ src, dest, isDir: true });
             for (const file of fs.readdirSync(src)) {
-                VanillaElementsInstaller.copyRecursive(path.join(src, file), path.join(dest, file));
+                VanillaElementsInstaller.collectItemsToCopy(path.join(src, file), path.join(dest, file), list);
             }
         } else {
-            // Ensure parent directory exists before copying
-            const parentDir = path.dirname(dest);
+            list.push({ src, dest, isDir: false });
+        }
+    }
+
+    static copyItem(item) {
+        if (item.isDir) {
+            if (!fs.existsSync(item.dest)) fs.mkdirSync(item.dest, { recursive: true });
+        } else {
+            const parentDir = path.dirname(item.dest);
             if (!fs.existsSync(parentDir)) fs.mkdirSync(parentDir, { recursive: true });
-            fs.copyFileSync(src, dest);
+            fs.copyFileSync(item.src, item.dest);
         }
     }
 
@@ -34,11 +48,18 @@ class VanillaElementsInstaller {
         const sourceRoot = path.resolve(__dirname, '..');
         const destinationRoot = process.cwd();
 
+        // Build the list of items to copy
+        const itemsToCopy = [];
         for (const item of fs.readdirSync(sourceRoot)) {
-            VanillaElementsInstaller.copyRecursive(
+            VanillaElementsInstaller.collectItemsToCopy(
                 path.join(sourceRoot, item),
-                path.join(destinationRoot, customPath, item)
+                path.join(destinationRoot, item),
+                itemsToCopy
             );
+        }
+        // Copy all items
+        for (const item of itemsToCopy) {
+            VanillaElementsInstaller.copyItem(item);
         }
     }
 }
