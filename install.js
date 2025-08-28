@@ -68,7 +68,7 @@ class VanillaElementsInstaller {
 
         // Copy all items
         for (const item of itemsToCopy) {
-            VanillaElementsInstaller.copyItem(item);
+           // VanillaElementsInstaller.copyItem(item);
         }
         VanillaElementsInstaller.renameNpmIgnoreToGitIgnore()
 
