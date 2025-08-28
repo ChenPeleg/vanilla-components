@@ -27,8 +27,10 @@
   },
   "files": [
     "src/**/*",
+    "public/*",
     "package/**/*",
-    "scripts/**"
+    "scripts/**",
+    "*"
   ],
   "keywords": [
     "web components",
