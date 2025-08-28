@@ -8,11 +8,12 @@ import {fileURLToPath} from 'url';
 const locationArg = process.argv[2] || '';
 
 class VanillaElementsInstaller {
-    static exclude = [  'node_modules',   'package-lock.json','web-types.json',
-                      'package','.github', '.idea' ,'_tasks' ,'example-site'];
-    static renameNpmIgnoreToGitIgnore ({
-        destinationRoot, customPath
-                                       }) {
+    static exclude = ['node_modules', 'package-lock.json', 'web-types.json', 'package',
+                      '.github', '.idea', '_tasks', 'example-site'];
+
+    static renameNpmIgnoreToGitIgnore({
+                                          destinationRoot, customPath
+                                      }) {
         const npmignorePath = join(destinationRoot, customPath, '.npmignore');
         const gitignorePath = join(destinationRoot, customPath, '.gitignore');
         if (existsSync(npmignorePath)) {
@@ -62,9 +63,10 @@ class VanillaElementsInstaller {
         const fullDestination = resolve(destinationRoot, customPath);
 
         // Check if destination is inside source
-        if (!customPath && fullDestination.startsWith(sourceRoot + '\\') || (fullDestination !== sourceRoot && fullDestination.startsWith(sourceRoot + '/'))) {
-            console.error('Error: Destination folder is inside the source folder. This may cause recursive copying and is not allowed.');
-           customPath =  join(sourceRoot, 'template');
+        if (!customPath && fullDestination.startsWith(sourceRoot + '\\') ||
+            (fullDestination !== sourceRoot &&
+                fullDestination.startsWith(sourceRoot + '/'))) {
+            customPath = '../template';
         }
 
         const itemsToCopy = [];
@@ -75,20 +77,22 @@ class VanillaElementsInstaller {
 
         // Copy all items
         for (const item of itemsToCopy) {
-           // VanillaElementsInstaller.copyItem(item);
+            VanillaElementsInstaller.copyItem(item);
         }
         VanillaElementsInstaller.renameNpmIgnoreToGitIgnore({
-            destinationRoot,
-            customPath
-        })
+            destinationRoot, customPath
+        });
 
         // Find and run run-on-startup.js from its own location
         const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
         if (existsSync(runOnStartupPath)) {
-            const { spawnSync } = await import('child_process');
+            const {spawnSync} = await import('child_process');
             // Set cwd to the destination root, not scripts
             const runDir = join(destinationRoot, customPath);
-            const result = spawnSync('node', [runOnStartupPath], { stdio: 'inherit', cwd: runDir });
+            const result = spawnSync('node', [runOnStartupPath], {
+                stdio: 'inherit',
+                cwd: runDir
+            });
             if (result.error) {
                 console.error('Error running run-on-startup.js:', result.error);
             }
@@ -98,4 +102,4 @@ class VanillaElementsInstaller {
     }
 }
 
-VanillaElementsInstaller.run(locationArg).then( ) ;
+VanillaElementsInstaller.run(locationArg).then();
