@@ -9,18 +9,16 @@ import {renameSync} from 'node:fs';
 const locationArg = process.argv[2] || '';
 
 class VanillaElementsInstaller {
-    exclude = ['node_modules', 'package-lock.json', 'web-types.json', 'package',
+    exclude = ['node_modules', 'package-lock.json', 'web-types.json','.git', 'package',
                '.github', '.idea', '_tasks', 'example-site'];
-    sourceRoot;
-    destinationRoot;
-    customPath;
+
 
     constructor(customPath = '') {
 
         this.destinationRoot = process.cwd();
+        this.sourceRoot = this.buildsourceRoot();
         this.customPath = this.validateAndSetCustomPath(customPath);
-        this.sourceRoot = this.buildsourceRoot()
-        console.log(customPath);
+        console.log(  this.customPath, this.sourceRoot, this.destinationRoot);
     }
 
      buildsourceRoot() {
@@ -30,13 +28,11 @@ class VanillaElementsInstaller {
     }
 
     validateAndSetCustomPath(customPathFromArgs) {
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = dirname(__filename);
-        const sourceRoot = resolve(__dirname, '..');
+
         const fullDestination = resolve(this.destinationRoot, customPathFromArgs);
-        if ((fullDestination !== sourceRoot &&
-            (fullDestination.startsWith(sourceRoot + '\\') ||
-                fullDestination.startsWith(sourceRoot + '/')))) {
+        if ((fullDestination !== this.sourceRoot &&
+            (fullDestination.startsWith(this.sourceRoot + '\\') ||
+                fullDestination.startsWith(this.sourceRoot + '/')))) {
             return '../template';
         }
         return customPathFromArgs;
