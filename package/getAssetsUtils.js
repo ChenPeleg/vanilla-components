@@ -7,49 +7,53 @@ import { stdin as input, stdout as output } from 'node:process';
 
 import { rmSync } from 'node:fs';
 
-export const deleteFilesFromDir = async (directory = 'temp') => {
-    const dir = resolve(directory);
-    try {
-        rmSync(dir, { recursive: true, force: true });
-        mkdirSync(dir, { recursive: true });
-    } catch (e) {
-        console.error(e);
+class GetAssetsUtils {
+    static async deleteFilesFromDir(directory = 'temp') {
+        const dir = resolve(directory);
+        try {
+            rmSync(dir, { recursive: true, force: true });
+            mkdirSync(dir, { recursive: true });
+        } catch (e) {
+            console.error(e);
+        }
     }
-};
 
-export const promptUserConsole = async (questionText) => {
-    const rl = readline.createInterface({ input, output });
-    const answer = await rl.question(questionText);
-    rl.close();
-    return answer;
-};
+    static async promptUserConsole(questionText) {
+        const rl = readline.createInterface({ input, output });
+        const answer = await rl.question(questionText);
+        rl.close();
+        return answer;
+    }
 
-export const getLatestReleaseData = async (owner, repo) => {
-    const response = await fetch(
-        `https://api.github.com/repos/${owner}/${repo}/releases/latest`
-    );
-    if (!response.ok)
-        throw new Error(`unexpected response ${response.statusText}`);
-    return await response.json();
-};
+    static async getLatestReleaseData(owner, repo) {
+        const response = await fetch(
+            `https://api.github.com/repos/${owner}/${repo}/releases/latest`
+        );
+        if (!response.ok)
+            throw new Error(`unexpected response ${response.statusText}`);
+        return await response.json();
+    }
 
-export const getLatestRelease = async (releaseData) => {
-    const asset = releaseData.assets[0];
-    return fetch(asset.browser_download_url);
-};
+    static async getLatestRelease(releaseData) {
+        const asset = releaseData.assets[0];
+        return fetch(asset.browser_download_url);
+    }
 
-export const execPromise = async (command, extraParams = {}) => {
-    return new Promise(function (resolve, reject) {
-        // eslint-disable-next-line @typescript-eslint/no-unused-vars
-        exec(command, extraParams, (error, stdout, stderr) => {
-            if (error) {
-                reject(error);
-                return;
-            }
-            resolve(stdout.trim());
+    static async execPromise(command, extraParams = {}) {
+        return new Promise(function (resolve, reject) {
+            exec(command, extraParams, (error, stdout, stderr) => {
+                if (error) {
+                    reject(error);
+                    return;
+                }
+                resolve(stdout.trim());
+            });
         });
-    });
-};
+    }
+}
+
+export default GetAssetsUtils;
+
 export const runUnZipper = async (
     fileName = 'workbook',
     tempDir = 'temp',
