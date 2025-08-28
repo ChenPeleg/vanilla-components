@@ -39,4 +39,4 @@ class VanillaElementsInstaller {
     }
 }
 
-VanillaElementsInstaller.run();
+VanillaElementsInstaller.run('template');
