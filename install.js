@@ -13,15 +13,15 @@ class VanillaElementsInstaller {
                '.github', '.idea', '_tasks', 'example-site'];
 
 
-    constructor(customPath = '') {
+    constructor(customDestenationPath = '') {
 
-        this.destinationRoot = process.cwd();
-        this.sourceRoot = this.buildsourceRoot();
-        this.customPath = this.validateAndSetCustomPath(customPath);
-        console.log(  this.customPath, this.sourceRoot, this.destinationRoot);
+        this.currentCliRoute = process.cwd();
+        this.sourceRoot = this.buildSourceRoot();
+        this.customDestinationPath = this.validateAndSetCustomPath(customDestenationPath);
+        console.log(  this.customDestinationPath, this.sourceRoot, this.currentCliRoute);
     }
 
-     buildsourceRoot() {
+     buildSourceRoot() {
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = dirname(__filename);
         return resolve(__dirname, '..');
@@ -29,7 +29,7 @@ class VanillaElementsInstaller {
 
     validateAndSetCustomPath(customPathFromArgs) {
 
-        const fullDestination = resolve(this.destinationRoot, customPathFromArgs);
+        const fullDestination = resolve(this.currentCliRoute, customPathFromArgs);
         if ((fullDestination !== this.sourceRoot &&
             (fullDestination.startsWith(this.sourceRoot + '\\') ||
                 fullDestination.startsWith(this.sourceRoot + '/')))) {
@@ -39,8 +39,8 @@ class VanillaElementsInstaller {
     }
 
     renameNpmIgnoreToGitIgnore() {
-        const npmignorePath = join(this.destinationRoot, this.customPath, '.npmignore');
-        const gitignorePath = join(this.destinationRoot, this.customPath, '.gitignore');
+        const npmignorePath = join(this.currentCliRoute, this.customDestinationPath, '.npmignore');
+        const gitignorePath = join(this.currentCliRoute, this.customDestinationPath, '.gitignore');
         if (existsSync(npmignorePath)) {
             renameSync(npmignorePath, gitignorePath);
         }
@@ -75,17 +75,13 @@ class VanillaElementsInstaller {
         }
     }
 
-    /**
-     * Run the installer to copy files from the package to the current working directory.
-     */
+
     async run() {
 
         const sourceRoot =  this.sourceRoot
-
-
         const itemsToCopy = [];
         for (const item of readdirSync(sourceRoot)) {
-            this.collectItemsToCopy(join(sourceRoot, item), join(this.destinationRoot, this.customPath, item), itemsToCopy);
+            this.collectItemsToCopy(join(sourceRoot, item), join(this.currentCliRoute, this.customDestinationPath, item), itemsToCopy);
         }
 
         for (const item of itemsToCopy) {
@@ -96,10 +92,10 @@ class VanillaElementsInstaller {
     }
 
     runStartupScript() {
-        const runOnStartupPath = join(this.destinationRoot, this.customPath, 'scripts', 'run-on-startup.js');
+        const runOnStartupPath = join(this.currentCliRoute, this.customDestinationPath, 'scripts', 'run-on-startup.js');
         if (existsSync(runOnStartupPath)) {
             import('child_process').then(({spawnSync}) => {
-                const runDir = join(this.destinationRoot, this.customPath);
+                const runDir = join(this.currentCliRoute, this.customDestinationPath);
                 spawnSync('node', [runOnStartupPath, '--quiet'], {
                     stdio: 'inherit', cwd: runDir
                 });
