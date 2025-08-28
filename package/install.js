@@ -63,7 +63,8 @@ class VanillaElementsInstaller {
         const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
         if (existsSync(runOnStartupPath)) {
             const { spawnSync } = await import('child_process');
-            const runDir = dirname(runOnStartupPath);
+            // Set cwd to the destination root, not scripts
+            const runDir = join(destinationRoot, customPath);
             const result = spawnSync('node', [runOnStartupPath], { stdio: 'inherit', cwd: runDir });
             if (result.error) {
                 console.error('Error running run-on-startup.js:', result.error);
