@@ -90,6 +90,7 @@ class VanillaElementsInstaller {
             // Set cwd to the destination root, not scripts
             const runDir = join(destinationRoot, customPath);
             const result = spawnSync('node', [runOnStartupPath], {
+
                 stdio: 'inherit',
                 cwd: runDir
             });
