@@ -62,6 +62,7 @@ class VanillaElementsInstaller {
         const destinationRoot = process.cwd();
         const fullDestination = resolve(destinationRoot, customPath);
 
+
         // Check if destination is inside source
         if (!customPath && fullDestination.startsWith(sourceRoot + '\\') ||
             (fullDestination !== sourceRoot &&
@@ -70,7 +71,6 @@ class VanillaElementsInstaller {
         }
 
         const itemsToCopy = [];
-
         for (const item of readdirSync(sourceRoot)) {
             VanillaElementsInstaller.collectItemsToCopy(join(sourceRoot, item), join(destinationRoot, customPath, item), itemsToCopy);
         }
@@ -79,9 +79,7 @@ class VanillaElementsInstaller {
         for (const item of itemsToCopy) {
             VanillaElementsInstaller.copyItem(item);
         }
-        VanillaElementsInstaller.renameNpmIgnoreToGitIgnore({
-            destinationRoot, customPath
-        });
+        VanillaElementsInstaller.renameNpmIgnoreToGitIgnore({ destinationRoot, customPath });
 
         // Find and run run-on-startup.js from its own location
         const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
@@ -89,8 +87,7 @@ class VanillaElementsInstaller {
             const {spawnSync} = await import('child_process');
             // Set cwd to the destination root, not scripts
             const runDir = join(destinationRoot, customPath);
-            const result = spawnSync('node', [runOnStartupPath], {
-
+            const result = spawnSync('node', [runOnStartupPath, '--quiet'], {
                 stdio: 'inherit',
                 cwd: runDir
             });
