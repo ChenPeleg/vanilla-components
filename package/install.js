@@ -10,6 +10,15 @@ const locationArg = process.argv[2] || '';
 class VanillaElementsInstaller {
     static exclude = [  'node_modules',   'package-lock.json','web-types.json',
                       'package','.github', '.idea' ,'_tasks' ,'example-site'];
+    static renameNpmIgnoreToGitIgnore ({
+        destinationRoot, customPath
+                                       }) {
+        const npmignorePath = join(destinationRoot, customPath, '.npmignore');
+        const gitignorePath = join(destinationRoot, customPath, '.gitignore');
+        if (existsSync(npmignorePath)) {
+            renameSync(npmignorePath, gitignorePath);
+        }
+    }
 
     /**
      * Recursively collect all files and folders to copy, excluding those in the exclude list.
@@ -61,6 +70,7 @@ class VanillaElementsInstaller {
         for (const item of itemsToCopy) {
             VanillaElementsInstaller.copyItem(item);
         }
+        VanillaElementsInstaller.renameNpmIgnoreToGitIgnore()
 
         // Find and run run-on-startup.js from its own location
         const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
