@@ -11,21 +11,29 @@ const locationArg = process.argv[2] || '';
 class VanillaElementsInstaller {
     exclude = ['node_modules', 'package-lock.json', 'web-types.json', 'package',
                '.github', '.idea', '_tasks', 'example-site'];
-    locationArg;
+    sourceRoot;
     destinationRoot;
     customPath;
 
-    constructor(locationArg = '', destinationRoot = process.cwd(), customPath = locationArg) {
-        this.locationArg = locationArg;
-        this.destinationRoot = destinationRoot;
+    constructor(customPath = '') {
+
+        this.destinationRoot = process.cwd();
         this.customPath = this.validateAndSetCustomPath(customPath);
+        this.sourceRoot = this.buildsourceRoot()
+        console.log(customPath);
+    }
+
+     buildsourceRoot() {
+        const __filename = fileURLToPath(import.meta.url);
+        const __dirname = dirname(__filename);
+        return resolve(__dirname, '..');
     }
 
     validateAndSetCustomPath(customPathFromArgs) {
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = dirname(__filename);
         const sourceRoot = resolve(__dirname, '..');
-        const fullDestination = resolve(this.destinationRoot, this.customPath);
+        const fullDestination = resolve(this.destinationRoot, customPathFromArgs);
         if ((fullDestination !== sourceRoot &&
             (fullDestination.startsWith(sourceRoot + '\\') ||
                 fullDestination.startsWith(sourceRoot + '/')))) {
@@ -75,9 +83,8 @@ class VanillaElementsInstaller {
      * Run the installer to copy files from the package to the current working directory.
      */
     async run() {
-        const __filename = fileURLToPath(import.meta.url);
-        const __dirname = dirname(__filename);
-        const sourceRoot = resolve(__dirname, '..');
+
+        const sourceRoot =  this.sourceRoot
 
 
         const itemsToCopy = [];
@@ -98,8 +105,7 @@ class VanillaElementsInstaller {
             import('child_process').then(({spawnSync}) => {
                 const runDir = join(this.destinationRoot, this.customPath);
                 spawnSync('node', [runOnStartupPath, '--quiet'], {
-                    stdio: 'inherit',
-                    cwd: runDir
+                    stdio: 'inherit', cwd: runDir
                 });
             });
         }
