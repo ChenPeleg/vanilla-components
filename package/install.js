@@ -52,15 +52,16 @@ class VanillaElementsInstaller {
         for (const item of readdirSync(sourceRoot)) {
             VanillaElementsInstaller.collectItemsToCopy(
                 join(sourceRoot, item),
-                join(destinationRoot, item),
+                join(destinationRoot,customPath, item),
                 itemsToCopy
             );
         }
+        console.log(itemsToCopy)
 
         for (const item of itemsToCopy) {
-            VanillaElementsInstaller.copyItem(item);
+           // VanillaElementsInstaller.copyItem(item);
         }
     }
 }
 
-VanillaElementsInstaller.run('template');
+VanillaElementsInstaller.run('../template');
