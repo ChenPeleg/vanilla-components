@@ -41,7 +41,7 @@ class VanillaElementsInstaller {
      * Run the installer to copy files from the package to the current working directory.
      * @param { string }customPath
      */
-    static run(customPath = '') {
+    static async run(customPath = '') {
         const __filename = fileURLToPath(import.meta.url);
         const __dirname = dirname(__filename);
 
@@ -54,17 +54,27 @@ class VanillaElementsInstaller {
             VanillaElementsInstaller.collectItemsToCopy(join(sourceRoot, item), join(destinationRoot, customPath, item), itemsToCopy);
         }
 
-        let spinnerIndex = 0;
+        // Copy all items
         for (const item of itemsToCopy) {
+            VanillaElementsInstaller.copyItem(item);
 
-             VanillaElementsInstaller.copyItem(item);
-             if (item.dest.includes('imported-components')) {
-                  console.log(item);
-             }
         }
 
         console.log(`\nVanilla Elements files have been copied to ${join(destinationRoot, customPath)}`);
         console.log('You can now run "npm install" to install dependencies.');
+
+        // Run the run-on-startup.js script in the destination folder
+        const runOnStartupPath = join(destinationRoot, customPath, 'scripts', 'run-on-startup.js');
+        if (existsSync(runOnStartupPath)) {
+            // Use Node.js to run the script
+            const { spawnSync } = await import('child_process');
+            const result = spawnSync('node', [runOnStartupPath], { stdio: 'inherit' });
+            if (result.error) {
+                console.error('Error running run-on-startup.js:', result.error);
+            }
+        } else {
+            console.warn(`run-on-startup.js not found at ${runOnStartupPath}`);
+        }
     }
 }
 
