@@ -4,6 +4,9 @@ import {copyFileSync, existsSync, mkdirSync, readdirSync, statSync} from 'fs';
 import {basename, dirname, join, resolve} from 'path';
 import {fileURLToPath} from 'url';
 
+// Parse optional CLI argument for location
+const locationArg = process.argv[2] || '';
+
 class VanillaElementsInstaller {
     static exclude = ['.git', 'node_modules',   'package-lock.json','web-types.json',
                       'package','.github', '.idea' ,'_tasks' ,'example-site'];
@@ -75,4 +78,4 @@ class VanillaElementsInstaller {
     }
 }
 
-VanillaElementsInstaller.run('../template');
+VanillaElementsInstaller.run(locationArg).then( ) ;
