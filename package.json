@@ -1,7 +1,7 @@
 {
   "name": "vanilla-elements",
-  "private": true,
-  "version": "0.1.0",
+  "private": false,
+  "version": "0.2.0",
   "type": "module",
   "main": "./package/install.js",
   "bin":   "./package/install.js",
@@ -17,6 +17,16 @@
     "custom elements",
     "ui components"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ChenPeleg/vanilla-elemetns.git"
+  },
+  "author": "Chen Peleg",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ChenPeleg/vanilla-elemetns/issues"
+  },
+  "homepage": "https://chenpeleg.github.io/vanilla-elemetns/",
   "scripts": {
     "dev": "vite --mode development",
     "dev:package": "vite --mode package",
