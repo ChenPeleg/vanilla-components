@@ -2,7 +2,7 @@
   "name": "vanilla-components",
   "description": "A collection of web components built with vanilla JavaScript and TypeScript.",
   "private": false,
-  "version": "0.6.0",
+  "version": "0.7.0",
   "type": "module",
   "main": "./package/install.js",
   "bin": "./package/install.js",
