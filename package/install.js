@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
-import fs from 'fs';
-import path from 'path';
+import { existsSync, statSync, readdirSync, mkdirSync, copyFileSync } from 'fs';
+import { join, basename, dirname, resolve } from 'path';
 import { fileURLToPath } from 'url';
 
 class VanillaElementsInstaller {
@@ -14,13 +14,13 @@ class VanillaElementsInstaller {
      * @param {Array} list
      */
     static collectItemsToCopy(src, dest, list) {
-        if (VanillaElementsInstaller.exclude.includes(path.basename(src))) return;
-        if (!fs.existsSync(src)) return;
-        if (fs.statSync(src).isDirectory()) {
+        if (VanillaElementsInstaller.exclude.includes(basename(src))) return;
+        if (!existsSync(src)) return;
+        if (statSync(src).isDirectory()) {
             // Add the directory itself
             list.push({ src, dest, isDir: true });
-            for (const file of fs.readdirSync(src)) {
-                VanillaElementsInstaller.collectItemsToCopy(path.join(src, file), path.join(dest, file), list);
+            for (const file of readdirSync(src)) {
+                VanillaElementsInstaller.collectItemsToCopy(join(src, file), join(dest, file), list);
             }
         } else {
             list.push({ src, dest, isDir: false });
@@ -29,11 +29,11 @@ class VanillaElementsInstaller {
 
     static copyItem(item) {
         if (item.isDir) {
-            if (!fs.existsSync(item.dest)) fs.mkdirSync(item.dest, { recursive: true });
+            if (!existsSync(item.dest)) mkdirSync(item.dest, { recursive: true });
         } else {
-            const parentDir = path.dirname(item.dest);
-            if (!fs.existsSync(parentDir)) fs.mkdirSync(parentDir, { recursive: true });
-            fs.copyFileSync(item.src, item.dest);
+            const parentDir = dirname(item.dest);
+            if (!existsSync(parentDir)) mkdirSync(parentDir, { recursive: true });
+            copyFileSync(item.src, item.dest);
         }
     }
 
@@ -43,21 +43,20 @@ class VanillaElementsInstaller {
      */
     static run(customPath = '') {
         const __filename = fileURLToPath(import.meta.url);
-        const __dirname = path.dirname(__filename);
+        const __dirname = dirname(__filename);
 
-        const sourceRoot = path.resolve(__dirname, '..');
+        const sourceRoot = resolve(__dirname, '..');
         const destinationRoot = process.cwd();
 
-        // Build the list of items to copy
         const itemsToCopy = [];
-        for (const item of fs.readdirSync(sourceRoot)) {
+        for (const item of readdirSync(sourceRoot)) {
             VanillaElementsInstaller.collectItemsToCopy(
-                path.join(sourceRoot, item),
-                path.join(destinationRoot, item),
+                join(sourceRoot, item),
+                join(destinationRoot, item),
                 itemsToCopy
             );
         }
-        // Copy all items
+
         for (const item of itemsToCopy) {
             VanillaElementsInstaller.copyItem(item);
         }
