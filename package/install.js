@@ -5,9 +5,8 @@ import {basename, dirname, join, resolve} from 'path';
 import {fileURLToPath} from 'url';
 
 class VanillaElementsInstaller {
-    static exclude = ['.git', 'node_modules', 'package.json', 'package-lock.json',
-                      'package/install.js','.github', '.idea'];
-    static include = ['src', 'package.json', 'README.md', 'LICENSE'];
+    static exclude = ['.git', 'node_modules',   'package-lock.json','web-types.json',
+                      'package','.github', '.idea' ,'_tasks' ,'example-site'];
 
     /**
      * Recursively collect all files and folders to copy, excluding those in the exclude list.
@@ -50,19 +49,22 @@ class VanillaElementsInstaller {
         const destinationRoot = process.cwd();
 
         const itemsToCopy = [];
-        console.log('copying files');
+
         for (const item of readdirSync(sourceRoot)) {
             VanillaElementsInstaller.collectItemsToCopy(join(sourceRoot, item), join(destinationRoot, customPath, item), itemsToCopy);
         }
 
         let spinnerIndex = 0;
         for (const item of itemsToCopy) {
-            process.stdout.write(VanillaElementsInstaller.spinner[spinnerIndex]);
-            spinnerIndex = (spinnerIndex + 1) % VanillaElementsInstaller.spinner.length;
-            process.stdout.write(VanillaElementsInstaller.deleteChar);
 
              VanillaElementsInstaller.copyItem(item);
+             if (item.dest.includes('imported-components')) {
+                  console.log(item);
+             }
         }
+
+        console.log(`\nVanilla Elements files have been copied to ${join(destinationRoot, customPath)}`);
+        console.log('You can now run "npm install" to install dependencies.');
     }
 }
 
