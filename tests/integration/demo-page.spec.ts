@@ -11,7 +11,7 @@ test.describe ('Demo page for vanilla components', () => {
                     </app-page> 
                 </div`);
 
-        await expect(page.getByRole('heading', { name: 'Installation' })).toBeVisible();
+        await expect(page.getByRole('heading', { name: 'Vanilla Elements' })).toBeVisible();
     });
 
 })
