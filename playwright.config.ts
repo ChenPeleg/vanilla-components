@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import {testConstants} from './tests/_tools/testConstants';
 
 /**
  * Read environment variables from file.
@@ -70,9 +71,9 @@ export default defineConfig({
   ],
 
   /* Run your local dev server before starting the tests */
-  // webServer: {
-  //   command: 'npm run start',
-  //   url: 'http://localhost:3000',
-  //   reuseExistingServer: !process.env.CI,
-  // },
+    webServer:[ {
+        command: 'npm run e2e:test-server',
+        url: `http://localhost:${testConstants.port}`,
+        reuseExistingServer: !process.env.CI,
+    }],
 });
