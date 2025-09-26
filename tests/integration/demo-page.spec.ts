@@ -16,6 +16,8 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
     test('Displays the vanilla logo image', async ({ page }) => {
         await page.goto('/');
         await setPageHtml(page, `<div><app-page></app-page></div>`);
+        // Wait for component to render
+        await page.waitForTimeout(500);
         const image = page.getByAltText('Vanilla Logo');
         await expect(image).toBeVisible();
         await expect(image).toHaveAttribute('src');
@@ -24,6 +26,8 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
     test('Renders simple-button with initial count of 0', async ({ page }) => {
         await page.goto('/');
         await setPageHtml(page, `<div><app-page></app-page></div>`);
+        // Wait for component to render
+        await page.waitForTimeout(500);
         const button = page.getByRole('button', { name: /Count is/ });
         await expect(button).toBeVisible();
         await expect(button).toContainText('Count is');
@@ -34,6 +38,9 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
         await page.goto('/');
         await setPageHtml(page, `<div><app-page></app-page></div>`);
         
+        // Wait for component to render
+        await page.waitForTimeout(500);
+        
         // Find the button using role-based selector
         const button = page.getByRole('button', { name: /Count is/ });
         
@@ -42,25 +49,28 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
         
         // Click once
         await button.click();
-        await page.waitForTimeout(100);
+        await page.waitForTimeout(200);
         await expect(button).toContainText('1');
         
         // Click again
         await button.click();
-        await page.waitForTimeout(100);
+        await page.waitForTimeout(200);
         await expect(button).toContainText('2');
         
         // Click multiple times
         await button.click();
         await button.click();
         await button.click();
-        await page.waitForTimeout(100);
+        await page.waitForTimeout(200);
         await expect(button).toContainText('5');
     });
 
     test('Contains all documentation links', async ({ page }) => {
         await page.goto('/');
         await setPageHtml(page, `<div><app-page></app-page></div>`);
+        
+        // Wait for component to render
+        await page.waitForTimeout(500);
         
         // Check Custom elements link
         const customElementsLink = page.getByRole('link', { name: 'Custom elements' });
@@ -83,6 +93,9 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
         await page.goto('/');
         await setPageHtml(page, `<div><app-page></app-page></div>`);
         
+        // Wait for component to render
+        await page.waitForTimeout(500);
+        
         // Check header styling using getByRole
         const header = page.getByRole('heading', { name: 'Vanilla Elements' });
         await expect(header).toBeVisible();
@@ -94,6 +107,9 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
     test('Paragraph text contains expected content', async ({ page }) => {
         await page.goto('/');
         await setPageHtml(page, `<div><app-page></app-page></div>`);
+        
+        // Wait for component to render
+        await page.waitForTimeout(500);
         
         // Use text-based locator for paragraph content
         await expect(page.getByText('Using')).toBeVisible();
