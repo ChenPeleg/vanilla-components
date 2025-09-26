@@ -6,7 +6,7 @@ import {setPageHtml} from '../_tools/setPageHtml';
 
 const htmlSnippets = `  <div class="min-h-screen bg-gradient-to-br from-blue-100 to-indigo-200 flex flex-col items-center justify-center">
     <header class="w-full py-6 bg-white shadow-md flex justify-center">
-      <h1 class="text-3xl font-bold text-indigo-700">Painter & Figure</h1>
+      <h1 class="text-3xl font-bold text-indigo-700">Smoke test page</h1>
     </header>
     <main class="flex flex-col items-center mt-12">
       <p class="text-2xl font-semibold text-gray-800 mb-4">Welcome to Your Creative Space</p>
@@ -31,6 +31,6 @@ test.describe('Html smoke test', () => {
         await page.goto('/')
         await setPageHtml (page, htmlSnippets);
         const header = await page.getByRole('heading').innerText();
-        expect(header).toBe('Painter & Figure');
+        expect(header).toBe('Smoke test page');
     })
 })
