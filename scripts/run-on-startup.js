@@ -10,10 +10,20 @@ import {promises as fs} from 'node:fs';
 import {join} from 'node:path';
 
 export class RunOnStartup {
-
     static importFile = join('src', '_core', 'imported-components.ts');
     static srcDir = join(process.cwd(), 'src');
     #debug = false;
+    quiet = false;
+
+    /**
+     * @param {Object} [options]
+     * @param {boolean} [options.quiet=false] - Suppress all console logs if true
+     */
+    constructor(options = {}) {
+        if (typeof options.quiet === 'boolean') {
+            this.quiet = options.quiet;
+        }
+    }
 
     /**
      * Recursively get all files in a directory.
@@ -70,7 +80,7 @@ export class RunOnStartup {
      * @param {...any} args - Arguments to log
      */
     logInfo(...args) {
-        if (this.#debug) {
+        if (!this.quiet && this.#debug) {
             console.log(...args);
         }
     }
@@ -80,7 +90,7 @@ export class RunOnStartup {
      * @param {...any} args - Arguments to log
      */
     logError(...args) {
-        if (this.#debug) {
+        if (!this.quiet && this.#debug) {
             console.error(...args);
         }
     }
@@ -103,11 +113,10 @@ export class RunOnStartup {
                 }
             }
             const importFileContent = await this.getFileContent(RunOnStartup.importFile);
-            this.logInfo('Import file content loaded.');
-            const missingImports = [];
             const extraImports = [];
             const requiredImports = ceFiles.map(file => this.buildImportStatement(file));
             // Find missing imports (files with customElements.define not imported)
+            const missingImports = [];
             for (const file of ceFiles) {
                 const importStatement = this.buildImportStatement(file);
                 this.logInfo('Checking if import exists for:', importStatement);
@@ -145,29 +154,36 @@ export class RunOnStartup {
                 .map(([line]) => line);
             if (duplicateImports.length > 0) {
                 this.logInfo('Duplicate imports found:', duplicateImports);
-                console.log('Duplicate imports found:');
-                duplicateImports.forEach(i => console.log(i));
+                if (!this.quiet) {
+                    console.log('Duplicate imports found:');
+                    duplicateImports.forEach(i => console.log(i));
+                }
             }
-            const importsCorrect = missingImports.length === 0 && extraImports.length ===
-                0 && duplicateImports.length === 0;
+            const importsCorrect = missingImports.length === 0 && extraImports.length === 0 && duplicateImports.length === 0;
             if (importsCorrect) {
                 this.logInfo('All customElements.define files are correctly imported, no extra or duplicate imports found.');
             } else {
                 if (missingImports.length > 0) {
                     this.logInfo('Missing imports:', missingImports);
-                    console.log('Missing imports:');
-                    missingImports.forEach(i => console.log(i));
+                    if (!this.quiet) {
+                        console.log('Missing imports:');
+                        missingImports.forEach(i => console.log(i));
+                    }
                 }
                 if (extraImports.length > 0) {
                     this.logInfo('Extra imports (should be removed):', extraImports);
-                    console.log('Extra imports (should be removed):');
-                    extraImports.forEach(i => console.log(i));
+                    if (!this.quiet) {
+                        console.log('Extra imports (should be removed):');
+                        extraImports.forEach(i => console.log(i));
+                    }
                 }
             }
             return {importsCorrect, requiredImports, duplicateImports};
         } catch (err) {
             this.logError('Error in checkImports function:', err);
-            console.error('Error in checkImports function:', err);
+            if (!this.quiet) {
+                console.error('Error in checkImports function:', err);
+            }
             process.exit(1);
         }
     }
@@ -191,5 +207,6 @@ export class RunOnStartup {
     }
 }
 
-await new RunOnStartup().main();
-
+// Entry point: support CLI arg --quiet
+const quietArg = process.argv.includes('--quiet');
+await new RunOnStartup({ quiet: quietArg }).main();
