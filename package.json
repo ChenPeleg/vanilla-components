@@ -16,9 +16,10 @@
     "build:site": "tsc && vite build --site",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
-    "test": "tsc  "
+    "test": "  npx playwright test  "
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.1",
     "@tailwindcss/vite": "^4.1.11",
     "@types/node": "^24.0.7",
     "tailwindcss": "^4.1.11",
