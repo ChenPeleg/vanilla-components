@@ -11,7 +11,7 @@ test.describe('app-button', () => {
     test('renders with correct text', async ({ page }) => {
         await page.goto('/');
         await setPageHtml(page, `<app-button id="my-app-button"></app-button>`);
-        const button = await page.locator('app-button').locator('button');
+        const button = page.locator('app-button').locator('button');
         await expect(button).toHaveText('Click Me!');
     });
 
