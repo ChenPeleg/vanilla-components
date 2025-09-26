@@ -11,16 +11,18 @@
   },
   "scripts": {
     "dev": "vite --mode development",
+    "e2e:test-server": "vite --mode test --config tests/vite.testing-config.ts",
     "dev:package": "vite --mode package",
     "build": "tsc && vite build",
     "build:site": "tsc && vite build --site",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
-    "test": "tsc  "
+    "test": "  npx playwright test  "
   },
   "devDependencies": {
+    "@playwright/test": "^1.55.1",
     "@tailwindcss/vite": "^4.1.11",
-    "@types/node": "^24.0.7",
+    "@types/node": "^24.5.2",
     "tailwindcss": "^4.1.11",
     "typescript": "~5.8.3",
     "vite": "^7.1.7"
