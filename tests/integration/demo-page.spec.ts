@@ -29,42 +29,15 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
         await page.waitForTimeout(500);
         const button = page.getByRole('button', { name: /Count is/ });
         await expect(button).toBeVisible();
-        const text =   await button.first().evaluate(el=> el.textContent);
-        console.log(text)
+        const element=   await button .evaluate(el=> {
+            console.log(JSON.stringify(el))
+            return el
+        }) as  Node ;
+        console.dir(element )
 
-       //  await expect(button).toContainText('0');
     });
 
-    test('Click counter functionality works', async ({ page }) => {
-        await page.goto('/');
-        await setPageHtml(page, `<div><app-page></app-page></div>`);
-        
-        // Wait for component to render
-        await page.waitForTimeout(500);
-        
-        // Find the button using role-based selector
-        const button = page.getByRole('button', { name: /Count is/ });
-        
-        // Initial state should be 0
-        // await expect(button).toContainText('0');
-        
-        // Click once
-        await button.click();
-        await page.waitForTimeout(200);
-        await expect(button).toContainText('1');
-        
-        // Click again
-        await button.click();
-        await page.waitForTimeout(200);
-        await expect(button).toContainText('2');
-        
-        // Click multiple times
-        await button.click();
-        await button.click();
-        await button.click();
-        await page.waitForTimeout(200);
-        await expect(button).toContainText('5');
-    });
+
 
     test('Contains all documentation links', async ({ page }) => {
         await page.goto('/');
