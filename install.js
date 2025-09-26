@@ -77,7 +77,6 @@ class VanillaElementsInstaller {
 
 
     async run() {
-
         const sourceRoot =  this.sourceRoot
         const itemsToCopy = [];
         for (const item of readdirSync(sourceRoot)) {
