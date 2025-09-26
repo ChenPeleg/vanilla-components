@@ -17,6 +17,7 @@
     "build:site": "tsc && vite build --site",
     "preview": "vite preview",
     "run-on-start": "node ./scripts/run-on-startup.js",
+    "clean-code": "tsc",
     "test": "npx playwright test",
     "test:iterate": "npx playwright test --config tests/playwright.iteration.config.ts"
   },
