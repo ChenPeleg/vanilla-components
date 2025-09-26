@@ -3,14 +3,69 @@ import {setPageHtml} from '../_tools/setPageHtml';
 
 test.describe ('Demo page for vanilla components (app-page page)', () => {
     test('See the header of the app-page page', async ({ page }) => {
-        await page.goto('/')
+        await page.goto('/');
         await setPageHtml(page, //language=HTML
             `
                 <div>
                     <app-page>
                     </app-page> 
-                </div`);
+                </div>`);
         await expect(page.getByRole('heading', { name: 'Vanilla Elements' })).toBeVisible();
+    });
+
+    test('Displays the vanilla logo image', async ({ page }) => {
+        await page.goto('/');
+        await setPageHtml(page, `<div><app-page></app-page></div>`);
+        // Wait for component to render
+        await page.waitForTimeout(500);
+        const image = page.getByAltText('Vanilla Logo');
+        await expect(image).toBeVisible();
+        await expect(image).toHaveAttribute('src');
+    });
+
+    test('Renders simple-button with initial count of 0', async ({ page }) => {
+        await page.goto('/');
+        await setPageHtml(page, `<div><app-page></app-page></div>`);
+        await page.waitForTimeout(500);
+        const button = page.getByRole('button', { name: /Count is/ });
+        await expect(button).toBeVisible();
+
+
+    });
+
+
+
+    test('Contains all documentation links', async ({ page }) => {
+        await page.goto('/');
+        await setPageHtml(page, `<div><app-page></app-page></div>`);
+        await page.waitForTimeout(500);
+        const customElementsLink = page.getByRole('link', { name: 'Custom elements' });
+        await expect(customElementsLink).toBeVisible();
+        const tailwindLink = page.getByRole('link', { name: 'TailWind' });
+        await expect(tailwindLink).toBeVisible();
+        const viteLink = page.getByRole('link', { name: 'Vite' });
+        await expect(viteLink).toBeVisible();
+        const typescriptLink = page.getByRole('link', { name: 'TypeScript' });
+        await expect(typescriptLink).toBeVisible();
+    });
+
+    test('Has proper CSS classes and structure', async ({ page }) => {
+        await page.goto('/');
+        await setPageHtml(page, `<div><app-page></app-page></div>`);
+        await page.waitForTimeout(500);
+        const header = page.getByRole('heading', { name: 'Vanilla Elements' });
+        await expect(header).toBeVisible();
+        await expect(header).toHaveClass(/text-6xl/);
+        await expect(header).toHaveClass(/font-bold/);
+        await expect(header).toHaveClass(/text-gray-800/);
+    });
+
+    test('Paragraph text contains expected content', async ({ page }) => {
+        await page.goto('/');
+        await setPageHtml(page, `<div><app-page></app-page></div>`);
+        await page.waitForTimeout(500);
+        await expect(page.getByText('Using')).toBeVisible();
+        await expect(page.getByText('for development')).toBeVisible();
     });
 })
 

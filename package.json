@@ -19,6 +19,7 @@
     "run-on-start": "node ./scripts/run-on-startup.js",
     "clean-code": "tsc",
     "test": "npx playwright test",
+    "test:ui" : "npx playwright test --ui",
     "test:iterate": "npx playwright test --config tests/playwright.iteration.config.ts"
   },
   "devDependencies": {
