@@ -20,7 +20,7 @@ export class AppButton extends BaseElement {
     update() {
         const isDisabled = this.getAttribute('disabled') === 'true';
 
-        this.$<HTMLButtonElement>('button').disabled    = isDisabled//= isDisabled;
+        this.$<HTMLButtonElement>('button').disabled    = isDisabled  ;
         this.$<HTMLButtonElement>('button').setAttribute('aria-disabled', String(isDisabled));
     }
 
