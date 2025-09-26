@@ -25,4 +25,4 @@ jobs:
           cache: 'npm'
           cache-dependency-path: './'
       - run: npm install
-      - run: npm clean-code
+      - run: npm run clean-code
