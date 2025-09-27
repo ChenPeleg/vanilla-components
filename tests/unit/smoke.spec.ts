@@ -33,4 +33,20 @@ test.describe('Html smoke test', () => {
         const header = await page.getByRole('heading').innerText();
         expect(header).toBe('Smoke test page');
     })
+    test('Test can pierce shadow dom', async ({ page }) => {
+        await page.goto('/');
+        await setPageHtml(page, //language=HTML
+            `
+                <div>
+                    <button id="light-dom-button"> Light Button </button> 
+                    <simple-button role="button" id="shadow-dom-button"> Shadow Button </simple-button>
+                </div>`);
+        const lightDomButton = page.getByRole('button', { name: 'Light Button' });
+        const shadowDomButtonInner = page.getByRole('button' , { name: 'Shadow Button' });
+
+        await expect(lightDomButton).toBeVisible();
+        await expect(shadowDomButtonInner).toBeVisible();
+        expect((await shadowDomButtonInner.allInnerTexts()).join('')).toBe('Shadow Button');
+
+    });
 })
