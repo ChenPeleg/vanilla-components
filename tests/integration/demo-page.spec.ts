@@ -16,7 +16,6 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
     test('Displays the vanilla logo image', async ({ page }) => {
         await page.goto('/');
         await setPageHtml(page, `<div><app-page></app-page></div>`);
-        // Wait for component to render
         await page.waitForTimeout(500);
         const image = page.getByAltText('Vanilla Logo');
         await expect(image).toBeVisible();
