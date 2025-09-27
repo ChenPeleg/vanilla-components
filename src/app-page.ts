@@ -5,14 +5,15 @@ import vanillaLogo from './assets/images/vanilla-flower.png';
 export class SimpleButton extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
+        this.setAttribute('role', 'button');
         this.$<HTMLButtonElement>('button').addEventListener('click', () => this.actionCallback({clicked: true}));
     }
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <button class="  px-4 py-2  text-black bg-slate-200 hover:border-[#646cff] border-2 border-transparent rounded cursor-pointer focus:border-black     transition duration-200">
+            <div class="  px-4 py-2  text-black bg-slate-200 hover:border-[#646cff] border-2 border-transparent rounded cursor-pointer focus:border-black     transition duration-200">
                 <slot></slot>
-            </button>
+            </div>
         `;
     }
 }
@@ -24,9 +25,9 @@ class AppPage extends BaseElement {
     private state = {
         clicks: 0
     }
-
     connectedCallback() {
         super.connectedCallback();
+        this.setAttribute('role', 'button');
         this.$<SimpleButton>('simple-button').actionCallback = () => {
             this.state.clicks++;
             this.update();

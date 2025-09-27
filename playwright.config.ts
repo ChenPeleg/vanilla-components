@@ -5,7 +5,7 @@ import {testConstants} from './tests/_tools/testConstants';
 export default defineConfig({
     testDir: 'tests',
     outputDir: 'tests/test-results/',
-    reporter: [['html', {outputFolder: 'tests/playwright-report'}]],
+    reporter: [['html', {outputFolder: 'tests/playwright-report', open: 'never'}]],
     fullyParallel: true,
     forbidOnly: !!process.env.CI,
     retries: process.env.CI ? 2 : 0,

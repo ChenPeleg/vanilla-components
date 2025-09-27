@@ -38,18 +38,15 @@ test.describe('Html smoke test', () => {
         await setPageHtml(page, //language=HTML
             `
                 <div>
-                    <button id="light-dom-button"> Light Button </button>
-<!--                    <simple-button>-->
-<!--                        Count is <span id="count-text"> 0 </span>-->
-<!--                    </simple-button>-->
-                    <app-page></app-page>
+                    <button id="light-dom-button"> Light Button </button> 
+                    <simple-button role="button" id="shadow-dom-button"> Shadow Button </simple-button>
                 </div>`);
         const lightDomButton = page.getByRole('button', { name: 'Light Button' });
-        // const shadowDomButton = page.locator('simple-button').first()
-        const shadowDomButtonInner = page.locator('app-page').locator('simple-button');
+        const shadowDomButtonInner = page.getByRole('button' , { name: 'Shadow Button' });
 
-        console.log( await shadowDomButtonInner.allInnerTexts());
         await expect(lightDomButton).toBeVisible();
-        // await expect(shadowDomButton).toBeVisible();
+        await expect(shadowDomButtonInner).toBeVisible();
+        expect((await shadowDomButtonInner.allInnerTexts()).join('')).toBe('Shadow Button');
+
     });
 })
