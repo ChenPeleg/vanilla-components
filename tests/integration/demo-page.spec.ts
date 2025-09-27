@@ -26,10 +26,11 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
         await page.goto('/');
         await setPageHtml(page, `<div><app-page></app-page></div>`);
         await page.waitForTimeout(500);
-        const button = page.getByRole('button', { name: /Count is/ });
+        // Use a more specific locator for the simple-button
+        const button = page.locator('simple-button');
         await expect(button).toBeVisible();
-
-
+        const countText = button.locator('#count-text');
+        await expect(countText).toHaveText(/0/);
     });
 
 
@@ -66,5 +67,21 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
         await expect(page.getByText('Using')).toBeVisible();
         await expect(page.getByText('for development')).toBeVisible();
     });
-})
 
+    test('Clicking the simple-button increments the count', async ({ page }) => {
+        await page.goto('/');
+        await setPageHtml(page, `<div><app-page></app-page></div>`);
+        await page.waitForTimeout(500);
+        // Use a more specific locator for the simple-button
+        const button = page.locator('simple-button');
+        await expect(button).toBeVisible();
+        const countText = button.locator('#count-text');
+        await expect(countText).toHaveText(/0/);
+        // Click the button
+        await button.click();
+        await expect(countText).toHaveText(/1/);
+        // Click again
+        await button.click();
+        await expect(countText).toHaveText(/2/);
+    });
+})

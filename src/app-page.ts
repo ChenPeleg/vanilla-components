@@ -11,9 +11,9 @@ export class SimpleButton extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="  px-4 py-2  text-black bg-slate-200 hover:border-[#646cff] border-2 border-transparent rounded cursor-pointer focus:border-black     transition duration-200">
+            <button class="px-4 py-2 text-black bg-slate-200 hover:border-[#646cff] border-2 border-transparent rounded cursor-pointer focus:border-black transition duration-200">
                 <slot></slot>
-            </div>
+            </button>
         `;
     }
 }
@@ -63,6 +63,3 @@ class AppPage extends BaseElement {
 }
 
 customElements.define('app-page', AppPage);
-
-
-
