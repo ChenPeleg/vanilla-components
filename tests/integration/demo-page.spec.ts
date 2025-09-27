@@ -4,8 +4,7 @@ import {setPageHtml} from '../_tools/setPageHtml';
 test.describe ('Demo page for vanilla components (app-page page)', () => {
     test('See the header of the app-page page', async ({ page }) => {
         await page.goto('/');
-        await setPageHtml(page, //language=HTML
-            `
+        await setPageHtml(page, `
                 <div>
                     <app-page>
                     </app-page> 
@@ -26,14 +25,11 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
         await page.goto('/');
         await setPageHtml(page, `<div><app-page></app-page></div>`);
         await page.waitForTimeout(500);
-        // Use a more specific locator for the simple-button
         const button = page.locator('simple-button');
         await expect(button).toBeVisible();
         const countText = button.locator('#count-text');
         await expect(countText).toHaveText(/0/);
     });
-
-
 
     test('Contains all documentation links', async ({ page }) => {
         await page.goto('/');
@@ -72,15 +68,12 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
         await page.goto('/');
         await setPageHtml(page, `<div><app-page></app-page></div>`);
         await page.waitForTimeout(500);
-        // Use a more specific locator for the simple-button
         const button = page.locator('simple-button');
         await expect(button).toBeVisible();
         const countText = button.locator('#count-text');
         await expect(countText).toHaveText(/0/);
-        // Click the button
         await button.click();
         await expect(countText).toHaveText(/1/);
-        // Click again
         await button.click();
         await expect(countText).toHaveText(/2/);
     });
