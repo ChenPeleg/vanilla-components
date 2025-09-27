@@ -43,7 +43,10 @@ test.describe('Html smoke test', () => {
                     </app-page> 
                 </div>`);
         const lightDomButton = page.getByRole('button', { name: 'Light Button' });
+        const shadowDomButton = page.locator('app-page').locator('button');
+        console.log( await lightDomButton.innerHTML());
+        console.log( await shadowDomButton.textContent());
         await expect(lightDomButton).toBeVisible();
-        console.log(page.getByRole('button', { name: 'Dark Button' })!);
+        await expect(shadowDomButton).toBeVisible();
     });
 })
