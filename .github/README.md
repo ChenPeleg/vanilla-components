@@ -4,15 +4,13 @@ This directory contains GitHub-specific configuration files for the Vanilla Comp
 
 ## Files
 
-- **`copilot-instructions.md`** - Comprehensive GitHub Copilot instructions with detailed patterns, conventions, and best practices for this vanilla web components project.
-
-- **`copilot-rules.md`** - Quick reference guide with essential rules and patterns for GitHub Copilot to follow when working with this codebase.
+- **`copilot-instructions.md`** - GitHub Copilot instructions with both quick reference rules and comprehensive documentation covering patterns, conventions, and best practices for this vanilla web components project.
 
 - **`workflows/`** - GitHub Actions workflows for CI/CD, testing, and deployment.
 
 ## GitHub Copilot Integration
 
-The copilot instruction files help ensure that GitHub Copilot suggestions align with the project's conventions and patterns:
+The copilot instruction file helps ensure that GitHub Copilot suggestions align with the project's conventions and patterns:
 
 - Web component development using vanilla TypeScript
 - Shadow DOM and Custom Elements API usage  
