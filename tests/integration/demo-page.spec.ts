@@ -68,13 +68,12 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
         await page.goto('/');
         await setPageHtml(page, `<div><app-page></app-page></div>`);
         await page.waitForTimeout(500);
-        const button = page.locator('simple-button');
+        const button = page.getByRole('button');
         await expect(button).toBeVisible();
-        const countText = button.locator('#count-text');
-        await expect(countText).toHaveText(/0/);
+        await expect(button).toHaveText(/0/);
         await button.click();
-        await expect(countText).toHaveText(/1/);
+        await expect(button).toHaveText(/1/);
         await button.click();
-        await expect(countText).toHaveText(/2/);
+        await expect(button).toHaveText(/2/);
     });
 })

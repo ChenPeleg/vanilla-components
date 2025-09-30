@@ -9,11 +9,13 @@ export class AppButton extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
         this.setAttribute('role', 'button');
-        this.$<HTMLButtonElement>('button').addEventListener('click', () => {
-            if (this.$<HTMLButtonElement>('button').disabled) {
+        this.shadowRoot?.addEventListener('click', () => {
+            if (this.getAttribute('disabled') === 'true') {
                 return;
             }
             this.actionCallback({clicked: true});
+        }, {
+            signal : this.abortSignal.signal
         });
         this.update();
     }
@@ -21,8 +23,9 @@ export class AppButton extends BaseElement {
     update() {
         const isDisabled = this.getAttribute('disabled') === 'true';
 
-        this.$<HTMLButtonElement>('button').disabled    = isDisabled  ;
-        this.$<HTMLButtonElement>('button').setAttribute('aria-disabled', String(isDisabled));
+        this.setAttribute('disabled', isDisabled ? 'true'  : 'false') ;
+        this.setAttribute('disabled', isDisabled ? 'true'  : 'false') ;
+        this.setAttribute('aria-disabled', String(isDisabled));
     }
 
     renderTemplate() {

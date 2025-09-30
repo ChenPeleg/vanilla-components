@@ -4,9 +4,11 @@ import type {CustomElement} from './CustomElement.ts';
 
 export class BaseElement extends HTMLElement implements CustomElement {
     protected internals: ElementInternals;
+    protected abortSignal: AbortController;
 
     constructor() {
         super();
+        this.abortSignal = new AbortController() ;
         this.attachShadow({mode: 'open'});
         this.internals = this.attachInternals();
 
@@ -39,6 +41,10 @@ export class BaseElement extends HTMLElement implements CustomElement {
      */
     public actionCallback = (_result: any) => {
     };
+
+    public disconnectedCallback () {
+        this.abortSignal.abort();
+    }
 
     protected update() {
     }

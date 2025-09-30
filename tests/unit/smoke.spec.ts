@@ -39,7 +39,7 @@ test.describe('Html smoke test', () => {
             `
                 <div>
                     <button id="light-dom-button"> Light Button </button> 
-                    <simple-button role="button" id="shadow-dom-button"> Shadow Button </simple-button>
+                    <simple-button id="shadow-dom-button"> Shadow Button </simple-button>
                 </div>`);
         const lightDomButton = page.getByRole('button', { name: 'Light Button' });
         const shadowDomButtonInner = page.getByRole('button' , { name: 'Shadow Button' });
