@@ -6,7 +6,7 @@ export class SimpleButton extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
         this.setAttribute('role', 'button');
-        this.$<HTMLButtonElement>('button').addEventListener('click', () => this.actionCallback({clicked: true}));
+        this.shadowRoot?.addEventListener('click', () => this.actionCallback({clicked: true}));
     }
     renderTemplate() {
         // language=HTML
@@ -27,7 +27,6 @@ class AppPage extends BaseElement {
     }
     connectedCallback() {
         super.connectedCallback();
-        this.setAttribute('role', 'button');
         this.$<SimpleButton>('simple-button').actionCallback = () => {
             this.state.clicks++;
             this.update();
