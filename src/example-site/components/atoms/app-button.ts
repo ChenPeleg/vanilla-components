@@ -14,6 +14,8 @@ export class AppButton extends BaseElement {
                 return;
             }
             this.actionCallback({clicked: true});
+        }, {
+            signal : this.abortSignal.signal
         });
         this.update();
     }
