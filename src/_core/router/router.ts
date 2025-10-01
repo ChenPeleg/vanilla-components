@@ -46,6 +46,7 @@ export class Router {
         return this._state;
     }
 
+
     public set changeCallback(callback: (state: RouterState) => RouterState) {
         this._routeChangeCallback = callback;
         setTimeout(() => {
@@ -104,7 +105,7 @@ export class Router {
     }
 
     private findMatchingRoute(path: string): { route: RouteObject, params: any } | null {
-console.log(this.routes)
+
         if (this.routes.has(path)) {
             return {
                 route: this.routes.get(path)!,
