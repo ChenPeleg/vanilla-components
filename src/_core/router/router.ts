@@ -51,7 +51,7 @@ export class Router {
         setTimeout(() => {
 
             this.handleRouteChange()
-        }, 1)
+        }, 0)
     }
 
     public registerRoute(route: RouteObject): Router {
@@ -80,6 +80,7 @@ export class Router {
         this.currentPath = this.isHashRouter ? window.location.hash.slice(1) || '/' : window.location.pathname || '/';
 
         let match = this.findMatchingRoute(this.currentPath);
+        console.log(this.currentPath)
 
         if (match) {
 
@@ -103,7 +104,7 @@ export class Router {
     }
 
     private findMatchingRoute(path: string): { route: RouteObject, params: any } | null {
-
+console.log(this.routes)
         if (this.routes.has(path)) {
             return {
                 route: this.routes.get(path)!,

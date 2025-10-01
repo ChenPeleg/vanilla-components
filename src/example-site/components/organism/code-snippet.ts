@@ -11,12 +11,6 @@ export class CodeSnippet extends BaseElement {
     }
 
     connectedCallback(): void {
-
-        super.connectedCallback();
-        this.storeSubscription = this.servicesProvider.getService(StoreService).subscribe(() => {
-            this.update()
-        })
-
         this.update();
     }
 
