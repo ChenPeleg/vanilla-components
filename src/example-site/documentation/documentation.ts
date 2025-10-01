@@ -32,5 +32,5 @@ const howToUse: DocumentationType[] = [{
 
 export const documentation: DocumentationType[] = [...howToUse].map((doc, index) => ({
     id: doc.id || `doc-${index + 1}`,
-    type: doc.type || DocumentationKind.text, ...doc,
+    type: doc.type || DocumentationKind.Text, ...doc,
 }));

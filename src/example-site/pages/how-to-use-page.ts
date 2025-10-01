@@ -15,7 +15,7 @@ class HowToUsePage extends BaseElement {
                 return `<code-gist gist="${doc.content}"></code-gist>`;
             case DocumentationKind.html:
                 return doc.content;
-            case DocumentationKind.text:
+            case DocumentationKind.Text:
             default:
                 return `<p class="text-gray-700 text-lg mt-4"> ${doc.content} </p>`;
         }
