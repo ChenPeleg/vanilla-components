@@ -22,6 +22,10 @@ const howToUse: DocumentationType[] = [{
     content: `The base element is a custom web component that extends the functionality of the native HTML element.
               It provides a foundation for creating reusable components with encapsulated styles and behavior.`
 }, {
+    content: ` `
+},
+
+    {
     content: `To use the base element just extent it and put some html inside the <code>renderTemplate()</code> method.`
 }]
 
