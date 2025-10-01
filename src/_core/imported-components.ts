@@ -26,3 +26,4 @@ import '../example-site/pages/main.layout.ts';
 import '../root.ts';
 import '../_core/router/router-outlet.ts';
 import '../example-site/pages/examples-page.ts';
+import '../example-site/components/organism/docs-article.ts';
