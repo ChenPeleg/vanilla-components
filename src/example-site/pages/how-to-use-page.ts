@@ -11,15 +11,13 @@ class HowToUsePage extends BaseElement {
         switch (doc.type) {
             case DocumentationKind.header:
                 return `<header-2> ${doc.content} </header-2>`;
-            case DocumentationKind.code:
-                return `<code-gist> ${doc.content} </code-gist>`;
+            case DocumentationKind.gist:
+                return `<code-gist gist="${doc.content}"></code-gist>`;
             case DocumentationKind.html:
                 return doc.content;
             case DocumentationKind.text:
             default:
                 return `<p class="text-gray-700 text-lg mt-4"> ${doc.content} </p>`;
-
-
         }
 
     }
