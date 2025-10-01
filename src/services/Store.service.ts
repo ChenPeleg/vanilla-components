@@ -1,11 +1,10 @@
 import {ServicesResolver} from '../_global/provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from '../_global/provider/AbstractBaseService.ts';
 import {LocalStorageService} from './LocalStorage.service.ts';
-import type {AppStoreModel} from '../store/app-store-model.ts';
+import {type AppStoreModel, DisplayType,} from '../store/app-store-model.ts';
 import {StoreFactory, type StoreReducer} from '../_global/StoreFactory.ts';
 import type {AppAction} from '../models/AppAction.ts';
 import {appReducer} from '../store/app-reducer.ts';
-
 
 
 export class StoreService extends AbstractBaseService {
@@ -48,11 +47,20 @@ export class StoreService extends AbstractBaseService {
             return null;
         }
 
+
+        return stateFromLocalStorage
+
     }
 
 
     private createInitialStoreState() {
-        const initialState: any = {}
+
+        const initialState: AppStoreModel = {
+            count: 0,
+            display: DisplayType.Grid
+        }
+
+
         return initialState;
     }
 
