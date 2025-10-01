@@ -7,16 +7,9 @@ export class GlobalCounter extends BaseElement {
     }
 
     connectedCallback(): void {
+
         super.connectedCallback();
-        this.setAttribute('role', 'button');
-        this.shadowRoot?.addEventListener('click', () => {
-            if (this.getAttribute('disabled') === 'true') {
-                return;
-            }
-            this.actionCallback({clicked: true});
-        }, {
-            signal : this.abortSignal.signal
-        });
+
         this.update();
     }
 
