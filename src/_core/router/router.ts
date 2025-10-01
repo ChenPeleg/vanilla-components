@@ -81,7 +81,7 @@ export class Router {
         this.currentPath = this.isHashRouter ? window.location.hash.slice(1) || '/' : window.location.pathname || '/';
 
         let match = this.findMatchingRoute(this.currentPath);
-        console.log(this.currentPath)
+
 
         if (match) {
 
