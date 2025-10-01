@@ -18,6 +18,13 @@ export const overrideRoutes = () => {
         index: true,
         element: () => `<main-layout><home-page></home-page></main-layout>`
     }, {
+        path: '/how-to-use',
+        element: () => `<main-layout><how-to-use-page></how-to-use-page></main-layout>`
+    },   {
+        path: '/examples',
+        element: () => `<main-layout><examples-page></examples-page></main-layout>`
+    },
+        {
         path: '*',
         element: () => `<main-layout><about-page></about-page></main-layout>`
     }

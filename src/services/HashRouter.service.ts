@@ -22,11 +22,10 @@ export class HashRouterService extends AbstractBaseService {
     }
 
     updateRoutes(routes: RouteObject[]) {
-        this.router = new Router({
-            routes,
-            isHashRouter: true
-        });
-        // this.subscribers = [];
+        for (const route of routes) {
+
+            this.router.registerRoute(route);
+        }
         this.router.changeCallback = (state: RouterState) => {
             this.setState(state);
             return state;

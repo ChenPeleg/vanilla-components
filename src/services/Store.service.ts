@@ -1,19 +1,22 @@
 import {ServicesResolver} from '../_global/provider/ServiceResolverClass.ts';
 import {AbstractBaseService} from '../_global/provider/AbstractBaseService.ts';
 import {LocalStorageService} from './LocalStorage.service.ts';
-import type {AppStoreModel} from '../store/app-store-model.ts';
+import {type AppStoreModel, DisplayType,} from '../store/app-store-model.ts';
 import {StoreFactory, type StoreReducer} from '../_global/StoreFactory.ts';
 import type {AppAction} from '../models/AppAction.ts';
 import {appReducer} from '../store/app-reducer.ts';
-
+import type {Subscription} from '../models/Subscription.ts';
 
 
 export class StoreService extends AbstractBaseService {
     private readonly _initialState: AppStoreModel;
+    private subscribers: { cb: (newState: AppStoreModel) => void, id: number }[];
+    private subscriberId = 0;
 
     constructor(provider: ServicesResolver) {
         super(provider);
         this._initialState = this.createInitialStoreState();
+        this.subscribers = [];
     }
 
     private _store: StoreFactory<AppAction, AppStoreModel, typeof appReducer> | null = null;
@@ -29,6 +32,20 @@ export class StoreService extends AbstractBaseService {
         return this._initialState;
     }
 
+    subscribe(fn: (newState: AppStoreModel) => void): Subscription {
+        this.subscribers.push({
+            cb: fn,
+            id: this.subscriberId
+        });
+        return {
+            unsubscribe: () => this.unsubscribe(this.subscriberId++)
+        };
+    }
+
+    unsubscribe(id: number) {
+        this.subscribers = this.subscribers.filter(sub => sub.id !== id);
+    }
+
     private createStore() {
         const stateFromLocalStorage = this.storeFromLocalStorage()
 
@@ -37,6 +54,7 @@ export class StoreService extends AbstractBaseService {
             defaultState: stateFromLocalStorage || this.initialState
         })
         globalStore.subscribe((state: AppStoreModel) => {
+            this.subscribers.forEach(sub => sub.cb(state));
             this.servicesResolver.getService(LocalStorageService).setObject(LocalStorageService.STORE_SETTINGS, state);
         })
         return this._store = globalStore;
@@ -48,11 +66,19 @@ export class StoreService extends AbstractBaseService {
             return null;
         }
 
+
+        return stateFromLocalStorage
+
     }
 
-
     private createInitialStoreState() {
-        const initialState: any = {}
+
+        const initialState: AppStoreModel = {
+            count: 0,
+            display: DisplayType.Grid
+        }
+
+
         return initialState;
     }
 

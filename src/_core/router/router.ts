@@ -46,12 +46,13 @@ export class Router {
         return this._state;
     }
 
+
     public set changeCallback(callback: (state: RouterState) => RouterState) {
         this._routeChangeCallback = callback;
         setTimeout(() => {
 
             this.handleRouteChange()
-        }, 1)
+        }, 0)
     }
 
     public registerRoute(route: RouteObject): Router {
@@ -80,6 +81,7 @@ export class Router {
         this.currentPath = this.isHashRouter ? window.location.hash.slice(1) || '/' : window.location.pathname || '/';
 
         let match = this.findMatchingRoute(this.currentPath);
+
 
         if (match) {
 
