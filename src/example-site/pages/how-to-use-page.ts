@@ -25,7 +25,7 @@ class HowToUsePage extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <main class="overflow-hidden bg-amber-200  w-full h-full p-5 flex flex-col items-center">
+            <main class="overflow-y-auto bg-amber-200  w-full h-full p-5 flex flex-col items-center">
                 <article class="max-w-3xl">
                     <header-1> How to use  </header-1>
                      ${this.howTouseDocs.map(doc => this.buildDocUnit(doc)).join('')}
