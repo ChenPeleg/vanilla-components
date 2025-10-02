@@ -32,11 +32,11 @@ const installationDocs: DocumentationType[] = [
         content: `To create a new project using Vanilla Components, run the following command in your terminal:`
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>npx vanilla-components my-project-name
+        content: `npx vanilla-components my-project-name
 cd my-project-name
 npm install
-npm run dev</code></pre>`,
-        type: DocumentationKind.html
+npm run dev`,
+        type: DocumentationKind.code
     },
     {
         content: 'Cloning from GitHub',
@@ -46,11 +46,11 @@ npm run dev</code></pre>`,
         content: `Alternatively, you can clone the repository directly:`
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>git clone https://github.com/ChenPeleg/vanilla-components.git
+        content: `git clone https://github.com/ChenPeleg/vanilla-components.git
 cd vanilla-components
 npm install
-npm run dev</code></pre>`,
-        type: DocumentationKind.html
+npm run dev`,
+        type: DocumentationKind.code
     }
 ];
 
@@ -96,7 +96,7 @@ const firstComponentDocs: DocumentationType[] = [
         content: `Here's a complete example of a simple button component:`
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>import { BaseElement } from '../_core/elements/base-element.ts';
+        content: `import { BaseElement } from '../_core/elements/base-element.ts';
 
 class MyButton extends BaseElement {
     static get observedAttributes() {
@@ -123,8 +123,8 @@ class MyButton extends BaseElement {
     }
 }
 
-customElements.define('my-button', MyButton);</code></pre>`,
-        type: DocumentationKind.html
+customElements.define('my-button', MyButton);`,
+        type: DocumentationKind.code
     },
     {
         content: 'Key Points',
@@ -155,7 +155,7 @@ const observedAttributesDocs: DocumentationType[] = [
         content: `Observed attributes allow your component to react to attribute changes. This is essential for creating dynamic, reactive components.`
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>class DynamicCard extends BaseElement {
+        content: `class DynamicCard extends BaseElement {
     static get observedAttributes() {
         return ['title', 'color', 'visible'];
     }
@@ -185,8 +185,8 @@ const observedAttributesDocs: DocumentationType[] = [
     renderTemplate() {
         this.update();
     }
-}</code></pre>`,
-        type: DocumentationKind.html
+}`,
+        type: DocumentationKind.code
     }
 ];
 
@@ -204,7 +204,7 @@ const actionCallbackDocs: DocumentationType[] = [
         type: DocumentationKind.header,
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>class ClickCounter extends BaseElement {
+        content: `class ClickCounter extends BaseElement {
     private count = 0;
 
     connectedCallback(): void {
@@ -229,15 +229,15 @@ const actionCallbackDocs: DocumentationType[] = [
             </button>
         \`;
     }
-}</code></pre>`,
-        type: DocumentationKind.html
+}`,
+        type: DocumentationKind.code
     },
     {
         content: 'Parent Component',
         type: DocumentationKind.header,
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>class ParentContainer extends BaseElement {
+        content: `class ParentContainer extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
         
@@ -256,8 +256,8 @@ const actionCallbackDocs: DocumentationType[] = [
             </div>
         \`;
     }
-}</code></pre>`,
-        type: DocumentationKind.html
+}`,
+        type: DocumentationKind.code
     }
 ];
 
@@ -278,7 +278,7 @@ const stylingDocs: DocumentationType[] = [
         type: DocumentationKind.html
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>class StyledCard extends BaseElement {
+        content: `class StyledCard extends BaseElement {
     renderTemplate() {
         this.shadowRoot!.innerHTML = \`
             <div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
@@ -301,8 +301,8 @@ const stylingDocs: DocumentationType[] = [
             </div>
         \`;
     }
-}</code></pre>`,
-        type: DocumentationKind.html
+}`,
+        type: DocumentationKind.code
     }
 ];
 
@@ -320,7 +320,7 @@ const routingDocs: DocumentationType[] = [
         type: DocumentationKind.header,
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>import type { RouteObject } from '../../_core/router/router.ts';
+        content: `import type { RouteObject } from '../../_core/router/router.ts';
 
 const routes: RouteObject[] = [
     {
@@ -340,15 +340,15 @@ const routes: RouteObject[] = [
         path: '*',
         element: () => \`<not-found-page></not-found-page>\`
     }
-];</code></pre>`,
-        type: DocumentationKind.html
+];`,
+        type: DocumentationKind.code
     },
     {
         content: 'Navigation',
         type: DocumentationKind.header,
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>// Using hash navigation
+        content: `// Using hash navigation
 <a href="#/about">About</a>
 <a href="#/products/123">Product 123</a>
 
@@ -356,8 +356,8 @@ const routes: RouteObject[] = [
 import { HashRouterService } from './services/HashRouter.service.ts';
 
 const router = _ServicesProvider.getService(HashRouterService);
-router.navigate('/about');</code></pre>`,
-        type: DocumentationKind.html
+router.navigate('/about');`,
+        type: DocumentationKind.code
     }
 ];
 
@@ -375,7 +375,7 @@ const stateManagementDocs: DocumentationType[] = [
         type: DocumentationKind.header,
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>// Define action types
+        content: `// Define action types
 export const AppActionType = {
     INCREMENT: 'INCREMENT',
     DECREMENT: 'DECREMENT',
@@ -387,15 +387,15 @@ import { Store } from './services/Store.service.ts';
 
 const store = _ServicesProvider.getService(Store);
 store.dispatch({ type: AppActionType.INCREMENT });
-store.dispatch({ type: AppActionType.SET_VALUE, payload: 10 });</code></pre>`,
-        type: DocumentationKind.html
+store.dispatch({ type: AppActionType.SET_VALUE, payload: 10 });`,
+        type: DocumentationKind.code
     },
     {
         content: 'Subscribing to State Changes',
         type: DocumentationKind.header,
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>class CounterDisplay extends BaseElement {
+        content: `class CounterDisplay extends BaseElement {
     private subscription?: Subscription;
 
     connectedCallback(): void {
@@ -422,8 +422,8 @@ store.dispatch({ type: AppActionType.SET_VALUE, payload: 10 });</code></pre>`,
             </div>
         \`;
     }
-}</code></pre>`,
-        type: DocumentationKind.html
+}`,
+        type: DocumentationKind.code
     }
 ];
 
@@ -448,7 +448,7 @@ const buttonExampleDocs: DocumentationType[] = [
         content: `A complete button component demonstrating click handling, disabled states, and custom styling.`
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>class InteractiveButton extends BaseElement {
+        content: `class InteractiveButton extends BaseElement {
     static get observedAttributes() {
         return ['label', 'disabled', 'variant'];
     }
@@ -486,15 +486,15 @@ const buttonExampleDocs: DocumentationType[] = [
     }
 }
 
-customElements.define('interactive-button', InteractiveButton);</code></pre>`,
-        type: DocumentationKind.html
+customElements.define('interactive-button', InteractiveButton);`,
+        type: DocumentationKind.code
     },
     {
         content: 'Usage Example',
         type: DocumentationKind.header,
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code><!-- Primary button -->
+        content: `<!-- Primary button -->
 <interactive-button label="Save" variant="primary"></interactive-button>
 
 <!-- Disabled button -->
@@ -506,8 +506,8 @@ customElements.define('interactive-button', InteractiveButton);</code></pre>`,
     btn.actionCallback = (result) => {
         console.log('Button clicked at:', result.timestamp);
     };
-</script></code></pre>`,
-        type: DocumentationKind.html
+</script>`,
+        type: DocumentationKind.code
     }
 ];
 
@@ -520,7 +520,7 @@ const formInputExampleDocs: DocumentationType[] = [
         content: `A text input component with real-time validation and error messages.`
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>class ValidatedInput extends BaseElement {
+        content: `class ValidatedInput extends BaseElement {
     static get observedAttributes() {
         return ['label', 'placeholder', 'required', 'pattern', 'error'];
     }
@@ -579,8 +579,8 @@ const formInputExampleDocs: DocumentationType[] = [
     }
 }
 
-customElements.define('validated-input', ValidatedInput);</code></pre>`,
-        type: DocumentationKind.html
+customElements.define('validated-input', ValidatedInput);`,
+        type: DocumentationKind.code
     }
 ];
 
@@ -593,7 +593,7 @@ const cardExampleDocs: DocumentationType[] = [
         content: `A card component with expand/collapse functionality and different states.`
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>class ExpandableCard extends BaseElement {
+        content: `class ExpandableCard extends BaseElement {
     private expanded = false;
 
     static get observedAttributes() {
@@ -644,8 +644,8 @@ const cardExampleDocs: DocumentationType[] = [
     }
 }
 
-customElements.define('expandable-card', ExpandableCard);</code></pre>`,
-        type: DocumentationKind.html
+customElements.define('expandable-card', ExpandableCard);`,
+        type: DocumentationKind.code
     }
 ];
 
@@ -658,7 +658,7 @@ const stateManagementExampleDocs: DocumentationType[] = [
         content: `A practical example showing how to connect components to the global store for state management.`
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>// Counter actions
+        content: `// Counter actions
 export const CounterActions = {
     INCREMENT: 'COUNTER_INCREMENT',
     DECREMENT: 'COUNTER_DECREMENT',
@@ -726,8 +726,8 @@ class GlobalCounterDisplay extends BaseElement {
     }
 }
 
-customElements.define('global-counter-display', GlobalCounterDisplay);</code></pre>`,
-        type: DocumentationKind.html
+customElements.define('global-counter-display', GlobalCounterDisplay);`,
+        type: DocumentationKind.code
     }
 ];
 
@@ -740,7 +740,7 @@ const routingExampleDocs: DocumentationType[] = [
         content: `Example showing how to implement navigation between pages using the hash router.`
     },
     {
-        content: `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>// Navigation component
+        content: `// Navigation component
 class AppNavigation extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
@@ -800,8 +800,8 @@ class AppNavigation extends BaseElement {
     }
 }
 
-customElements.define('app-navigation', AppNavigation);</code></pre>`,
-        type: DocumentationKind.html
+customElements.define('app-navigation', AppNavigation);`,
+        type: DocumentationKind.code
     }
 ];
 
