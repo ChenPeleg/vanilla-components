@@ -10,6 +10,8 @@ class ExamplesPage extends BaseElement {
                 return `<header-2> ${doc.content} </header-2>`;
             case DocumentationKind.gist:
                 return `<code-gist gist="${doc.content}"></code-gist>`;
+            case DocumentationKind.code:
+                return `<pre class="bg-gray-800 text-white p-4 rounded-lg overflow-x-auto"><code>${doc.content}</code></pre>`;
             case DocumentationKind.html:
                 return doc.content;
             case DocumentationKind.Text:
