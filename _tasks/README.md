@@ -78,6 +78,18 @@ This directory contains task files for improving and expanding the Vanilla Compo
 - Additional templates (API Reference, Best Practices)
 - Implementation examples
 
+### Task 06: Make How-to-Use Page Mobile Responsive
+**File**: `task06-make-how-to-use-page-mobile-responsive.md`
+**Status**: 📋 Planning
+**Purpose**: Ensure the How-to-Use page is fully responsive on mobile devices
+
+**Contents**:
+- Analysis of current mobile responsiveness issues
+- Specific implementation steps for responsive design
+- Viewport testing requirements (320px - 1024px)
+- Touch target accessibility guidelines (44x44px minimum)
+- TailwindCSS responsive utility classes to implement
+
 ## Documentation Task Hierarchy
 
 ```
