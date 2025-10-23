@@ -5,7 +5,7 @@ class Header2 extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <h2   class="font-bold text-xl mb-2">
+            <h2   class="font-bold text-lg sm:text-xl mb-2">
                 <slot></slot>
             </h2>
         `;
