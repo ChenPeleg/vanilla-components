@@ -1,19 +1,4 @@
-import {makeBrandedType} from '../../models/makeBrandedType.ts';
-
-export const DocumentationKind = makeBrandedType({
-    Text: 'text',
-    gist: 'gist',
-    html: 'html',
-    header: 'header',
-    code: 'code',
-}, 'environment');
-
-export type DocumentationKindType = (typeof DocumentationKind)[keyof typeof DocumentationKind];
-
-
-export  type DocumentationType = {
-    id?: string; content: string; type?: DocumentationKindType;
-}
+import { DocumentationKind, type DocumentationType } from '../models/documentation.types.ts';
 
 // Installation & Setup
 const installationDocs: DocumentationType[] = [
