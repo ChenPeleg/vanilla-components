@@ -36,12 +36,11 @@ const buttonExampleDocs: DocumentationType[] = [
             danger: 'bg-red-500 hover:bg-red-600'
         };
         //
-        this.shadowRoot!.innerHTML =  <button 
-                class="px-6 py-3 \${variants[variant]} text-white rounded-lg font-semibold 
-                       transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
-                \${disabled ? 'disabled' : ''}>
-                \${label}
-            </button>
+        this.shadowRoot!.innerHTML =      &#60; button class='px-6 py-3 text-white rounded-lg font-semibold 
+                       transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed'
+                \${disabled ? 'disabled' : ''} &rt;
+                \${label} &rt;
+             &#60; button &rt;
         ';
     }
 }
