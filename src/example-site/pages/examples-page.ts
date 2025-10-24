@@ -16,7 +16,7 @@ class ExamplesPage extends BaseElement {
             case DocumentationKind.html:
                 return doc.content;
                 case DocumentationKind.highlightedCode:
-                return `<highlighted-code code="${doc.content}">${doc.content}</highlighted-code>`;
+                return `<highlighted-code code="${doc.content}"></highlighted-code>`;
             case DocumentationKind.Text:
             default:
                 return `<p class="text-gray-700 text-base sm:text-lg mt-4"> ${doc.content} </p>`;
