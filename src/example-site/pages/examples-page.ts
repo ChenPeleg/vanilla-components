@@ -1,5 +1,6 @@
 import {BaseElement} from '../../_core/elements/base-element.ts';
-import {examples, DocumentationKind, type DocumentationType} from '../documentation/documentation.ts';
+import {examples  } from '../documentation/documentation.ts';
+import {DocumentationKind, type DocumentationType} from '../models/documentation.types.ts';
 
 class ExamplesPage extends BaseElement {
     private examplesDocs = examples;
