@@ -29,3 +29,4 @@ import '../example-site/pages/how-to-use-page.ts';
 import '../example-site/pages/main.layout.ts';
 import '../root.ts';
 import '../_core/router/router-outlet.ts';
+import '../example-site/code/highlighted-code.ts';
