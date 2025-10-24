@@ -5,7 +5,7 @@ export class HighlightedCode extends BaseElement {
 
 
     static get observedAttributes() {
-        return ['class', 'disabled'];
+        return ['class', 'code'];
     }
 
     connectedCallback(): void {
@@ -24,6 +24,7 @@ export class HighlightedCode extends BaseElement {
     renderTemplate() {
         this.shadowRoot!.innerHTML = `   
         <div class="  bg-gray-800"   >
+        abc123
        ${this.legacyRender()}
         </div>
     `;
