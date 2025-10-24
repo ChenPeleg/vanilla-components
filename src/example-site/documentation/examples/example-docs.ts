@@ -35,19 +35,19 @@ const buttonExampleDocs: DocumentationType[] = [
             secondary: 'bg-gray-500 hover:bg-gray-600',
             danger: 'bg-red-500 hover:bg-red-600'
         };
-        
-        this.shadowRoot!.innerHTML = \`
-            <button 
+        //
+        this.shadowRoot!.innerHTML =  <button 
                 class="px-6 py-3 \${variants[variant]} text-white rounded-lg font-semibold 
                        transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed"
                 \${disabled ? 'disabled' : ''}>
                 \${label}
             </button>
-        \`;
+        ';
     }
 }
 
 customElements.define('interactive-button', InteractiveButton);`,
+
         type: DocumentationKind.highlightedCode
     },
     {
