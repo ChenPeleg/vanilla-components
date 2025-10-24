@@ -80,7 +80,7 @@ export class SyntaxHighlighter {
     addCodeUnitData(code: string, language: SupportedLanguage = 'ts'): string {
         const tokens = this.tokenize(code, language);
         const highlightedCode = this.tokensToHtml(tokens);
-        return `<pre class="code-block language-${language}">${highlightedCode}</pre>`;
+        return this.htmlRenderer.wrapInPreTag(highlightedCode, language);
     }
 
     /**
