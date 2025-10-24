@@ -9,6 +9,7 @@ export class HighlightedCode extends BaseElement {
     }
 
     connectedCallback(): void {
+        super.connectedCallback();
         this.update();
     }
 
@@ -17,14 +18,14 @@ export class HighlightedCode extends BaseElement {
     }
 
     legacyRender() {
-        return `<pre class="bg-gray-800 text-white p-2 sm:p-4 rounded-lg overflow-x-auto text-xs sm:text-sm break-words whitespace-pre-wrap"><code class="break-words">${this.getAttribute('code')}</code></pre>`;
+        const rawCode = this.getAttribute('code') || '';
+        return `<pre class="bg-gray-800 text-white p-2 sm:p-4 rounded-lg overflow-x-auto text-xs sm:text-sm break-words whitespace-pre-wrap"><code class="break-words">${rawCode}</code></pre>`;
 
     }
 
     renderTemplate() {
         this.shadowRoot!.innerHTML = `   
-        <div class="  bg-gray-800"   >
-        abc123
+        <div class="  bg-gray-800"   > 
        ${this.legacyRender()}
         </div>
     `;
