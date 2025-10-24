@@ -78,17 +78,44 @@ This directory contains task files for improving and expanding the Vanilla Compo
 - Additional templates (API Reference, Best Practices)
 - Implementation examples
 
+### Task 06: Make How-to-Use Page Mobile Responsive
+**File**: `task06-make-how-to-use-page-mobile-responsive.md`
+**Status**: Existing task
+**Purpose**: Improve mobile responsiveness of the How-to-Use documentation page
+
+### Task 07: Improve Syntax Highlighter
+**File**: `task07-improve-syntax-highlighter.md`
+**Status**: ✅ Completed (Planning Phase)
+**Purpose**: Comprehensive plan to enhance the code syntax highlighter component
+
+**Contents**:
+- Current state analysis of the syntax highlighter
+- Six-phase improvement plan:
+  - Phase 1: Core Enhancement (tokenization, naming fixes)
+  - Phase 2: Language Support Expansion (JS/TS, HTML, CSS, JSON)
+  - Phase 3: Feature Enhancement (line numbers, copy button, themes)
+  - Phase 4: Component Integration (expand usage across app)
+  - Phase 5: Performance and Optimization
+  - Phase 6: Testing and Documentation
+- Implementation priorities (4 priority levels)
+- Success metrics and technical considerations
+- Timeline estimate: 66-90 hours (8-11 weeks)
+
 ## Documentation Task Hierarchy
 
 ```
 Task 03: Master Plan
     ├── Task 04: Implementation Checklist
     └── Task 05: Content Templates
+
+Task 07: Syntax Highlighter Improvement Plan
+    └── Standalone comprehensive improvement plan
 ```
 
 - **Task 03** provides the strategic overview and phases
 - **Task 04** breaks down into actionable steps with priorities
 - **Task 05** provides concrete content that can be copied and used immediately
+- **Task 07** provides a complete plan for enhancing the syntax highlighter
 
 ## Quick Start Guide for Implementation
 
