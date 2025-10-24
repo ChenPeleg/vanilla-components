@@ -4,6 +4,7 @@
  * @module imported-components
  */
 import '../app-page.ts';
+import '../example-site/code/highlighted-code.ts';
 import '../example-site/components/atoms/app-button.ts';
 import '../example-site/components/atoms/card-component.ts';
 import '../example-site/components/atoms/global-counter.ts';
@@ -29,5 +30,3 @@ import '../example-site/pages/how-to-use-page.ts';
 import '../example-site/pages/main.layout.ts';
 import '../root.ts';
 import '../_core/router/router-outlet.ts';
-import '../example-site/code/highlighted-code.ts';
-import '../example-site/code/highlighted-code-2.ts';
