@@ -48,7 +48,7 @@ const buttonExampleDocs: DocumentationType[] = [
 }
 
 customElements.define('interactive-button', InteractiveButton);`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     },
     {
         content: 'Usage Example',

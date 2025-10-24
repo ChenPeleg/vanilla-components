@@ -15,6 +15,8 @@ class ExamplesPage extends BaseElement {
                 return `<pre class="bg-gray-800 text-white p-2 sm:p-4 rounded-lg overflow-x-auto text-xs sm:text-sm break-words whitespace-pre-wrap"><code class="break-words">${doc.content}</code></pre>`;
             case DocumentationKind.html:
                 return doc.content;
+                case DocumentationKind.highlightedCode:
+                return `<highlighted-code code="${doc.content}">${doc.content}</highlighted-code>`;
             case DocumentationKind.Text:
             default:
                 return `<p class="text-gray-700 text-base sm:text-lg mt-4"> ${doc.content} </p>`;

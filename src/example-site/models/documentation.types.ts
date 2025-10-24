@@ -6,6 +6,7 @@ export const DocumentationKind = makeBrandedType({
     html: 'html',
     header: 'header',
     code: 'code',
+    highlightedCode: 'highlightedCode'
 }, 'environment');
 
 export type DocumentationKindType = (typeof DocumentationKind)[keyof typeof DocumentationKind];
