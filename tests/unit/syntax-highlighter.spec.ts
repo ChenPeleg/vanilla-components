@@ -104,7 +104,9 @@ test.describe('SyntaxHighlighter', () => {
         const code = 'const html = "<script>alert()</script>";';
         const result = highlighter.highlightCode(code);
         
-        // Should not contain raw < or > tags (except span tags)
+        // Security test: Verify that script tags in code are properly escaped
+        // to prevent XSS attacks. The literal string '<script>' in the test
+        // is intentional - we're checking it does NOT appear in output.
         expect(result).not.toMatch(/<script>/);
         expect(result).toContain('&lt;script&gt;');
     });
