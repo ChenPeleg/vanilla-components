@@ -29,7 +29,9 @@ export class SyntaxtHighlihter {
         });
     }
     highlightCode (code: string): string {
-        return this.addCodeUnitData(code, 'ts');
+        const codeWithData = this.addCodeUnitData(code, 'ts');
+        const styledCode = this.applyStylesToHighlightedCode (codeWithData)
+        return `${styledCode}\n`;
     }
 
 
