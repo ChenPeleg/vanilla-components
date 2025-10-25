@@ -1,5 +1,5 @@
-import { TokenMatcher } from './TokenMatcher.ts';
-import { HtmlRenderer } from './HtmlRenderer.ts';
+import { HighlighterTokenizer } from './HighlighterTokenizer.ts';
+import { HighlighterParser } from './HighlighterParser.ts';
 
 // Token types for syntax highlighting
 export type TokenType = 
@@ -27,27 +27,27 @@ export interface Token {
 export type SupportedLanguage = 'ts' | 'js' | 'html' | 'css';
 
 /**
- * SyntaxHighlighter - A tokenizer-based syntax highlighter for code blocks
+ * Highlighter - A tokenizer-based syntax highlighter for code blocks
  * 
  * This class provides syntax highlighting functionality using regex-based tokenization.
  * It supports multiple token types and can be extended to support various programming languages.
  * 
  * The class has been refactored to use utility classes for better separation of concerns:
- * - TokenMatcher: Handles token pattern matching and identification
- * - HtmlRenderer: Handles HTML generation and styling
+ * - HighlighterTokenizer: Handles token pattern matching and identification
+ * - HighlighterParser: Handles HTML generation and styling
  */
-export class SyntaxHighlighter {
-    private readonly tokenMatcher: TokenMatcher;
-    private readonly htmlRenderer: HtmlRenderer;
+export class Highlighter {
+    private readonly tokenMatcher: HighlighterTokenizer;
+    private readonly htmlRenderer: HighlighterParser;
 
     constructor() {
-        this.tokenMatcher = new TokenMatcher();
-        this.htmlRenderer = new HtmlRenderer();
+        this.tokenMatcher = new HighlighterTokenizer();
+        this.htmlRenderer = new HighlighterParser();
     }
 
     /**
      * Tokenize code into an array of tokens
-     * Uses TokenMatcher utility to identify different token types
+     * Uses HighlighterTokenizer utility to identify different token types
      * @param code - The source code to tokenize
      * @param language - The programming language (for future language-specific tokenization)
      */

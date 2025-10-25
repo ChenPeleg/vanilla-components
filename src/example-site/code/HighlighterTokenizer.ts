@@ -1,13 +1,13 @@
 import type { Token } from './syntax-highlighter.ts';
 
 /**
- * TokenMatcher - Utility class for matching different token types in source code
+ * HighlighterTokenizer - Utility class for matching different token types in source code
  * 
  * This class encapsulates the regex patterns and matching logic for identifying
  * different types of tokens (keywords, strings, numbers, operators, etc.) in source code.
  * Each token type has its own dedicated matching method for better organization and maintainability.
  */
-export class TokenMatcher {
+export class HighlighterTokenizer {
     /**
      * Extended list of JavaScript/TypeScript keywords
      */

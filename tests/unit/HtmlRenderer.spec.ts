@@ -1,12 +1,12 @@
 import { test, expect } from '@playwright/test';
-import { HtmlRenderer } from '../../src/example-site/code/HtmlRenderer';
+import { HighlighterParser } from '../../src/example-site/code/HighlighterParser';
 import type { Token } from '../../src/example-site/code/syntax-highlighter';
 
-test.describe('HtmlRenderer', () => {
-    let renderer: HtmlRenderer;
+test.describe('HighlighterParser', () => {
+    let renderer: HighlighterParser;
 
     test.beforeEach(() => {
-        renderer = new HtmlRenderer();
+        renderer = new HighlighterParser();
     });
 
     test('escapeHtml - escapes HTML special characters', () => {
