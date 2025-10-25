@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { TokenMatcher } from '../../src/example-site/code/TokenMatcher';
+import { HighlighterTokenizer } from '../../src/example-site/code/HighlighterTokenizer';
 
-test.describe('TokenMatcher', () => {
-    let matcher: TokenMatcher;
+test.describe('HighlighterTokenizer', () => {
+    let matcher: HighlighterTokenizer;
 
     test.beforeEach(() => {
-        matcher = new TokenMatcher();
+        matcher = new HighlighterTokenizer();
     });
 
     test('matchMultiLineComment - matches multi-line comments', () => {

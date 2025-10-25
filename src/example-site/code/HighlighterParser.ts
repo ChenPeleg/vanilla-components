@@ -1,12 +1,12 @@
 import type { Token, SupportedLanguage } from './syntax-highlighter.ts';
 
 /**
- * HtmlRenderer - Utility class for converting tokens to styled HTML
+ * HighlighterParser - Utility class for converting tokens to styled HTML
  * 
  * This class handles the conversion of parsed tokens into HTML strings,
  * including HTML escaping for security and CSS styling application.
  */
-export class HtmlRenderer {
+export class HighlighterParser {
     /**
      * Map token types to Tailwind CSS classes for styling
      */

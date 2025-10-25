@@ -1,9 +1,9 @@
 import {BaseElement} from '../../_core/elements/base-element.ts';
-import {SyntaxHighlighter} from './syntax-highlighter.ts';
+import {Highlighter} from './syntax-highlighter.ts';
 
 
 export class HighlightedCode extends BaseElement {
-    syntaxHighlighter = new SyntaxHighlighter()
+    syntaxHighlighter = new Highlighter()
 
 
     static get observedAttributes() {

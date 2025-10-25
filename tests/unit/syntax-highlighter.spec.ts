@@ -1,11 +1,11 @@
 import { test, expect } from '@playwright/test';
-import { SyntaxHighlighter } from '../../src/example-site/code/syntax-highlighter';
+import { Highlighter } from '../../src/example-site/code/syntax-highlighter';
 
-test.describe('SyntaxHighlighter', () => {
-    let highlighter: SyntaxHighlighter;
+test.describe('Highlighter', () => {
+    let highlighter: Highlighter;
 
     test.beforeEach(() => {
-        highlighter = new SyntaxHighlighter();
+        highlighter = new Highlighter();
     });
 
     test('tokenizes simple keywords', () => {
