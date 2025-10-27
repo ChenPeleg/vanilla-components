@@ -1,17 +1,38 @@
 import {BaseElement} from '../../_core/elements/base-element.ts';
-import {Highlighter} from './syntax-highlighter.ts';
+import {Highlighter, type ColorTheme} from './syntax-highlighter.ts';
 
 
 export class HighlightedCode extends BaseElement {
-    syntaxHighlighter = new Highlighter()
+    syntaxHighlighter: Highlighter;
 
+    constructor() {
+        super();
+        // Initialize with default theme
+        this.syntaxHighlighter = new Highlighter('bold');
+    }
 
     static get observedAttributes() {
-        return ['class', 'code'];
+        return ['class', 'code', 'theme'];
     }
 
     connectedCallback(): void {
         super.connectedCallback();
+        this.updateTheme();
+        this.update();
+    }
+
+    updateTheme() {
+        const theme = this.getAttribute('theme') as ColorTheme | null;
+        if (theme === 'bold' || theme === 'calm' || theme === 'faded') {
+            this.syntaxHighlighter = new Highlighter(theme);
+        }
+    }
+
+    attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+        if (oldValue === newValue) return;
+        if (name === 'theme') {
+            this.updateTheme();
+        }
         this.update();
     }
 
