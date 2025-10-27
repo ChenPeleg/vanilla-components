@@ -1,5 +1,5 @@
 import { HighlighterTokenizer } from './HighlighterTokenizer.ts';
-import { HighlighterParser } from './HighlighterParser.ts';
+import { HighlighterParser, type ColorTheme } from './HighlighterParser.ts';
 
 // Token types for syntax highlighting
 export type TokenType = 
@@ -26,6 +26,9 @@ export interface Token {
 // Language types supported by the highlighter
 export type SupportedLanguage = 'ts' | 'js' | 'html' | 'css';
 
+// Re-export ColorTheme for convenience
+export type { ColorTheme };
+
 /**
  * Highlighter - A tokenizer-based syntax highlighter for code blocks
  * 
@@ -40,9 +43,9 @@ export class Highlighter {
     private readonly tokenMatcher: HighlighterTokenizer;
     private readonly htmlRenderer: HighlighterParser;
 
-    constructor() {
+    constructor(theme: ColorTheme = 'bold') {
         this.tokenMatcher = new HighlighterTokenizer();
-        this.htmlRenderer = new HighlighterParser();
+        this.htmlRenderer = new HighlighterParser(theme);
     }
 
     /**
