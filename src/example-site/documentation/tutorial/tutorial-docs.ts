@@ -109,7 +109,7 @@ class MyButton extends BaseElement {
 }
 
 customElements.define('my-button', MyButton);`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     },
     {
         content: 'Key Points',
@@ -171,7 +171,7 @@ const observedAttributesDocs: DocumentationType[] = [
         this.update();
     }
 }`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     }
 ];
 
@@ -215,7 +215,7 @@ const actionCallbackDocs: DocumentationType[] = [
         \`;
     }
 }`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     },
     {
         content: 'Parent Component',
@@ -242,7 +242,7 @@ const actionCallbackDocs: DocumentationType[] = [
         \`;
     }
 }`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     }
 ];
 
@@ -287,7 +287,7 @@ const stylingDocs: DocumentationType[] = [
         \`;
     }
 }`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     }
 ];
 
@@ -326,7 +326,7 @@ const routes: RouteObject[] = [
         element: () => \`<not-found-page></not-found-page>\`
     }
 ];`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     },
     {
         content: 'Navigation',
@@ -342,7 +342,7 @@ import { HashRouterService } from './services/HashRouter.service.ts';
 
 const router = _ServicesProvider.getService(HashRouterService);
 router.navigate('/about');`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     }
 ];
 
@@ -373,7 +373,7 @@ import { Store } from './services/Store.service.ts';
 const store = _ServicesProvider.getService(Store);
 store.dispatch({ type: AppActionType.INCREMENT });
 store.dispatch({ type: AppActionType.SET_VALUE, payload: 10 });`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     },
     {
         content: 'Subscribing to State Changes',
@@ -408,7 +408,7 @@ store.dispatch({ type: AppActionType.SET_VALUE, payload: 10 });`,
         \`;
     }
 }`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     }
 ];
 
