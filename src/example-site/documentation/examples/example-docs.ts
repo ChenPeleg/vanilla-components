@@ -67,7 +67,7 @@ customElements.define('interactive-button', InteractiveButton);`,
         console.log('Button clicked at:', result.timestamp);
     };
 </script>`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     }
 ];
 
@@ -140,7 +140,7 @@ const formInputExampleDocs: DocumentationType[] = [
 }
 
 customElements.define('validated-input', ValidatedInput);`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     }
 ];
 
@@ -205,7 +205,7 @@ const cardExampleDocs: DocumentationType[] = [
 }
 
 customElements.define('expandable-card', ExpandableCard);`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     }
 ];
 
@@ -287,7 +287,7 @@ class GlobalCounterDisplay extends BaseElement {
 }
 
 customElements.define('global-counter-display', GlobalCounterDisplay);`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     }
 ];
 
@@ -361,7 +361,7 @@ class AppNavigation extends BaseElement {
 }
 
 customElements.define('app-navigation', AppNavigation);`,
-        type: DocumentationKind.code
+        type: DocumentationKind.highlightedCode
     }
 ];
 
