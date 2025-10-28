@@ -7,7 +7,7 @@ class HomePage extends BaseElement {
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <main class="overflow-y-auto bg-slate-200  w-full h-full">
-                <div class="flex flex-row   justify-center h-full">
+                <div class="flex flex-col lg:flex-row justify-center h-full">
                     <div class="flex-1 bg-amber-200 flex flex-col items-center justify-start">
                       <use-case-panel></use-case-panel>
                     </div>
