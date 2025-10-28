@@ -16,47 +16,66 @@ export class HighlighterParser {
 
     /**
      * Color scheme maps for different themes
+     * 
+     * Bold theme: Based on VS Code Dark+ theme - the most popular editor theme for JS/TS
+     * - Keywords: Light blue (#569CD6 ≈ text-blue-400)
+     * - Strings: Orange/brown (#CE9178 ≈ text-orange-400)
+     * - Comments: Green (#6A9955 ≈ text-green-600)
+     * - Numbers: Light green (#B5CEA8 ≈ text-lime-300)
+     * - Functions: Yellow (#DCDCAA ≈ text-yellow-200)
+     * - Classes/Types: Teal/cyan (#4EC9B0 ≈ text-teal-400)
+     * - Operators/Punctuation: Light gray (#D4D4D4 ≈ text-gray-300)
+     * - Variables: Light blue (#9CDCFE ≈ text-sky-300)
      */
     private readonly boldTheme: Record<string, string> = {
-        'keyword': 'text-blue-500 font-bold',
-        'string': 'text-green-500',
-        'comment': 'text-gray-500 italic',
-        'number': 'text-orange-500',
-        'operator': 'text-pink-500',
-        'punctuation': 'text-gray-400',
-        'function': 'text-yellow-500',
-        'class': 'text-cyan-500 font-semibold',
-        'type': 'text-teal-500',
-        'identifier': 'text-gray-800',
-        'static': 'text-purple-500',
+        'keyword': 'text-blue-400',
+        'string': 'text-orange-400',
+        'comment': 'text-green-600 italic',
+        'number': 'text-lime-300',
+        'operator': 'text-gray-300',
+        'punctuation': 'text-gray-300',
+        'function': 'text-yellow-200',
+        'class': 'text-teal-400',
+        'type': 'text-teal-400',
+        'identifier': 'text-sky-300',
+        'static': 'text-blue-400',
     };
 
+    /**
+     * Calm theme: Based on GitHub theme colors for a gentler appearance
+     * - Keywords: Soft blue
+     * - Strings: Muted coral/salmon
+     * - Comments: Subtle gray-green
+     */
     private readonly calmTheme: Record<string, string> = {
-        'keyword': 'text-blue-500 font-bold',
-        'string': 'text-green-500',
-        'comment': 'text-gray-500 italic',
-        'number': 'text-orange-500',
-        'operator': 'text-pink-500',
-        'punctuation': 'text-gray-400',
-        'function': 'text-yellow-500',
-        'class': 'text-cyan-500 font-semibold',
-        'type': 'text-teal-500',
-        'identifier': 'text-gray-800',
-        'static': 'text-purple-500',
+        'keyword': 'text-blue-500',
+        'string': 'text-amber-600',
+        'comment': 'text-slate-500 italic',
+        'number': 'text-emerald-500',
+        'operator': 'text-slate-400',
+        'punctuation': 'text-slate-400',
+        'function': 'text-amber-500',
+        'class': 'text-cyan-600',
+        'type': 'text-cyan-600',
+        'identifier': 'text-slate-700',
+        'static': 'text-violet-600',
     };
 
+    /**
+     * Faded theme: Lighter, softer colors for reduced visual intensity
+     */
     private readonly fadedTheme: Record<string, string> = {
         'keyword': 'text-blue-300',
-        'string': 'text-green-300',
+        'string': 'text-orange-300',
         'comment': 'text-gray-400 italic',
-        'number': 'text-orange-300',
-        'operator': 'text-pink-300',
+        'number': 'text-lime-200',
+        'operator': 'text-gray-400',
         'punctuation': 'text-gray-400',
-        'function': 'text-yellow-300',
-        'class': 'text-cyan-300',
+        'function': 'text-yellow-100',
+        'class': 'text-teal-300',
         'type': 'text-teal-300',
-        'identifier': 'text-gray-500',
-        'static': 'text-purple-300',
+        'identifier': 'text-sky-200',
+        'static': 'text-blue-300',
     };
 
     constructor(theme: ColorTheme = 'bold') {

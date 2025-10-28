@@ -115,8 +115,8 @@ test.describe('Highlighter', () => {
         const code = 'const x = 5;';
         const result = highlighter.highlightCode(code);
         
-        // Should have classes for keywords
-        expect(result).toContain('text-blue-500');
+        // Should have classes for keywords (VS Code Dark+ style)
+        expect(result).toContain('text-blue-400');
     });
 
     test('handles empty code', () => {

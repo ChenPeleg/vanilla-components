@@ -72,7 +72,7 @@ test.describe('HighlighterParser', () => {
         const html = '<span data-symbol="keyword">const</span>';
         const styled = renderer.applyStylesToHtml(html);
         
-        expect(styled).toContain('class="text-blue-500 font-bold"');
+        expect(styled).toContain('class="text-blue-400"');
         expect(styled).not.toContain('data-symbol');
     });
 
@@ -80,7 +80,7 @@ test.describe('HighlighterParser', () => {
         const html = '<span data-symbol="string">hello</span>';
         const styled = renderer.applyStylesToHtml(html);
         
-        expect(styled).toContain('class="text-green-500"');
+        expect(styled).toContain('class="text-orange-400"');
     });
 
     test('applyStylesToHtml - applies default class for unknown types', () => {
@@ -116,8 +116,8 @@ test.describe('HighlighterParser', () => {
         const result = renderer.renderTokens(tokens, 'ts');
         
         expect(result).toContain('<pre class="code-block language-ts">');
-        expect(result).toContain('class="text-blue-500 font-bold">const</span>');
-        expect(result).toContain('class="text-gray-800">x</span>');
+        expect(result).toContain('class="text-blue-400">const</span>');
+        expect(result).toContain('class="text-sky-300">x</span>');
         expect(result).toContain('\n'); // Ends with newline
     });
 
@@ -130,8 +130,8 @@ test.describe('HighlighterParser', () => {
         
         const result = renderer.renderTokens(tokens, 'js');
         
-        expect(result).toContain('class="text-gray-500 italic">// comment</span>');
-        expect(result).toContain('class="text-green-500">&quot;hello&quot;</span>');
+        expect(result).toContain('class="text-green-600 italic">// comment</span>');
+        expect(result).toContain('class="text-orange-400">&quot;hello&quot;</span>');
     });
 
     test('renderTokens - securely handles malicious code', () => {
@@ -170,10 +170,10 @@ test.describe('HighlighterParser', () => {
         
         const result = renderer.renderTokens(tokens, 'ts');
         
-        expect(result).toContain('text-blue-500'); // keyword
-        expect(result).toContain('text-gray-800'); // identifier
-        expect(result).toContain('text-pink-500'); // operator
-        expect(result).toContain('text-green-500'); // string
-        expect(result).toContain('text-gray-400'); // punctuation
+        expect(result).toContain('text-blue-400'); // keyword (VS Code Dark+ style)
+        expect(result).toContain('text-sky-300'); // identifier
+        expect(result).toContain('text-gray-300'); // operator
+        expect(result).toContain('text-orange-400'); // string
+        expect(result).toContain('text-gray-300'); // punctuation
     });
 });
