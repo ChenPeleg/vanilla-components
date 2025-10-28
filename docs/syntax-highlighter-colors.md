@@ -6,6 +6,8 @@ The HighlighterParser now uses color schemes inspired by popular code editors an
 
 ## Available Themes
 
+**Note:** All themes are designed for dark backgrounds (`bg-gray-800` or similar). The colors are optimized for code blocks with dark backgrounds, which is the standard in most code editors.
+
 ### Bold Theme (Default) - VS Code Dark+ Inspired
 
 The default "bold" theme is inspired by **VS Code Dark+**, the most popular code editor theme for JavaScript and TypeScript development.
@@ -29,7 +31,7 @@ The "calm" theme is inspired by **GitHub's syntax highlighting** with softer, mo
 **Color Mapping:**
 - **Keywords**: `text-blue-500` - Soft blue
 - **Strings**: `text-amber-600` - Warm amber
-- **Comments**: `text-slate-500 italic` - Subtle gray
+- **Comments**: `text-slate-500 italic` - Subtle slate
 - **Numbers**: `text-emerald-500` - Emerald green
 - **Functions**: `text-amber-500` - Amber
 - **Classes/Types**: `text-cyan-600` - Cyan
