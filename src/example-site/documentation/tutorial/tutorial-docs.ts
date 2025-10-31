@@ -117,8 +117,7 @@ customElements.define('my-button', MyButton);`,
         type: DocumentationKind.header,
     },
     {
-        // Replaced the yellow info div with a notice-box to surface the key points
-        content: `<notice-box variant="important" title="Key Points">
+         content: `<notice-box variant="important" title="Key Points">
             <div class="p-0">
                 <p class="font-bold mb-2">⚡ Important</p>
                 <ul class="list-disc pl-5 space-y-1">
