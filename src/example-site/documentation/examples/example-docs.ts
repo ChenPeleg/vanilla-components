@@ -7,6 +7,10 @@ const buttonExampleDocs: DocumentationType[] = [
         type: DocumentationKind.header,
     },
     {
+        content: `<notice-box variant="tip" title="Try the Live Example">This interactive button example below demonstrates click handling, disabled states, and how parent components can listen to the <code>actionCallback</code>.</notice-box>`,
+        type: DocumentationKind.html,
+    },
+    {
         content: `A complete button component demonstrating click handling, disabled states, and custom styling.`
     },
     {
@@ -373,4 +377,3 @@ export const exampleDocs: DocumentationType[] = [
     ...stateManagementExampleDocs,
     ...routingExampleDocs
 ];
-

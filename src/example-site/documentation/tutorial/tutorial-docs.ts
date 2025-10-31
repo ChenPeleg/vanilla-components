@@ -128,6 +128,10 @@ customElements.define('my-button', MyButton);`,
             </ul>
         </div>`,
         type: DocumentationKind.html
+    },
+    {
+        content: `<notice-box variant="info" title="Tip: Reusable UI">Use <code>&lt;notice-box&gt;</code> to surface important guidance to your users while documenting components or providing context in tutorials.</notice-box>`,
+        type: DocumentationKind.html,
     }
 ];
 
@@ -423,4 +427,3 @@ export const tutorialDocs: DocumentationType[] = [
     ...routingDocs,
     ...stateManagementDocs
 ];
-
