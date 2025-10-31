@@ -43,7 +43,7 @@ export class DocumentationRenderer extends BaseElement {
     protected renderTemplate() {
         const content = (this._docs || []).map(doc => this.buildDocUnit(doc)).join('');
         this.shadowRoot!.innerHTML = `
-            <div class="w-full">${content}</div>
+            <div class="w-full flex flex-col gap-5">${content}</div>
         `;
     }
 }
