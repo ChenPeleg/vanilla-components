@@ -1,5 +1,6 @@
 import { BaseElement } from '../../../_core/elements/base-element.ts';
 import { DocumentationKind, type DocumentationType } from '../../models/documentation.types.ts';
+import {SiteColors} from '../../colors/siteColors.ts';
 
 export class DocumentationRenderer extends BaseElement {
     private _docs: DocumentationType[] = [];
@@ -36,7 +37,7 @@ export class DocumentationRenderer extends BaseElement {
                 return `<highlighted-code code="${doc.content}"></highlighted-code>`;
             case DocumentationKind.Text:
             default:
-                return `<p class="text-gray-700 text-base sm:text-lg mt-4"> ${doc.content} </p>`;
+                return `<p class="${SiteColors.textMain} text-base sm:text-lg mt-4"> ${doc.content} </p>`;
         }
     }
 
