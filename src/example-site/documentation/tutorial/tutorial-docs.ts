@@ -50,7 +50,7 @@ const projectStructureDocs: DocumentationType[] = [
         content: `The project follows a clear, organized structure based on atomic design principles:`
     },
     {
-        content: `<div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
+        content: `<div class="${SiteColors.tutorialFoldersBg} border-l-4 border-blue-500 p-4 my-4">
             <p class="font-bold mb-2">📁 Key Directories</p>
             <ul class="list-disc pl-5 space-y-1">
                 <li><strong>src/_core/</strong> - Core functionality (BaseElement, router, services)</li>
