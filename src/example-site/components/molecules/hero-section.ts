@@ -22,7 +22,7 @@ class HeroSection extends BaseElement {
                     ${this.content.map(item => `
                         <div class="  bg-white/10   shadow-lg rounded-lg p-6  w-full max-w-md">
                             <h2 class="inline font-agbalumo text-xl font-bold ${SiteColors.headerText} mb-2">${item.header}</h2> -
-                            <p class="inline text-gray-600">${item.text}</p>
+                            <p class="inline ${SiteColors.textMain}">${item.text}</p>
                         </div>
                     `).join('')}
                 </div>
