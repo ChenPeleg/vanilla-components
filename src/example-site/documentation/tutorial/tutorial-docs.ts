@@ -117,16 +117,19 @@ customElements.define('my-button', MyButton);`,
         type: DocumentationKind.header,
     },
     {
-        content: `<div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 my-4">
-            <p class="font-bold mb-2">⚡ Important</p>
-            <ul class="list-disc pl-5 space-y-1">
-                <li>Always extend <code>BaseElement</code></li>
-                <li>Call <code>super.connectedCallback()</code> first in your connectedCallback</li>
-                <li>Implement <code>renderTemplate()</code> method for your component's HTML</li>
-                <li>Use <code>customElements.define()</code> to register your component</li>
-                <li>Include <code>.ts</code> extension in imports</li>
-            </ul>
-        </div>`,
+        // Replaced the yellow info div with a notice-box to surface the key points
+        content: `<notice-box variant="important" title="Key Points">
+            <div class="p-0">
+                <p class="font-bold mb-2">⚡ Important</p>
+                <ul class="list-disc pl-5 space-y-1">
+                    <li>Always extend <code>BaseElement</code></li>
+                    <li>Call <code>super.connectedCallback()</code> first in your connectedCallback</li>
+                    <li>Implement <code>renderTemplate()</code> method for your component's HTML</li>
+                    <li>Use <code>customElements.define()</code> to register your component</li>
+                    <li>Include <code>.ts</code> extension in imports</li>
+                </ul>
+            </div>
+        </notice-box>`,
         type: DocumentationKind.html
     },
     {
@@ -261,10 +264,11 @@ const stylingDocs: DocumentationType[] = [
         content: `Vanilla Components automatically integrates TailwindCSS with Shadow DOM, so you can use utility classes directly in your templates.`
     },
     {
-        content: `<div class="bg-purple-50 border-l-4 border-purple-500 p-4 my-4">
+        // Wrapped the previous tip div inside a notice-box for prominence
+        content: `<notice-box variant="tip" title="Styling with TailwindCSS">
             <p class="font-bold mb-2">💡 Tip</p>
             <p>The <code>globalStyleSheet</code> is automatically applied to all components extending BaseElement in the <code>connectedCallback()</code> method.</p>
-        </div>`,
+        </notice-box>`,
         type: DocumentationKind.html
     },
     {
