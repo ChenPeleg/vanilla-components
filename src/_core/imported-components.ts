@@ -32,3 +32,4 @@ import '../root.ts';
 import '../_core/router/router-outlet.ts';
 import '../example-site/components/organism/docs-page-layout.ts';
 import '../example-site/components/molecules/documentation-renderer.ts';
+import '../example-site/components/atoms/notice-box.ts';
