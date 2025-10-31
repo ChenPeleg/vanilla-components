@@ -6,8 +6,6 @@ test.describe('Highlighter Color Themes', () => {
         const highlighter = new Highlighter('bold');
         const code = 'const x = 5;';
         const result = highlighter.highlightCode(code);
-        
-        // VS Code Dark+ uses light blue for keywords (text-blue-400)
         expect(result).toContain('text-blue-400');
     });
 
@@ -15,8 +13,7 @@ test.describe('Highlighter Color Themes', () => {
         const highlighter = new Highlighter('bold');
         const code = 'const str = "hello";';
         const result = highlighter.highlightCode(code);
-        
-        // VS Code Dark+ uses orange/brown for strings
+
         expect(result).toContain('text-orange-400');
     });
 
@@ -24,8 +21,6 @@ test.describe('Highlighter Color Themes', () => {
         const highlighter = new Highlighter('bold');
         const code = 'const num = 42;';
         const result = highlighter.highlightCode(code);
-        
-        // VS Code Dark+ uses light green for numbers
         expect(result).toContain('text-lime-300');
     });
 
@@ -33,8 +28,6 @@ test.describe('Highlighter Color Themes', () => {
         const highlighter = new Highlighter('bold');
         const code = 'myFunction()';
         const result = highlighter.highlightCode(code);
-        
-        // VS Code Dark+ uses yellow for functions
         expect(result).toContain('text-yellow-200');
     });
 
@@ -42,8 +35,6 @@ test.describe('Highlighter Color Themes', () => {
         const highlighter = new Highlighter('bold');
         const code = 'class MyClass';
         const result = highlighter.highlightCode(code);
-        
-        // VS Code Dark+ uses teal/cyan for classes
         expect(result).toContain('text-teal-400');
     });
 
@@ -51,8 +42,6 @@ test.describe('Highlighter Color Themes', () => {
         const highlighter = new Highlighter('bold');
         const code = '// comment';
         const result = highlighter.highlightCode(code);
-        
-        // VS Code Dark+ uses green for comments
         expect(result).toContain('text-green-600');
         expect(result).toContain('italic');
     });
@@ -61,8 +50,6 @@ test.describe('Highlighter Color Themes', () => {
         const highlighter = new Highlighter('calm');
         const code = 'const x = 5;';
         const result = highlighter.highlightCode(code);
-        
-        // Calm theme uses text-blue-500 for keywords
         expect(result).toContain('text-blue-500');
     });
 
@@ -78,8 +65,6 @@ test.describe('Highlighter Color Themes', () => {
         const highlighter = new Highlighter('faded');
         const code = 'const x = 5;';
         const result = highlighter.highlightCode(code);
-        
-        // Should have faded blue color for keywords (300 variant)
         expect(result).toContain('text-blue-300');
     });
 
@@ -127,8 +112,6 @@ test.describe('Highlighter Color Themes', () => {
         const highlighter = new Highlighter();
         const code = 'const x = 5;';
         const result = highlighter.highlightCode(code);
-        
-        // Should have bold theme colors (VS Code Dark+ inspired)
         expect(result).toContain('text-blue-400');
     });
 });
