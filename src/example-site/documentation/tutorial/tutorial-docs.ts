@@ -1,4 +1,5 @@
 import { DocumentationKind, type DocumentationType } from '../../models/documentation.types.ts';
+import {SiteColors} from '../../colors/siteColors.ts';
 
 // Installation & Setup
 const installationDocs: DocumentationType[] = [
@@ -49,7 +50,7 @@ const projectStructureDocs: DocumentationType[] = [
         content: `The project follows a clear, organized structure based on atomic design principles:`
     },
     {
-        content: `<div class="bg-blue-50 border-l-4 border-blue-500 p-4 my-4">
+        content: `<div class="${SiteColors.tutorialFoldersBg} border-l-4 border-blue-500 p-4 my-4">
             <p class="font-bold mb-2">📁 Key Directories</p>
             <ul class="list-disc pl-5 space-y-1">
                 <li><strong>src/_core/</strong> - Core functionality (BaseElement, router, services)</li>
@@ -268,18 +269,18 @@ const stylingDocs: DocumentationType[] = [
         this.shadowRoot!.innerHTML = \`
             <div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
                 <div class="px-6 py-4">
-                    <h3 class="font-bold text-xl mb-2 text-gray-800">
+                    <h3 class="font-bold text-xl mb-2 ${SiteColors.headerText}">
                         Card Title
                     </h3>
-                    <p class="text-gray-700 text-base">
+                    <p class="${SiteColors.textMain} text-base">
                         Card content goes here with full Tailwind support!
                     </p>
                 </div>
                 <div class="px-6 pt-4 pb-2">
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold ${SiteColors.textMain} mr-2 mb-2">
                         #tag1
                     </span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold ${SiteColors.textMain} mr-2 mb-2">
                         #tag2
                     </span>
                 </div>

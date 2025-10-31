@@ -1,6 +1,7 @@
 import {ToggleButton} from '../atoms/toggle-button.ts';
 import {BaseElement} from '../../../_core/elements/base-element.ts';
 import {AppButton} from '../atoms/app-button.ts';
+import {SiteColors} from '../../colors/siteColors.ts';
 
 
 class StateManagementPanel extends BaseElement {
@@ -26,8 +27,8 @@ class StateManagementPanel extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="flex flex-col items-center justify-center p-4 h-96 bg-amber-100 ">
-                <div class="flex flex-col items-start justify-start bg-amber-50/80 shadow-lg rounded-lg p-6 w-full max-w-md gap-6">
+            <div class="flex flex-col items-center justify-center p-4 h-96 ${SiteColors.stateManagementBgColor} ">
+                <div class="flex flex-col items-start justify-start ${SiteColors.cardBackgroundBg} shadow-lg rounded-lg p-6 w-full max-w-md gap-6">
                     <div class="flex flex-col items-start justify-start gap-2">
                         <span>
                             The Counter <span id="active-state"></span>
