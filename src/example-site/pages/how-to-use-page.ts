@@ -12,7 +12,7 @@ class HowToUsePage extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <docs-page-layout title="How to use" bg="${SiteColors.textMain}">
+            <docs-page-layout title="How to use" bg="${SiteColors.howToUseBgColor}">
                 <documentation-renderer></documentation-renderer>
             </docs-page-layout>
         `;
