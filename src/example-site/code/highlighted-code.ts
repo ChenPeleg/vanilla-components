@@ -7,7 +7,7 @@ export class HighlightedCode extends BaseElement {
 
     constructor() {
         super();
-        this.syntaxHighlighter = new Highlighter('faded');
+        this.syntaxHighlighter = new Highlighter('bold');
     }
 
     static get observedAttributes() {
