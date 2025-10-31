@@ -72,7 +72,7 @@ test.describe('HighlighterParser', () => {
         const html = '<span data-symbol="keyword">const</span>';
         const styled = renderer.applyStylesToHtml(html);
         
-        expect(styled).toContain('class="text-blue-400"');
+        expect(styled).toContain('class="text-blue-500"');
         expect(styled).not.toContain('data-symbol');
     });
 
@@ -80,7 +80,7 @@ test.describe('HighlighterParser', () => {
         const html = '<span data-symbol="string">hello</span>';
         const styled = renderer.applyStylesToHtml(html);
         
-        expect(styled).toContain('class="text-orange-400"');
+        expect(styled).toContain('class="text-amber-600"');
     });
 
     test('applyStylesToHtml - applies default class for unknown types', () => {
@@ -116,8 +116,8 @@ test.describe('HighlighterParser', () => {
         const result = renderer.renderTokens(tokens, 'ts');
         
         expect(result).toContain('<pre class="code-block language-ts">');
-        expect(result).toContain('class="text-blue-400">const</span>');
-        expect(result).toContain('class="text-sky-300">x</span>');
+        expect(result).toContain('class="text-blue-500">const</span>');
+        expect(result).toContain('class="text-slate-700">x</span>');
         expect(result).toContain('\n'); // Ends with newline
     });
 
@@ -130,8 +130,8 @@ test.describe('HighlighterParser', () => {
         
         const result = renderer.renderTokens(tokens, 'js');
         
-        expect(result).toContain('class="text-green-600 italic">// comment</span>');
-        expect(result).toContain('class="text-orange-400">&quot;hello&quot;</span>');
+        expect(result).toContain('class="text-slate-500 italic">// comment</span>');
+        expect(result).toContain('class="text-amber-600">&quot;hello&quot;</span>');
     });
 
     test('renderTokens - securely handles malicious code', () => {
@@ -141,9 +141,6 @@ test.describe('HighlighterParser', () => {
         
         const result = renderer.renderTokens(tokens, 'ts');
         
-        // Security test: Verify that script tags are properly escaped
-        // to prevent XSS attacks. The literal string '<script>' in the test
-        // is intentional - we're checking it does NOT appear in output.
         expect(result).not.toMatch(/<script>/);
         expect(result).toContain('&lt;script&gt;');
     });
@@ -170,10 +167,10 @@ test.describe('HighlighterParser', () => {
         
         const result = renderer.renderTokens(tokens, 'ts');
         
-        expect(result).toContain('text-blue-400'); // keyword (VS Code Dark+ style)
-        expect(result).toContain('text-sky-300'); // identifier
-        expect(result).toContain('text-gray-300'); // operator
-        expect(result).toContain('text-orange-400'); // string
-        expect(result).toContain('text-gray-300'); // punctuation
+        expect(result).toContain('text-blue-500');
+        expect(result).toContain('text-slate-700');
+        expect(result).toContain('text-slate-400');
+        expect(result).toContain('text-amber-600');
+        expect(result).toContain('text-slate-400');
     });
 });

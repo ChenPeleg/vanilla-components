@@ -12,6 +12,13 @@ export type ColorTheme = 'bold' | 'calm' | 'faded';
  * including HTML escaping for security and CSS styling application.
  */
 export class HighlighterParser {
+    public $$getThemesForTestOnly()  {
+        return  {
+            bold: this.boldTheme,
+            calm: this.calmTheme,
+            faded: this.fadedTheme,
+        }
+    }
     private colorTheme: ColorTheme;
 
     /**
