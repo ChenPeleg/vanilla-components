@@ -1,4 +1,5 @@
 import {BaseElement} from '../../../_core/elements/base-element.ts';
+import {SiteColors} from '../../colors/siteColors.ts';
 
 
 export class ToggleButton extends BaseElement {
@@ -39,7 +40,7 @@ export class ToggleButton extends BaseElement {
                 <button id="toggle-button" data-active="${isActive}"
                         class="w-14 px-2 py-2 relative data-[active=true]:bg-blue-500 shadow  bg-blue-500/30  text-white rounded-full cursor-pointer hover:shadow-lg transition duration-200 flex items-start justify-start">
                 <span id="toggle-nob"
-                      class="w-6 h-6 bg-white rounded-full relative right-0 ${isActive ? '' : 'translate-x-4'} transition-transform"></span>
+                      class="w-6 h-6  ${SiteColors.cardBackgroundBg} rounded-full relative right-0 ${isActive ? '' : 'translate-x-4'} transition-transform"></span>
                 </button>
                 <lable for="toggle-button" class=" ">
                     <slot></slot>

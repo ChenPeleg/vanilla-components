@@ -14,7 +14,7 @@ export class DocsPageLayout extends BaseElement {
 
     protected renderTemplate() {
         const title = this.getAttribute('title') || '';
-        const bg = this.getAttribute('bg') || 'bg-white';
+        const bg = this.getAttribute('bg') || SiteColors.cardBackgroundBg ;
         const intro = this.getAttribute('intro') || '';
 
         this.shadowRoot!.innerHTML = `

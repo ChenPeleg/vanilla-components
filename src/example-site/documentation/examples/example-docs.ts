@@ -189,7 +189,7 @@ const cardExampleDocs: DocumentationType[] = [
         const subtitle = this.getAttribute('subtitle') || '';
         
         this.shadowRoot!.innerHTML = \`
-            <div class="bg-white rounded-lg shadow-lg overflow-hidden border border-gray-200">
+            <div class="${SiteColors.cardBackgroundBg} rounded-lg shadow-lg overflow-hidden border border-gray-200">
                 <div class="card-header p-4 bg-gradient-to-r from-blue-500 to-purple-500 text-white cursor-pointer flex justify-between items-center">
                     <div>
                         <h3 class="text-xl font-bold">\${title}</h3>
