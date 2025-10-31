@@ -117,7 +117,7 @@ test.describe('HighlighterParser', () => {
         
         expect(result).toContain('<pre class="code-block language-ts">');
         expect(result).toContain('class="text-blue-500">const</span>');
-        expect(result).toContain('class="text-sky-300">x</span>');
+        expect(result).toContain('class="text-slate-700">x</span>');
         expect(result).toContain('\n'); // Ends with newline
     });
 
@@ -168,7 +168,7 @@ test.describe('HighlighterParser', () => {
         const result = renderer.renderTokens(tokens, 'ts');
         
         expect(result).toContain('text-blue-500');
-        expect(result).toContain('text-sky-300');
+        expect(result).toContain('text-slate-700');
         expect(result).toContain('text-slate-400');
         expect(result).toContain('text-amber-600');
         expect(result).toContain('text-slate-400');

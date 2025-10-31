@@ -52,7 +52,7 @@ test.describe('HighlightedCode Component Theme Support', () => {
         expect(shadowContent).toContain('text-blue-500');
     });
 
-    test('highlighted-code defaults to bold theme when no theme specified', async ({ page }) => {
+    test('highlighted-code defaults to faded theme when no theme specified', async ({ page }) => {
         await page.goto('/');
         await setPageHtml(page, `
             <highlighted-code code="const x = 5;"></highlighted-code>
@@ -65,8 +65,8 @@ test.describe('HighlightedCode Component Theme Support', () => {
             return el.shadowRoot?.innerHTML || '';
         });
         
-        // Should contain text-blue-500 (VS Code Dark+ keyword color)
-        expect(shadowContent).toContain('text-blue-500');
+        // Should contain text-blue-300 (faded keyword color) instead of text-blue-500
+        expect(shadowContent).toContain('text-blue-300');
     });
 
     test('highlighted-code theme can be changed dynamically', async ({ page }) => {
