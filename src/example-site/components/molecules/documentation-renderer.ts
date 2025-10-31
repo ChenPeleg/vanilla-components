@@ -19,7 +19,7 @@ export class DocumentationRenderer extends BaseElement {
 
     set docs(value: DocumentationType[]) {
         this._docs = Array.isArray(value) ? value : [];
-        this.update();
+        this.renderTemplate()
     }
 
     private buildDocUnit(doc: DocumentationType): string {
