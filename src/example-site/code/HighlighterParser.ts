@@ -27,7 +27,7 @@ export class HighlighterParser {
      * - Operators/Punctuation: Light gray (#D4D4D4 ≈ text-gray-300)
      * - Variables: Light blue (#9CDCFE ≈ text-sky-300)
      */
-    private readonly boldTheme: Record<string, string> = {
+    private readonly calmTheme: Record<string, string> = {
         'keyword': 'text-blue-400',
         'string': 'text-orange-400',
         'comment': 'text-green-600 italic',
@@ -47,7 +47,7 @@ export class HighlighterParser {
      * - Strings: Muted coral/salmon
      * - Comments: Subtle gray-green
      */
-    private readonly calmTheme: Record<string, string> = {
+    private readonly boldTheme : Record<string, string> = {
         'keyword': 'text-blue-500',
         'string': 'text-amber-600',
         'comment': 'text-slate-500 italic',
