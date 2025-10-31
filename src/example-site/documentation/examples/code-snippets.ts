@@ -1,4 +1,5 @@
-export const INTERACTIVE_BUTTON_CODE = `class InteractiveButton extends BaseElement {
+export const CODE_SNIPPETS = {
+    INTERACTIVE_BUTTON: `class InteractiveButton extends BaseElement {
     static get observedAttributes() {
         return ['label', 'disabled', 'variant'];
     }
@@ -34,9 +35,9 @@ export const INTERACTIVE_BUTTON_CODE = `class InteractiveButton extends BaseElem
     }
 }
 
-customElements.define('interactive-button', InteractiveButton);`;
+customElements.define('interactive-button', InteractiveButton);`,
 
-export const VALIDATED_INPUT_CODE = `class ValidatedInput extends BaseElement {
+    VALIDATED_INPUT: `class ValidatedInput extends BaseElement {
     static get observedAttributes() {
         return ['label', 'placeholder', 'required', 'pattern', 'error'];
     }
@@ -95,4 +96,5 @@ export const VALIDATED_INPUT_CODE = `class ValidatedInput extends BaseElement {
     }
 }
 
-customElements.define('validated-input', ValidatedInput);`;
+customElements.define('validated-input', ValidatedInput);`
+};

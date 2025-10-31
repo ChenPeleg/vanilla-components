@@ -1,6 +1,6 @@
 import { DocumentationKind, type DocumentationType } from '../../models/documentation.types.ts';
 import {SiteColors} from '../../colors/siteColors.ts';
-import { INTERACTIVE_BUTTON_CODE, VALIDATED_INPUT_CODE } from './code-snippets.ts';
+import { CODE_SNIPPETS } from './code-snippets.ts';
 
 const buttonExampleDocs: DocumentationType[] = [
     {
@@ -15,7 +15,7 @@ const buttonExampleDocs: DocumentationType[] = [
         content: `A complete button component demonstrating click handling, disabled states, and custom styling.`
     },
     {
-        content: INTERACTIVE_BUTTON_CODE,
+        content: CODE_SNIPPETS.INTERACTIVE_BUTTON,
         type: DocumentationKind.highlightedCode
     },
     {
@@ -49,7 +49,7 @@ const formInputExampleDocs: DocumentationType[] = [
         content: `A text input component with real-time validation and error messages.`
     },
     {
-        content: VALIDATED_INPUT_CODE,
+        content: CODE_SNIPPETS.VALIDATED_INPUT,
         type: DocumentationKind.highlightedCode
     }
 ];
