@@ -1,4 +1,5 @@
 import { DocumentationKind, type DocumentationType } from '../../models/documentation.types.ts';
+import {SiteColors} from '../../colors/siteColors.ts';
 
 // Installation & Setup
 const installationDocs: DocumentationType[] = [
@@ -271,15 +272,15 @@ const stylingDocs: DocumentationType[] = [
                     <h3 class="font-bold text-xl mb-2 text-gray-800">
                         Card Title
                     </h3>
-                    <p class="text-gray-700 text-base">
+                    <p class="${SiteColors.textMain} text-base">
                         Card content goes here with full Tailwind support!
                     </p>
                 </div>
                 <div class="px-6 pt-4 pb-2">
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold ${SiteColors.textMain} mr-2 mb-2">
                         #tag1
                     </span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
+                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold ${SiteColors.textMain} mr-2 mb-2">
                         #tag2
                     </span>
                 </div>

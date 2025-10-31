@@ -1,4 +1,5 @@
 import { DocumentationKind, type DocumentationType } from '../../models/documentation.types.ts';
+import {SiteColors} from '../../colors/siteColors.ts';
 
 const buttonExampleDocs: DocumentationType[] = [
     {
@@ -124,7 +125,7 @@ const formInputExampleDocs: DocumentationType[] = [
         
         this.shadowRoot!.innerHTML = \`
             <div class="mb-4">
-                <label class="block text-gray-700 font-semibold mb-2">
+                <label class="block ${SiteColors.textMain} font-semibold mb-2">
                     \${label} \${required ? '<span class="text-red-500">*</span>' : ''}
                 </label>
                 <input 
