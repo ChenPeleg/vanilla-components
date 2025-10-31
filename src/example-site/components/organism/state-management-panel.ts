@@ -27,7 +27,7 @@ class StateManagementPanel extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="flex flex-col items-center justify-center p-4 h-96 ${SiteColors.examplesBgColor} ">
+            <div class="flex flex-col items-center justify-center p-4 h-96   ">
                 <div class="flex flex-col items-start justify-start ${SiteColors.cardBackgroundBg} shadow-lg rounded-lg p-6 w-full max-w-md gap-6">
                     <div class="flex flex-col items-start justify-start gap-2">
                         <span>
