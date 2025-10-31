@@ -42,7 +42,6 @@ export type { ColorTheme };
 export class Highlighter {
     private readonly tokenMatcher: HighlighterTokenizer;
     private readonly htmlRenderer: HighlighterParser;
-
     constructor(theme: ColorTheme = 'bold') {
         this.tokenMatcher = new HighlighterTokenizer();
         this.htmlRenderer = new HighlighterParser(theme);
