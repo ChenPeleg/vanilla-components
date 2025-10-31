@@ -1,4 +1,5 @@
 import {BaseElement} from '../../../_core/elements/base-element.ts';
+import {SiteColors} from '../../colors/siteColors.ts';
 
 class HeroSection extends BaseElement {
     content = [{
@@ -20,7 +21,7 @@ class HeroSection extends BaseElement {
                 <div class="flex flex-col gap-4">
                     ${this.content.map(item => `
                         <div class="  bg-white/10   shadow-lg rounded-lg p-6  w-full max-w-md">
-                            <h2 class="inline font-agbalumo text-xl font-bold text-gray-800 mb-2">${item.header}</h2> -
+                            <h2 class="inline font-agbalumo text-xl font-bold ${SiteColors.headerText} mb-2">${item.header}</h2> -
                             <p class="inline text-gray-600">${item.text}</p>
                         </div>
                     `).join('')}

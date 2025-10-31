@@ -269,7 +269,7 @@ const stylingDocs: DocumentationType[] = [
         this.shadowRoot!.innerHTML = \`
             <div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
                 <div class="px-6 py-4">
-                    <h3 class="font-bold text-xl mb-2 text-gray-800">
+                    <h3 class="font-bold text-xl mb-2 ${SiteColors.headerText}">
                         Card Title
                     </h3>
                     <p class="${SiteColors.textMain} text-base">

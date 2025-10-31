@@ -1,5 +1,6 @@
 export class SiteColors {
-   static textMain = 'text-gray-700';
-   static howToUseBgColor = 'bg-amber-200';
-   static examplesBgColor = 'bg-fuchsia-100';
+    static headerText = "text-gray-800 dark:text-gray-100";
+   static textMain = 'text-gray-700 dark:text-gray-300';
+   static howToUseBgColor = 'bg-amber-200 dark:bg-amber-900 dark:bg-opacity-0';
+   static examplesBgColor = 'bg-fuchsia-100 dark:bg-fuchsia-900 dark:bg-opacity-0';
 }
