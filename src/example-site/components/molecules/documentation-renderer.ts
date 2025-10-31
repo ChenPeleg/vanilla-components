@@ -26,7 +26,7 @@ export class DocumentationRenderer extends BaseElement {
     private buildDocUnit(doc: DocumentationType): string {
         switch (doc.type) {
             case DocumentationKind.header:
-                return `<header-2> ${doc.content} </header-2>`;
+                return `<div class="mt-3"><header-2> ${doc.content} </header-2></div>`;
             case DocumentationKind.gist:
                 return `<code-gist gist="${doc.content}"></code-gist>`;
             case DocumentationKind.code:
@@ -34,17 +34,17 @@ export class DocumentationRenderer extends BaseElement {
             case DocumentationKind.html:
                 return doc.content;
             case DocumentationKind.highlightedCode:
-                return `<highlighted-code code="${doc.content}"></highlighted-code>`;
+                return `<div class="mb-4"><highlighted-code code="${doc.content}"></highlighted-code></div>`;
             case DocumentationKind.Text:
             default:
-                return `<p class="${SiteColors.textMain} text-base sm:text-lg mt-4"> ${doc.content} </p>`;
+                return `<p class="${SiteColors.textMain} text-base sm:text-lg"> ${doc.content} </p>`;
         }
     }
 
     protected renderTemplate() {
         const content = (this._docs || []).map(doc => this.buildDocUnit(doc)).join('');
         this.shadowRoot!.innerHTML = `
-            <div class="w-full flex flex-col gap-5">${content}</div>
+            <div class="w-full flex flex-col gap-3">${content}</div>
         `;
     }
 }
