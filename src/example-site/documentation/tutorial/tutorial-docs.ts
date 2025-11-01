@@ -1,5 +1,6 @@
 import { DocumentationKind, type DocumentationType } from '../../models/documentation.types.ts';
 import {SiteColors} from '../../colors/siteColors.ts';
+import { TUTORIAL_SNIPPETS } from './tutorial-code-snippets.ts';
 
 // Installation & Setup
 const installationDocs: DocumentationType[] = [
@@ -18,10 +19,7 @@ const installationDocs: DocumentationType[] = [
         content: `To create a new project using Vanilla Components, run the following command in your terminal:`
     },
     {
-        content: `npx vanilla-components my-project-name
-cd my-project-name
-npm install
-npm run dev`,
+        content: TUTORIAL_SNIPPETS.NPM_INSTALL,
         type: DocumentationKind.code
     },
     {
@@ -32,10 +30,7 @@ npm run dev`,
         content: `Alternatively, you can clone the repository directly:`
     },
     {
-        content: `git clone https://github.com/ChenPeleg/vanilla-components.git
-cd vanilla-components
-npm install
-npm run dev`,
+        content: TUTORIAL_SNIPPETS.GIT_CLONE,
         type: DocumentationKind.code
     }
 ];
@@ -82,34 +77,7 @@ const firstComponentDocs: DocumentationType[] = [
         content: `Here's a complete example of a simple button component:`
     },
     {
-        content: `import { BaseElement } from '../_core/elements/base-element.ts';
-
-class MyButton extends BaseElement {
-    static get observedAttributes() {
-        return ['label', 'disabled'];
-    }
-
-    connectedCallback(): void {
-        super.connectedCallback(); // Always call first!
-        this.setAttribute('role', 'button');
-        this.renderTemplate();
-    }
-
-    renderTemplate() {
-        const label = this.getAttribute('label') || 'Click me';
-        const isDisabled = this.getAttribute('disabled') === 'true';
-        
-        this.shadowRoot!.innerHTML = \`
-            <button 
-                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
-                \${isDisabled ? 'disabled' : ''}>
-                \${label}
-            </button>
-        \`;
-    }
-}
-
-customElements.define('my-button', MyButton);`,
+        content: TUTORIAL_SNIPPETS.MY_BUTTON,
         type: DocumentationKind.highlightedCode
     },
     {
@@ -147,37 +115,7 @@ const observedAttributesDocs: DocumentationType[] = [
         content: `Observed attributes allow your component to react to attribute changes. This is essential for creating dynamic, reactive components.`
     },
     {
-        content: `class DynamicCard extends BaseElement {
-    static get observedAttributes() {
-        return ['title', 'color', 'visible'];
-    }
-
-    attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-        if (oldValue === newValue) return;
-        this.update();
-    }
-
-    update() {
-        const title = this.getAttribute('title') || 'Default Title';
-        const color = this.getAttribute('color') || 'blue';
-        const visible = this.getAttribute('visible') !== 'false';
-        
-        if (!visible) {
-            this.shadowRoot!.innerHTML = '';
-            return;
-        }
-        
-        this.shadowRoot!.innerHTML = \`
-            <div class="p-4 bg-\${color}-100 rounded-lg">
-                <h3 class="text-xl font-bold">\${title}</h3>
-            </div>
-        \`;
-    }
-
-    renderTemplate() {
-        this.update();
-    }
-}`,
+        content: TUTORIAL_SNIPPETS.DYNAMIC_CARD,
         type: DocumentationKind.highlightedCode
     }
 ];
@@ -196,32 +134,7 @@ const actionCallbackDocs: DocumentationType[] = [
         type: DocumentationKind.header,
     },
     {
-        content: `class ClickCounter extends BaseElement {
-    private count = 0;
-
-    connectedCallback(): void {
-        super.connectedCallback();
-        
-        this.$<HTMLButtonElement>('button').addEventListener('click', () => {
-            this.count++;
-            this.update();
-            
-            // Notify parent of the click
-            this.actionCallback({ 
-                type: 'count-changed', 
-                count: this.count 
-            });
-        });
-    }
-
-    renderTemplate() {
-        this.shadowRoot!.innerHTML = \`
-            <button class="px-4 py-2 bg-green-500 text-white rounded">
-                Clicked: \${this.count} times
-            </button>
-        \`;
-    }
-}`,
+        content: TUTORIAL_SNIPPETS.CLICK_COUNTER,
         type: DocumentationKind.highlightedCode
     },
     {
@@ -229,26 +142,7 @@ const actionCallbackDocs: DocumentationType[] = [
         type: DocumentationKind.header,
     },
     {
-        content: `class ParentContainer extends BaseElement {
-    connectedCallback(): void {
-        super.connectedCallback();
-        
-        const counter = this.$<ClickCounter>('click-counter');
-        counter.actionCallback = (result) => {
-            console.log('Child clicked:', result.count);
-            // Handle the callback
-        };
-    }
-
-    renderTemplate() {
-        this.shadowRoot!.innerHTML = \`
-            <div class="p-4">
-                <h2>Parent Container</h2>
-                <click-counter></click-counter>
-            </div>
-        \`;
-    }
-}`,
+        content: TUTORIAL_SNIPPETS.PARENT_CONTAINER,
         type: DocumentationKind.highlightedCode
     }
 ];
@@ -271,30 +165,7 @@ const stylingDocs: DocumentationType[] = [
         type: DocumentationKind.html
     },
     {
-        content: `class StyledCard extends BaseElement {
-    renderTemplate() {
-        this.shadowRoot!.innerHTML = \`
-            <div class="max-w-sm rounded-lg overflow-hidden shadow-lg bg-white">
-                <div class="px-6 py-4">
-                    <h3 class="font-bold text-xl mb-2 ${SiteColors.headerText}">
-                        Card Title
-                    </h3>
-                    <p class="${SiteColors.textMain} text-base">
-                        Card content goes here with full Tailwind support!
-                    </p>
-                </div>
-                <div class="px-6 pt-4 pb-2">
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold ${SiteColors.textMain} mr-2 mb-2">
-                        #tag1
-                    </span>
-                    <span class="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold ${SiteColors.textMain} mr-2 mb-2">
-                        #tag2
-                    </span>
-                </div>
-            </div>
-        \`;
-    }
-}`,
+        content: TUTORIAL_SNIPPETS.STYLED_CARD,
         type: DocumentationKind.highlightedCode
     }
 ];
@@ -313,27 +184,7 @@ const routingDocs: DocumentationType[] = [
         type: DocumentationKind.header,
     },
     {
-        content: `import type { RouteObject } from '../../_core/router/router.ts';
-
-const routes: RouteObject[] = [
-    {
-        path: '/',
-        index: true,
-        element: () => \`<home-page></home-page>\`
-    },
-    {
-        path: '/about',
-        element: () => \`<about-page></about-page>\`
-    },
-    {
-        path: '/products/:id',
-        element: () => \`<product-page></product-page>\`
-    },
-    {
-        path: '*',
-        element: () => \`<not-found-page></not-found-page>\`
-    }
-];`,
+        content: TUTORIAL_SNIPPETS.ROUTES_DEFINITION,
         type: DocumentationKind.highlightedCode
     },
     {
@@ -341,15 +192,7 @@ const routes: RouteObject[] = [
         type: DocumentationKind.header,
     },
     {
-        content: `// Using hash navigation
-<a href="#/about">About</a>
-<a href="#/products/123">Product 123</a>
-
-// Programmatic navigation
-import { HashRouterService } from './services/HashRouter.service.ts';
-
-const router = _ServicesProvider.getService(HashRouterService);
-router.navigate('/about');`,
+        content: TUTORIAL_SNIPPETS.NAVIGATION_USAGE,
         type: DocumentationKind.highlightedCode
     }
 ];
@@ -368,19 +211,7 @@ const stateManagementDocs: DocumentationType[] = [
         type: DocumentationKind.header,
     },
     {
-        content: `// Define action types
-export const AppActionType = {
-    INCREMENT: 'INCREMENT',
-    DECREMENT: 'DECREMENT',
-    SET_VALUE: 'SET_VALUE'
-} as const;
-
-// Dispatch actions
-import { Store } from './services/Store.service.ts';
-
-const store = _ServicesProvider.getService(Store);
-store.dispatch({ type: AppActionType.INCREMENT });
-store.dispatch({ type: AppActionType.SET_VALUE, payload: 10 });`,
+        content: TUTORIAL_SNIPPETS.ACTION_TYPES,
         type: DocumentationKind.highlightedCode
     },
     {
@@ -388,34 +219,7 @@ store.dispatch({ type: AppActionType.SET_VALUE, payload: 10 });`,
         type: DocumentationKind.header,
     },
     {
-        content: `class CounterDisplay extends BaseElement {
-    private subscription?: Subscription;
-
-    connectedCallback(): void {
-        super.connectedCallback();
-        
-        const store = _ServicesProvider.getService(Store);
-        this.subscription = store.subscribe((state) => {
-            this.updateDisplay(state.counter);
-        });
-    }
-
-    disconnectedCallback(): void {
-        this.subscription?.unsubscribe();
-    }
-
-    updateDisplay(count: number) {
-        this.$<HTMLSpanElement>('span').textContent = String(count);
-    }
-
-    renderTemplate() {
-        this.shadowRoot!.innerHTML = \`
-            <div class="text-2xl font-bold">
-                Count: <span>0</span>
-            </div>
-        \`;
-    }
-}`,
+        content: TUTORIAL_SNIPPETS.COUNTER_DISPLAY,
         type: DocumentationKind.highlightedCode
     }
 ];
