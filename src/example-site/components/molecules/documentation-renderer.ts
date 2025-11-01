@@ -41,7 +41,7 @@ export class DocumentationRenderer extends BaseElement {
             case DocumentationKind.header:
                 return `<div class="mt-3"><header-2> ${doc.content} </header-2></div>`;
             case DocumentationKind.gist:
-                return `<code-gist gist="${doc.content}"></code-gist>`;
+                return `<code-gist gist="${this.encodeHtmlAttribute(doc.content)}"></code-gist>`;
             case DocumentationKind.code:
                 return `<pre class="bg-gray-800 text-white p-2 sm:p-4 rounded-lg overflow-x-auto text-xs sm:text-sm break-words whitespace-pre-wrap"><code class="break-words">${doc.content}</code></pre>`;
             case DocumentationKind.html:
