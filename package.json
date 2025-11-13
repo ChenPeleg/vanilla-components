@@ -45,13 +45,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ChenPeleg/vanilla-elemetns.git"
+    "url": "git+https://github.com/ChenPeleg/vanilla-components.git"
   },
   "author": "Chen Peleg",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/ChenPeleg/vanilla-elemetns/issues"
+    "url": "https://github.com/ChenPeleg/vanilla-components/issues"
   },
-  "homepage": "https://chenpeleg.github.io/vanilla-elemetns/",
+  "homepage": "https://chenpeleg.github.io/vanilla-components/",
   "web-types": "./web-types.json"
 }
