@@ -29,8 +29,8 @@ export const overrideRoutes = () => {
         element: () => `<main-layout><about-page></about-page></main-layout>`
     }
 
-    ]
-    const routerService = _ServicesProvider.getService(HashRouterService)
-    routerService.updateRoutes(siteRoutes)
+    ];
+    const routerService = _ServicesProvider.getService(HashRouterService);
+    routerService.updateRoutes(siteRoutes);
 
 }

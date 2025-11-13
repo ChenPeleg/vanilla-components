@@ -36,12 +36,12 @@ export class HighlightedCode extends BaseElement {
     }
 
     update() {
-        this.renderTemplate()
+        this.renderTemplate();
     }
 
     legacyRender() {
         const rawCode = this.getAttribute('code') || '';
-        const styledCode = this.syntaxHighlighter.highlightCode(rawCode)
+        const styledCode = this.syntaxHighlighter.highlightCode(rawCode);
         return `<pre class="bg-gray-800 text-white p-2 sm:p-4 rounded-lg overflow-x-auto text-xs sm:text-sm break-words whitespace-pre-wrap"><code class="break-words">${styledCode}</code></pre>`;
 
     }
