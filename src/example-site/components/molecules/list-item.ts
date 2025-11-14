@@ -9,6 +9,13 @@ export class ListItem extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
         this.renderTemplate();
+        const trashButton = this.$('#trash-button');
+        if (trashButton) {
+            trashButton.addEventListener('click', () => {
+                const id = this.getAttribute('id') || '';
+                this.actionCallback({id, actionType: 'delete'});
+            })
+        }
     }
 
     actionCallback = ({
@@ -18,7 +25,7 @@ export class ListItem extends BaseElement {
         id: string;
         actionType: string;
     }) => {
-
+        console.log(id, actionType)
     }
 
     renderTemplate() {
