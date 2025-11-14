@@ -8,7 +8,6 @@ export class AppButton extends BaseElement {
 
     connectedCallback(): void {
         super.connectedCallback();
-        this.setAttribute('role', 'button');
         this.shadowRoot?.addEventListener('click', () => {
             if (this.getAttribute('disabled') === 'true') {
                 return;
@@ -22,15 +21,15 @@ export class AppButton extends BaseElement {
 
     update() {
         const isDisabled = this.getAttribute('disabled') === 'true';
-
-        this.setAttribute('disabled', isDisabled ? 'true'  : 'false') ;
-        this.setAttribute('disabled', isDisabled ? 'true'  : 'false') ;
-        this.setAttribute('aria-disabled', String(isDisabled));
+        const buttonDiv = this.shadowRoot?.querySelector('[role="button"]');
+        if (buttonDiv) {
+            buttonDiv.setAttribute('aria-disabled', String(isDisabled));
+        }
     }
 
     renderTemplate() {
         this.shadowRoot!.innerHTML = `   
-        <div class=" disabled:bg-blue-500/50 px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 transition duration-200"   >
+        <div role="button" tabindex="0" class=" disabled:bg-blue-500/50 px-4 py-2 bg-blue-500 text-white rounded cursor-pointer hover:bg-blue-600 transition duration-200"   >
            Click Me!
         </div>
     `;
