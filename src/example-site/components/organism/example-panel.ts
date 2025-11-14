@@ -1,7 +1,7 @@
 import {BaseElement} from '../../../_core/elements/base-element.ts';
 
 
-class ExamplesPanel extends BaseElement {
+class ExamplePanel extends BaseElement {
 
 
     renderTemplate() {
@@ -10,6 +10,9 @@ class ExamplesPanel extends BaseElement {
             <div class="  "> 
                 <examples-buttons-panel></examples-buttons-panel>
             </div>
+            <div>
+                <examples-lists-panel></examples-lists-panel>
+            </div>
         `;
         this.update();
     }
@@ -17,4 +20,4 @@ class ExamplesPanel extends BaseElement {
 
 }
 
-customElements.define('examples-panel', ExamplesPanel);
+customElements.define('examples-panel', ExamplePanel);
