@@ -1,6 +1,11 @@
 import {BaseElement} from '../../../_core/elements/base-element.ts';
 
 
+export interface ListItemData {
+    text: string;
+    id: string;
+}
+
 class ExamplesListPanel extends BaseElement {
 
     state = {
@@ -10,18 +15,19 @@ class ExamplesListPanel extends BaseElement {
     connectedCallback() {
         super.connectedCallback();
     }
+    renderItem(text: string, index: number) {
+        return `<list-item text="${text}" id="${index + text}"></list-item>`;
+    }
 
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="  w-full flex flex-row items-center justify-center p-4 h-96  ">
-                <list-item  text="${'but milk'}"></list-item>
+            <div class="  w-full flex flex-col items-center justify-center p-4 h-96  ">
+                ${this.state.items.map((item, index) => this.renderItem(item, index)).join('')}
             </div>
         `;
         this.update();
     }
-
-
 }
 
 customElements.define('examples-lists-panel', ExamplesListPanel);
