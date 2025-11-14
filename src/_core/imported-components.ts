@@ -24,7 +24,7 @@ import '../example-site/components/organism/docs-article.ts';
 import '../example-site/components/organism/docs-page-layout.ts';
 import '../example-site/components/organism/main-content.ts';
 import '../example-site/components/organism/nav-bar.ts';
-import '../example-site/components/organism/state-management-panel.ts';
+import '../example-site/components/organism/examples-panel.ts';
 import '../example-site/components/organism/use-case-panel.ts';
 import '../example-site/documentation/examples/code-snippets.ts';
 import '../example-site/documentation/tutorial/tutorial-code-snippets.ts';
