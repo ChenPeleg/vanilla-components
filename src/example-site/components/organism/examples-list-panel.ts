@@ -1,5 +1,5 @@
 import {BaseElement} from '../../../_core/elements/base-element.ts';
-
+import {ListItem} from '../molecules/list-item.ts';
 
 
 class ExamplesListPanel extends BaseElement {
@@ -10,9 +10,27 @@ class ExamplesListPanel extends BaseElement {
 
     connectedCallback() {
         super.connectedCallback();
+        this.connectActionCallback()
     }
+
     renderItem(text: string, index: number) {
         return `<list-item text="${text}" id="${index + text}"></list-item>`;
+    }
+
+    itemAction({
+                   id,
+                   actionType
+               }: { id: string, actionType: string }) {
+        console.log(actionType, id)
+    }
+
+    connectActionCallback() {
+        const allListItems = this.shadowRoot?.querySelectorAll ('list-item')
+        allListItems?.forEach((el    ) => {
+            (el as ListItem).actionCallback = ({id, actionType}) => {
+                this.itemAction({id, actionType})
+            }
+        })
     }
 
     renderTemplate() {

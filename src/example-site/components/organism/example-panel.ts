@@ -7,7 +7,7 @@ class ExamplePanel extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="  "> 
+            <div class="  ">
                 <examples-buttons-panel></examples-buttons-panel>
             </div>
             <div class="  ">

@@ -1,7 +1,7 @@
 import { BaseElement } from '../../../_core/elements/base-element.ts';
 import {SiteColors} from '../../colors/siteColors.ts';
 
-class ListItem extends BaseElement {
+export class ListItem extends BaseElement {
     static get observedAttributes() { return ['text', 'id' ]; }
 
     connectedCallback(): void {
