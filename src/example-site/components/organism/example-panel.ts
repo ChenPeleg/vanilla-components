@@ -10,7 +10,7 @@ class ExamplePanel extends BaseElement {
             <div class="  "> 
                 <examples-buttons-panel></examples-buttons-panel>
             </div>
-            <div>
+            <div class="  ">
                 <examples-lists-panel></examples-lists-panel>
             </div>
         `;
