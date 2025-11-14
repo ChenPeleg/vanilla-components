@@ -12,11 +12,11 @@ class HomePage extends BaseElement {
                     <div class="flex-1 ${SiteColors.howToUseBgColor} flex flex-col items-center justify-start">
                         <use-case-panel></use-case-panel>
                     </div>
-                    <div class="flex-1  ${SiteColors.mainVanillaBgColor} flex flex-col items-center justify-start">
+                    <div class="flex-1  ${SiteColors.mainVanillaBgColor} flex flex-col items-center justify-start -order-1  lg:order-0">
                         <hero-section></hero-section>
                     </div>
                     <div class="flex-1 ${SiteColors.examplesBgColor} ">
-                        <state-management-panel></state-management-panel>
+                        <examples-panel></examples-panel>
                     </div>
                 </div>
             </main>
