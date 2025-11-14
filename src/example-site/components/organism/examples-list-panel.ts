@@ -12,7 +12,7 @@ class ExamplesListPanel extends BaseElement {
         // language=HTML
         this.shadowRoot!.innerHTML = `
             <div class="  w-full flex flex-row items-center justify-center p-4 h-96  ">
-
+ 
             </div>
         `;
         this.update();

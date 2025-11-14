@@ -36,3 +36,4 @@ import '../example-site/pages/main.layout.ts';
 import '../root.ts';
 import '../example-site/components/organism/examples-buttons-panel.ts';
 import '../example-site/components/organism/examples-list-panel.ts';
+import '../example-site/components/molecules/list-item.ts';
