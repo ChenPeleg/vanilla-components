@@ -1,10 +1,6 @@
 import {BaseElement} from '../../../_core/elements/base-element.ts';
 
 
-export interface ListItemData {
-    text: string;
-    id: string;
-}
 
 class ExamplesListPanel extends BaseElement {
 
@@ -22,7 +18,7 @@ class ExamplesListPanel extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="  w-full flex flex-col items-center justify-center p-4 h-96  ">
+            <div class="  w-full flex flex-col items-center justify-center p-4 h-96 gap-3 ">
                 ${this.state.items.map((item, index) => this.renderItem(item, index)).join('')}
             </div>
         `;
