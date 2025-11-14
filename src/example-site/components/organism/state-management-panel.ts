@@ -4,7 +4,7 @@ import {AppButton} from '../atoms/app-button.ts';
 import {SiteColors} from '../../colors/siteColors.ts';
 
 
-class StateManagementPanel extends BaseElement {
+class ExamplesPanel extends BaseElement {
     private state = {
         isActive: true,
         clicks: 0
@@ -57,4 +57,4 @@ class StateManagementPanel extends BaseElement {
     }
 }
 
-customElements.define('state-management-panel', StateManagementPanel);
+customElements.define('examples-panel', ExamplesPanel);

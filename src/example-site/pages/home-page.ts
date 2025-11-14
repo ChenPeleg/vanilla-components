@@ -16,7 +16,7 @@ class HomePage extends BaseElement {
                         <hero-section></hero-section>
                     </div>
                     <div class="flex-1 ${SiteColors.examplesBgColor} ">
-                        <state-management-panel></state-management-panel>
+                        <examples-panel></examples-panel>
                     </div>
                 </div>
             </main>
