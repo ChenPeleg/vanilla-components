@@ -70,10 +70,16 @@ test.describe ('Demo page for vanilla components (app-page page)', () => {
         await page.waitForTimeout(500);
         const button = page.getByRole('button');
         await expect(button).toBeVisible();
-        await expect(button).toHaveText(/0/);
+        
+        // Check the count by querying the span in the light DOM
+        const simpleButtonEl = page.locator('simple-button');
+        const countText = simpleButtonEl.locator('#count-text');
+        await expect(countText).toHaveText(/0/);
+        
         await button.click();
-        await expect(button).toHaveText(/1/);
+        await expect(countText).toHaveText(/1/);
+        
         await button.click();
-        await expect(button).toHaveText(/2/);
+        await expect(countText).toHaveText(/2/);
     });
 })

@@ -5,13 +5,12 @@ import vanillaLogo from './assets/images/vanilla-flower.png';
 export class SimpleButton extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
-        this.setAttribute('role', 'button');
         this.shadowRoot?.addEventListener('click', () => this.actionCallback({clicked: true}));
     }
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="px-4 py-2 text-black bg-slate-200 hover:border-[#646cff] border-2 border-transparent rounded cursor-pointer focus:border-black transition duration-200">
+            <div role="button" tabindex="0" class="px-4 py-2 text-black bg-slate-200 hover:border-[#646cff] border-2 border-transparent rounded cursor-pointer focus:border-black transition duration-200">
                 <slot></slot>
             </div>
         `;

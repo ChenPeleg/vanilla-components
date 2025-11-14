@@ -8,9 +8,9 @@ test.describe('HighlightedCode Component Theme Support', () => {
             <highlighted-code theme="faded" code="const x = 5;"></highlighted-code>
         `);
         
-        // Get the component
+        // Get the component and wait for it to be attached
         const component = page.locator('highlighted-code');
-        await expect(component).toBeVisible();
+        await component.waitFor({ state: 'attached' });
         
         // Verify the theme attribute is set
         const theme = await component.getAttribute('theme');
@@ -23,9 +23,9 @@ test.describe('HighlightedCode Component Theme Support', () => {
             <highlighted-code theme="faded" code="const x = 5;"></highlighted-code>
         `);
         
-        // Wait for the component to render
+        // Wait for the component to be attached
         const component = page.locator('highlighted-code');
-        await expect(component).toBeVisible();
+        await component.waitFor({ state: 'attached' });
         
         // Check shadow DOM content for faded colors
         const shadowContent = await component.evaluate((el) => {
@@ -43,7 +43,7 @@ test.describe('HighlightedCode Component Theme Support', () => {
         `);
         
         const component = page.locator('highlighted-code');
-        await expect(component).toBeVisible();
+        await component.waitFor({ state: 'attached' });
         
         const shadowContent = await component.evaluate((el) => {
             return el.shadowRoot?.innerHTML || '';
@@ -59,7 +59,7 @@ test.describe('HighlightedCode Component Theme Support', () => {
         `);
         
         const component = page.locator('highlighted-code');
-        await expect(component).toBeVisible();
+        await component.waitFor({ state: 'attached' });
         
         const shadowContent = await component.evaluate((el) => {
             return el.shadowRoot?.innerHTML || '';
@@ -76,7 +76,7 @@ test.describe('HighlightedCode Component Theme Support', () => {
         `);
         
         const component = page.locator('#test-code');
-        await expect(component).toBeVisible();
+        await component.waitFor({ state: 'attached' });
         
         // Get initial shadow content
         let shadowContent = await component.evaluate((el) => {

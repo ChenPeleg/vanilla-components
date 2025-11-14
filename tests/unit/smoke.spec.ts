@@ -46,7 +46,10 @@ test.describe('Html smoke test', () => {
 
         await expect(lightDomButton).toBeVisible();
         await expect(shadowDomButtonInner).toBeVisible();
-        expect((await shadowDomButtonInner.allInnerTexts()).join('')).toBe('Shadow Button');
+        
+        // Get text content from the custom element itself (which contains the slotted content)
+        const shadowButtonText = await page.locator('#shadow-dom-button').textContent();
+        expect(shadowButtonText?.trim()).toBe('Shadow Button');
 
     });
 })
