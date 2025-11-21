@@ -6,7 +6,14 @@ There are two ways to get started with Vanilla Components: use it as an NPM pack
 
 ### Using NPM Package
 
-**Create a new project scaffold** - Similar to `create-vite`, the `npx vanilla-components` command creates a complete project structure with all necessary files, configuration, and dependencies. This gives you a ready-to-use starting point for your application.
+**Create a new project scaffold** - Similar to `create-vite`, the `npx vanilla-components` command creates a basic project structure with core files and essential services. This gives you a ready-to-use starting point for your application.
+
+The scaffold includes:
+- **Core components**: BaseElement, routing service, and store management
+- **Build configuration**: Vite, TypeScript, and TailwindCSS setup
+- **Project structure**: Organized directories following atomic design principles
+- **Example components**: Sample atoms, molecules, and organisms to get started
+- **Development tools**: Scripts for dev server, building, and testing
 
 To create a new project using Vanilla Components, run the following command in your terminal:
 
@@ -47,7 +54,7 @@ Here are three examples showing different levels of component complexity:
 
 #### Example 1: Simple Text Container
 
-A minimal component that just renders content with styling:
+A minimal component that just renders content with styling. This example demonstrates the fundamental building blocks of a web component:
 
 ```typescript
 import { BaseElement } from '../_core/elements/base-element.ts';
@@ -65,9 +72,17 @@ class TextContainer extends BaseElement {
 customElements.define('text-container', TextContainer);
 ```
 
-#### Example 2: Component with Attribute Handling
+**Key concepts explained:**
 
-A component that reacts to attribute changes like `disabled`:
+- **`renderTemplate()`**: This method defines the HTML structure of your component. It's called automatically by BaseElement when the component is initialized. Inside this method, you set the `innerHTML` of the shadow DOM to create your component's structure.
+
+- **`<slot></slot>`**: The slot element is a placeholder that displays content passed between the component's opening and closing tags. For example, when you write `<text-container>Hello World</text-container>`, "Hello World" will be rendered where the `<slot>` is placed in the template.
+
+- **Shadow DOM**: By using `this.shadowRoot`, the component's styles and structure are encapsulated, preventing conflicts with the rest of your page's CSS.
+
+#### Example 2: Interactive Button Component with Attribute Handling
+
+A button component that reacts to attribute changes like `disabled`. This example introduces reactive attributes and component lifecycle methods:
 
 ```typescript
 import { BaseElement } from '../_core/elements/base-element.ts';
@@ -102,6 +117,18 @@ class SimpleButton extends BaseElement {
 
 customElements.define('simple-button', SimpleButton);
 ```
+
+**New concepts introduced:**
+
+- **`observedAttributes`**: This static getter returns an array of attribute names that the component should watch for changes. When these attributes change, the component can react accordingly.
+
+- **`connectedCallback()`**: A lifecycle method that runs when the component is added to the DOM. Always call `super.connectedCallback()` first to ensure BaseElement's setup is complete.
+
+- **`this.$<T>(selector)`**: A type-safe helper method provided by BaseElement for querying elements within the shadow DOM. The `<T>` allows you to specify the element type for better TypeScript support.
+
+- **Reactive updates**: The `update()` method reads the current attribute values and updates the component's internal state. This allows the component to respond dynamically when attributes change.
+
+- **Default slot content**: The `<slot>Click me</slot>` provides default content that appears if no content is provided between the component tags.
 
 #### Example 3: Full-Featured Component
 
