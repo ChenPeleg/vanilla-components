@@ -105,7 +105,7 @@ customElements.define('simple-button', SimpleButton);
 
 #### Example 3: Full-Featured Component
 
-A complete example with attributes, styling, and dynamic content:
+A complete example with attributes, styling, and dynamic content. This example shows reading a label attribute during initial render (non-reactive) and observing the disabled attribute for dynamic updates:
 
 ```typescript
 import { BaseElement } from '../_core/elements/base-element.ts';
@@ -130,6 +130,7 @@ class MyButton extends BaseElement {
     }
 
     renderTemplate() {
+        // Label is read once during render (not reactive)
         const label = this.getAttribute('label') || 'Click me';
         this.shadowRoot!.innerHTML = `
             <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50">
