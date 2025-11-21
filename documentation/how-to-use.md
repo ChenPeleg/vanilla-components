@@ -6,6 +6,8 @@ There are two ways to get started with Vanilla Components: use it as an NPM pack
 
 ### Using NPM Package
 
+**Create a new project scaffold** - Similar to `create-vite`, the `npx vanilla-components` command creates a complete project structure with all necessary files, configuration, and dependencies. This gives you a ready-to-use starting point for your application.
+
 To create a new project using Vanilla Components, run the following command in your terminal:
 
 ```bash
@@ -32,10 +34,10 @@ The project follows a clear, organized structure based on atomic design principl
 
 📁 **Key Directories:**
 - **src/_core/** - Core functionality (BaseElement, router, services)
-- **src/example-site/components/atoms/** - Basic UI elements (buttons, inputs)
-- **src/example-site/components/molecules/** - Component combinations
-- **src/example-site/components/organism/** - Complex UI sections
-- **src/example-site/pages/** - Full page components
+- **src/components/atoms/** - Basic UI elements (buttons, inputs)
+- **src/components/molecules/** - Component combinations
+- **src/components/organism/** - Complex UI sections
+- **src/pages/** - Full page components
 - **tests/** - Playwright test files
 
 ## Creating Your First Component
@@ -44,7 +46,74 @@ Every component in Vanilla Components extends the `BaseElement` class. This prov
 
 ### Basic Component Structure
 
-Here's a complete example of a simple button component:
+Here are three examples showing different levels of component complexity:
+
+#### Example 1: Simple Text Container
+
+A minimal component that just renders content with styling:
+
+```typescript
+import { BaseElement } from '../_core/elements/base-element.ts';
+
+class TextContainer extends BaseElement {
+    renderTemplate() {
+        this.shadowRoot!.innerHTML = `
+            <div class="p-4 bg-gray-100 rounded-lg">
+                <slot></slot>
+            </div>
+        `;
+    }
+}
+
+customElements.define('text-container', TextContainer);
+```
+
+#### Example 2: Component with Attribute Handling
+
+A component that reacts to attribute changes like `disabled`:
+
+```typescript
+import { BaseElement } from '../_core/elements/base-element.ts';
+
+class SimpleButton extends BaseElement {
+    static get observedAttributes() {
+        return ['disabled'];
+    }
+
+    connectedCallback(): void {
+        super.connectedCallback();
+        this.setAttribute('role', 'button');
+        this.renderTemplate();
+    }
+
+    attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+        if (oldValue === newValue) return;
+        this.update();
+    }
+
+    update() {
+        const isDisabled = this.getAttribute('disabled') === 'true';
+        const button = this.$<HTMLButtonElement>('button');
+        if (button) {
+            button.disabled = isDisabled;
+        }
+    }
+
+    renderTemplate() {
+        this.shadowRoot!.innerHTML = `
+            <button class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50">
+                <slot>Click me</slot>
+            </button>
+        `;
+    }
+}
+
+customElements.define('simple-button', SimpleButton);
+```
+
+#### Example 3: Full-Featured Component
+
+A complete example with attributes, styling, and dynamic content:
 
 ```typescript
 import { BaseElement } from '../_core/elements/base-element.ts';
