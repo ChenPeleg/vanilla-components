@@ -12,7 +12,7 @@ A complete button component demonstrating click handling, disabled states, and c
 ```typescript
 class InteractiveButton extends BaseElement {
     static get observedAttributes() {
-        return ['label', 'disabled', 'variant'];
+        return ['label', 'disabled'];
     }
 
     connectedCallback(): void {
@@ -26,22 +26,33 @@ class InteractiveButton extends BaseElement {
         });
     }
 
+    attributeChangedCallback(name: string, oldValue: string, newValue: string) {
+        if (oldValue === newValue) {
+            return;
+        }
+        this.update();
+    }
+
+    update() {
+        const button = this.$<HTMLButtonElement>('button');
+        if (!button) return;
+        
+        const label = this.getAttribute('label') || 'Click me';
+        const disabled = this.getAttribute('disabled') === 'true';
+        
+        button.textContent = label;
+        button.disabled = disabled;
+    }
+
     renderTemplate() {
         const label = this.getAttribute('label') || 'Click me';
         const disabled = this.getAttribute('disabled') === 'true';
-        const variant = this.getAttribute('variant') || 'primary';
-        
-        const variants = {
-            primary: 'bg-blue-500 hover:bg-blue-600',
-            secondary: 'bg-gray-500 hover:bg-gray-600',
-            danger: 'bg-red-500 hover:bg-red-600'
-        };
         
         this.shadowRoot!.innerHTML = `
             <button 
                 class="px-6 py-3 text-white rounded-lg font-semibold 
                        transition-colors duration-200 disabled:opacity-50 disabled:cursor-not-allowed
-                       ${variants[variant]}"
+                       bg-blue-500 hover:bg-blue-600"
                 ${disabled ? 'disabled' : ''}>
                 ${label}
             </button>
@@ -56,10 +67,10 @@ customElements.define('interactive-button', InteractiveButton);
 
 ```html
 <!-- Primary button -->
-<interactive-button label="Save" variant="primary"></interactive-button>
+<interactive-button label="Save"></interactive-button>
 
 <!-- Disabled button -->
-<interactive-button label="Delete" variant="danger" disabled="true"></interactive-button>
+<interactive-button label="Delete" disabled="true"></interactive-button>
 
 <!-- With event handler -->
 <script>
