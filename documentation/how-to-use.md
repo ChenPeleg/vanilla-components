@@ -112,7 +112,7 @@ import { BaseElement } from '../_core/elements/base-element.ts';
 
 class MyButton extends BaseElement {
     static get observedAttributes() {
-        return ['label', 'disabled'];
+        return ['disabled'];
     }
 
     connectedCallback(): void {
@@ -122,19 +122,18 @@ class MyButton extends BaseElement {
 
     // Called automatically when observed attributes change
     update() {
-        const label = this.getAttribute('label') || 'Click me';
         const isDisabled = this.getAttribute('disabled') === 'true';
         const button = this.$<HTMLButtonElement>('button');
         if (button) {
             button.disabled = isDisabled;
-            button.textContent = label;
         }
     }
 
     renderTemplate() {
+        const label = this.getAttribute('label') || 'Click me';
         this.shadowRoot!.innerHTML = `
             <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50">
-                Click me
+                ${label}
             </button>
         `;
     }
