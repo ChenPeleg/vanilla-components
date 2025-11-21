@@ -33,11 +33,8 @@ npm run dev
 The project follows a clear, organized structure based on atomic design principles:
 
 📁 **Key Directories:**
+- **src/** - Application entry point and source code
 - **src/_core/** - Core functionality (BaseElement, router, services)
-- **src/components/atoms/** - Basic UI elements (buttons, inputs)
-- **src/components/molecules/** - Component combinations
-- **src/components/organism/** - Complex UI sections
-- **src/pages/** - Full page components
 - **tests/** - Playwright test files
 
 ## Creating Your First Component
@@ -82,20 +79,21 @@ class SimpleButton extends BaseElement {
 
     connectedCallback(): void {
         super.connectedCallback();
-        this.setAttribute('role', 'button');
+        this.update();
     }
 
     // Called automatically when observed attributes change
     update() {
-        this.renderTemplate();
+        const isDisabled = this.getAttribute('disabled') === 'true';
+        const button = this.$<HTMLButtonElement>('button');
+        if (button) {
+            button.disabled = isDisabled;
+        }
     }
 
     renderTemplate() {
-        const isDisabled = this.getAttribute('disabled') === 'true';
         this.shadowRoot!.innerHTML = `
-            <button 
-                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
-                ${isDisabled ? 'disabled' : ''}>
+            <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
                 <slot>Click me</slot>
             </button>
         `;
@@ -119,23 +117,24 @@ class MyButton extends BaseElement {
 
     connectedCallback(): void {
         super.connectedCallback(); // Always call first!
-        this.setAttribute('role', 'button');
+        this.update();
     }
 
     // Called automatically when observed attributes change
     update() {
-        this.renderTemplate();
+        const label = this.getAttribute('label') || 'Click me';
+        const isDisabled = this.getAttribute('disabled') === 'true';
+        const button = this.$<HTMLButtonElement>('button');
+        if (button) {
+            button.disabled = isDisabled;
+            button.textContent = label;
+        }
     }
 
     renderTemplate() {
-        const label = this.getAttribute('label') || 'Click me';
-        const isDisabled = this.getAttribute('disabled') === 'true';
-        
         this.shadowRoot!.innerHTML = `
-            <button 
-                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50"
-                ${isDisabled ? 'disabled' : ''}>
-                ${label}
+            <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600 disabled:opacity-50">
+                Click me
             </button>
         `;
     }
