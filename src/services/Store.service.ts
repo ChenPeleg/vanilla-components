@@ -47,16 +47,16 @@ export class StoreService extends AbstractBaseService {
     }
 
     private createStore() {
-        const stateFromLocalStorage = this.storeFromLocalStorage()
+        const stateFromLocalStorage = this.storeFromLocalStorage();
 
         const globalStore: StoreFactory<AppAction, AppStoreModel, typeof appReducer> = new StoreFactory({
             reducer: appReducer,
             defaultState: stateFromLocalStorage || this.initialState
-        })
+        });
         globalStore.subscribe((state: AppStoreModel) => {
             this.subscribers.forEach(sub => sub.cb(state));
             this.servicesResolver.getService(LocalStorageService).setObject(LocalStorageService.STORE_SETTINGS, state);
-        })
+        });
         return this._store = globalStore;
     }
 

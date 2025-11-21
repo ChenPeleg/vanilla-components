@@ -56,7 +56,7 @@ class AppPage extends BaseElement {
     }
 
     update() {
-        this.$<HTMLSpanElement>('#count-text').textContent = this.state.clicks.toString()
+        this.$<HTMLSpanElement>('#count-text').textContent = this.state.clicks.toString();
     }
 }
 

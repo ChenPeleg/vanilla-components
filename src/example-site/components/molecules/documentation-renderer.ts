@@ -20,7 +20,7 @@ export class DocumentationRenderer extends BaseElement {
 
     set docs(value: DocumentationType[]) {
         this._docs = Array.isArray(value) ? value : [];
-        this.renderTemplate()
+        this.renderTemplate();
     }
 
     /**

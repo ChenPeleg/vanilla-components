@@ -52,8 +52,8 @@ class ExamplesButtonsPanel extends BaseElement {
 
     update() {
         this.$('#active-state').textContent = `${this.state.isActive ? 'Active' : 'Not active'}`;
-        this.$('#toggle-button-text').textContent = `${this.state.isActive ? 'Active' : 'Not active'}`
-        this.$('#count-text').textContent = this.state.clicks.toString()
+        this.$('#toggle-button-text').textContent = `${this.state.isActive ? 'Active' : 'Not active'}`;
+        this.$('#count-text').textContent = this.state.clicks.toString();
     }
 }
 
