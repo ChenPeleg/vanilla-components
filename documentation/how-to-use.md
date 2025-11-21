@@ -96,15 +96,18 @@ class SimpleButton extends BaseElement {
         const button = this.$<HTMLButtonElement>('button');
         if (button) {
             button.disabled = isDisabled;
+            button.classList.toggle('opacity-50', isDisabled);
         }
     }
 
     renderTemplate() {
+        const isDisabled = this.getAttribute('disabled') === 'true';
         this.shadowRoot!.innerHTML = `
-            <button class="px-4 py-2 bg-blue-500 text-white rounded disabled:opacity-50">
+            <button class="px-4 py-2 bg-blue-500 text-white rounded ${isDisabled ? 'opacity-50' : ''}">
                 <slot>Click me</slot>
             </button>
         `;
+        this.update();
     }
 }
 
