@@ -88,18 +88,18 @@ class SimpleButton extends BaseElement {
 
     attributeChangedCallback(name: string, oldValue: string, newValue: string) {
         if (oldValue === newValue) return;
-        const button = this.$<HTMLButtonElement>('button');
-        if (button) {
-            const isDisabled = newValue === 'true';
-            button.disabled = isDisabled;
-            button.classList.toggle('opacity-50', isDisabled);
+        // Re-render when attributes change
+        if (this.shadowRoot?.innerHTML) {
+            this.renderTemplate();
         }
     }
 
     renderTemplate() {
         const isDisabled = this.getAttribute('disabled') === 'true';
         this.shadowRoot!.innerHTML = `
-            <button class="px-4 py-2 bg-blue-500 text-white rounded ${isDisabled ? 'opacity-50' : ''}">
+            <button 
+                class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600"
+                ${isDisabled ? 'disabled' : ''}>
                 <slot>Click me</slot>
             </button>
         `;
