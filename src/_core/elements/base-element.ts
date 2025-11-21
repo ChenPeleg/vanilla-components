@@ -13,6 +13,7 @@ export class BaseElement extends HTMLElement implements CustomElement {
         this.abortSignal = new AbortController() ;
         this.attachShadow({mode: 'open'});
         this.internals = this.attachInternals();
+        this.style.display = 'contents';
 
     }
 

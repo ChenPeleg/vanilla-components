@@ -4,7 +4,7 @@ import {AppButton} from '../atoms/app-button.ts';
 import {SiteColors} from '../../colors/siteColors.ts';
 
 
-class StateManagementPanel extends BaseElement {
+class ExamplesButtonsPanel extends BaseElement {
     private state = {
         isActive: true,
         clicks: 0
@@ -27,7 +27,7 @@ class StateManagementPanel extends BaseElement {
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="flex flex-col items-center justify-center p-4 h-96   ">
+            <div class="  w-full flex flex-row items-center justify-center p-4 h-96  ">  
                 <div class="flex flex-col items-start justify-start ${SiteColors.cardBackgroundBg} shadow-lg rounded-lg p-6 w-full max-w-md gap-6">
                     <div class="flex flex-col items-start justify-start gap-2">
                         <span>
@@ -57,4 +57,4 @@ class StateManagementPanel extends BaseElement {
     }
 }
 
-customElements.define('state-management-panel', StateManagementPanel);
+customElements.define('examples-buttons-panel', ExamplesButtonsPanel);
