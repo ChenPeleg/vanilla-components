@@ -88,13 +88,9 @@ class SimpleButton extends BaseElement {
 
     attributeChangedCallback(name: string, oldValue: string, newValue: string) {
         if (oldValue === newValue) return;
-        this.update();
-    }
-
-    update() {
-        const isDisabled = this.getAttribute('disabled') === 'true';
         const button = this.$<HTMLButtonElement>('button');
         if (button) {
+            const isDisabled = newValue === 'true';
             button.disabled = isDisabled;
             button.classList.toggle('opacity-50', isDisabled);
         }
@@ -107,7 +103,6 @@ class SimpleButton extends BaseElement {
                 <slot>Click me</slot>
             </button>
         `;
-        this.update();
     }
 }
 
