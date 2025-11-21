@@ -83,15 +83,10 @@ class SimpleButton extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback();
         this.setAttribute('role', 'button');
-        this.renderTemplate();
     }
 
-    attributeChangedCallback(name: string, oldValue: string, newValue: string) {
-        if (oldValue === newValue) return;
-        // Re-render when attributes change
-        if (this.shadowRoot?.innerHTML) {
-            this.renderTemplate();
-        }
+    update() {
+        this.renderTemplate();
     }
 
     renderTemplate() {
@@ -124,6 +119,9 @@ class MyButton extends BaseElement {
     connectedCallback(): void {
         super.connectedCallback(); // Always call first!
         this.setAttribute('role', 'button');
+    }
+
+    update() {
         this.renderTemplate();
     }
 
