@@ -85,6 +85,7 @@ class SimpleButton extends BaseElement {
         this.setAttribute('role', 'button');
     }
 
+    // Called automatically when observed attributes change
     update() {
         this.renderTemplate();
     }
@@ -121,6 +122,7 @@ class MyButton extends BaseElement {
         this.setAttribute('role', 'button');
     }
 
+    // Called automatically when observed attributes change
     update() {
         this.renderTemplate();
     }
