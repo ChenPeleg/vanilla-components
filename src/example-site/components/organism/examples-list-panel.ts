@@ -1,53 +1,46 @@
 import {BaseElement} from '../../../_core/elements/base-element.ts';
 import {ListItem} from '../molecules/list-item.ts';
-import {ListController} from '../../../_core/ListController.ts';
 
 
 class ExamplesListPanel extends BaseElement {
-    
+
     state = {
         items: ['buy milk', 'walk the dog', 'do the laundry']
     }
 
     connectedCallback() {
         super.connectedCallback();
-        this.renderTemplate()
-        this.initController();
+        this.connectActionCallback()
     }
 
-    initController() {
-        const listController = this.$<ListController<string>>('list-controller');
-        if (!listController) return;
-
-        listController.renderer = (text: string) => {
-            const item = document.createElement('list-item') as ListItem;
-            item.setAttribute('id', text);
-            item.setAttribute('text', text);
-            item.actionCallback = (event) => this.itemAction(event);
-            return item;
-        }; 
-        listController.keyExtractor = (item: string) => item;
-        listController.items = this.state.items;
+    renderItem(text: string, index: number) {
+        return `<list-item text="${text}" id="${index + text}"></list-item>`;
     }
 
-    itemAction({id, actionType}: { id: string, actionType: string }) {
-        if (actionType === 'delete') {
-            this.state.items = this.state.items.filter(item => item !== id);
-            
-            const listController = this.$<ListController<string>>('list-controller');
-            if (listController) {
-                listController.items = this.state.items;
+    itemAction({
+                   id,
+                   actionType
+               }: { id: string, actionType: string }) {
+        console.log(actionType, id)
+    }
+
+    connectActionCallback() {
+        const allListItems = this.shadowRoot?.querySelectorAll ('list-item')
+        allListItems?.forEach((el    ) => {
+            (el as ListItem).actionCallback = ({id, actionType}) => {
+                this.itemAction({id, actionType})
             }
-        }
+        })
     }
 
     renderTemplate() {
         // language=HTML
         this.shadowRoot!.innerHTML = `
-            <div class="w-full flex flex-col items-center justify-center p-4 h-96 gap-3">
-                <list-controller id="list-controller"></list-controller>
+            <div class="  w-full flex flex-col items-center justify-center p-4 h-96 gap-3 ">
+                ${this.state.items.map((item, index) => this.renderItem(item, index)).join('')}
             </div>
         `;
+        this.update();
     }
 }
 
