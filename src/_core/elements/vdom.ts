@@ -54,7 +54,14 @@ export function vnodeToElement(vnode: VNode | string): Node {
         return document.createTextNode(vnode);
     }
 
-    const el = document.createElement(vnode.tag);
+    // Extract only the tag name (first word, no attributes or whitespace)
+    const tagName = vnode.tag.split(/[\s>]/)[0].toLowerCase();
+
+    if (!tagName || !/^[a-z][a-z0-9-]*$/i.test(tagName)) {
+        throw new Error(`[vnodeToElement] Invalid tag name: "${vnode.tag}"`);
+    }
+
+    const el = document.createElement(tagName);
     for (const [key, value] of Object.entries(vnode.attrs)) {
         el.setAttribute(key, value);
     }
