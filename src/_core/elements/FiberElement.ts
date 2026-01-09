@@ -11,7 +11,7 @@
 import { globalStyleSheet } from '../tailwind-style-sheet.ts';
 import type { CustomElement } from './CustomElement.ts';
 import { _ServicesProvider } from '../../services/_ServicesProvider.ts';
-import { type VNode, htmlToVNodes, vnodeToElementLegacy } from './vdom.ts';
+import { type VNode, htmlToVNodes, vNodeToElement } from './vdom.ts';
 
 export interface PatchOperation {
     type: 'CREATE' | 'UPDATE' | 'DELETE' | 'REPLACE';
@@ -268,7 +268,7 @@ export class FiberElement extends HTMLElement implements CustomElement {
     private applyEffect(effect: PatchOperation, root: ShadowRoot, children: Element[]): void {
         switch (effect.type) {
             case 'CREATE': {
-                const newEl = vnodeToElementLegacy(effect.node!) as Element;
+                const newEl = vNodeToElement([effect.node!]) as Element;
                 if (effect.index !== undefined && effect.index < children.length) {
                     root.insertBefore(newEl, children[effect.index]);
                 } else {
@@ -293,7 +293,7 @@ export class FiberElement extends HTMLElement implements CustomElement {
             case 'REPLACE': {
                 const target = effect.index !== undefined ? children[effect.index] : null;
                 if (target && effect.node) {
-                    const newEl = vnodeToElementLegacy(effect.node) as Element;
+                    const newEl = vNodeToElement([effect.node]) as Element;
                     root.replaceChild(newEl, target);
                 }
                 break;
@@ -347,13 +347,13 @@ export class FiberElement extends HTMLElement implements CustomElement {
 
                 if (!existingChild) {
                     // Append new child
-                    element.appendChild(vnodeToElementLegacy(childVNode));
+                    element.appendChild(vNodeToElement([childVNode]));
                 } else if (existingChild.tagName.toLowerCase() === childVNode.tag) {
                     // Patch existing child
                     this.patchElement(existingChild, childVNode);
                 } else {
                     // Replace with different tag
-                    element.replaceChild(vnodeToElementLegacy(childVNode), existingChild);
+                    element.replaceChild(vNodeToElement([childVNode]), existingChild);
                 }
             }
 

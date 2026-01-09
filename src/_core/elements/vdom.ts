@@ -90,7 +90,7 @@ function vnodeToString(vnode: VNode | string): string {
 /**
  * Converts an array of VNodes to a div element with class="contents" containing all children.
  */
-export function vnodeToHTMLString(vnodes: VNode[]): HTMLDivElement {
+export function vNodeToElement(vnodes: VNode[]): HTMLDivElement {
     const div = document.createElement('div');
     div.className = 'contents';
     div.innerHTML = vnodes.map(vnodeToString).join('');
