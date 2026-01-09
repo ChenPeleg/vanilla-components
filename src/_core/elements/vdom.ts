@@ -49,7 +49,7 @@ export function htmlToVNodes(html: string): VNode[] {
 /**
  * Converts a VNode (or text) back into a real DOM Node.
  */
-export function vnodeToElement(vnode: VNode | string): Node {
+export function vnodeToElementLegacy(vnode: VNode | string): Node {
     if (typeof vnode === 'string') {
         return document.createTextNode(vnode);
     }
@@ -59,7 +59,7 @@ export function vnodeToElement(vnode: VNode | string): Node {
         el.setAttribute(key, value);
     }
     for (const child of vnode.children) {
-        el.appendChild(vnodeToElement(child));
+        el.appendChild(vnodeToElementLegacy(child));
     }
     return el;
 }
