@@ -65,6 +65,39 @@ export function vnodeToElement(vnode: VNode | string): Node {
 }
 
 /**
+ * Converts a VNode (or text) to an HTML string.
+ */
+function vnodeToString(vnode: VNode | string): string {
+    if (typeof vnode === 'string') {
+        return vnode;
+    }
+
+    const attrs = Object.entries(vnode.attrs)
+        .map(([key, value]) => ` ${key}="${value}"`)
+        .join('');
+
+    const childrenHtml = vnode.children.map(vnodeToString).join('');
+
+    // Self-closing tags
+    const voidElements = ['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'source', 'track', 'wbr'];
+    if (voidElements.includes(vnode.tag)) {
+        return `<${vnode.tag}${attrs} />`;
+    }
+
+    return `<${vnode.tag}${attrs}>${childrenHtml}</${vnode.tag}>`;
+}
+
+/**
+ * Converts an array of VNodes to a div element with class="contents" containing all children.
+ */
+export function vnodeToHTMLString(vnodes: VNode[]): HTMLDivElement {
+    const div = document.createElement('div');
+    div.className = 'contents';
+    div.innerHTML = vnodes.map(vnodeToString).join('');
+    return div;
+}
+
+/**
  * Extracts all keyed VNodes from a tree (flat map).
  * Useful for quick lookups during reconciliation.
  */
@@ -85,4 +118,3 @@ export function collectKeyedNodes(vnodes: VNode[]): Map<string, VNode> {
     vnodes.forEach(walk);
     return map;
 }
-
