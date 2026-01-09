@@ -1,24 +1,37 @@
-export class ListController<T> {
-    private container: HTMLElement;
-    private itemRenderer: (item: T) => HTMLElement;
-    private keyExtractor: (item: T) => string;
-    private itemUpdater?: (element: HTMLElement, item: T) => void;
-    private elementMap: Map<string, HTMLElement> = new Map();
+import { BaseElement } from './elements/base-element.ts';
 
-    constructor(
-        container: HTMLElement,
-        itemRenderer: (item: T) => HTMLElement,
-        keyExtractor: (item: T) => string,
-        itemUpdater?: (element: HTMLElement, item: T) => void
-    ) {
-        this.container = container;
-        this.itemRenderer = itemRenderer;
-        this.keyExtractor = keyExtractor;
-        this.itemUpdater = itemUpdater;
+export class ListController<T> extends BaseElement {
+    public renderer: (item: T) => HTMLElement = (item: any) => {
+        const div = document.createElement('div');
+        div.textContent = String(item);
+        return div;
+    };
+    public keyExtractor: (item: T) => string = (item: any) => String(item);
+    public updater?: (element: HTMLElement, item: T) => void;
+    
+    private elementMap: Map<string, HTMLElement> = new Map();
+    private _items: T[] = [];
+
+    renderTemplate() {
+        // No initial template needed.
     }
 
-    setItems(items: T[]): void {
-        const newIds = new Set(items.map(this.keyExtractor));
+    set items(items: T[]) {
+        this._items = items;
+        this.renderList();
+    }
+    
+    get items(): T[] {
+        return this._items;
+    }
+
+    private renderList() {
+        // Ensure shadowRoot exists (BaseElement creates it). 
+        // We append directly to shadowRoot to encapsulate items, 
+        // matching the "Controller" pattern where it manages its own DOM list.
+        if (!this.shadowRoot) return;
+
+        const newIds = new Set(this._items.map(this.keyExtractor));
 
         // 1. Remove deleted items
         for (const [id, element] of this.elementMap) {
@@ -29,34 +42,41 @@ export class ListController<T> {
         }
 
         // 2. Add or Update items
-        items.forEach((item, index) => {
+        this._items.forEach((item, index) => {
             const id = this.keyExtractor(item);
             let element = this.elementMap.get(id);
 
             if (!element) {
                 // New: Create
-                element = this.itemRenderer(item);
+                element = this.renderer(item);
                 this.elementMap.set(id, element);
-                // Append initially, will be re-ordered if needed
-                this.container.appendChild(element);
+                this.shadowRoot!.appendChild(element);
             } else {
                 // Existing: Update
-                if (this.itemUpdater) {
-                    this.itemUpdater(element, item);
+                if (this.updater) {
+                    this.updater(element, item);
                 }
             }
 
-            // 3. Re-order: Ensure element is at the correct index
-            const currentDomNode = this.container.children[index];
+            // 3. Re-order
+            // elementMap elements are our managed children. 
+            // We need to ensure they are in the correct order in the shadowRoot.
+            // Note: shadowRoot might handle <style> tags from BaseElement/GlobalStyles.
+            // But strict list ordering usually implies we want our items in order relative to each other.
+            // The simplest way is to ensure `shadowRoot.children[index]` is correct, skipping non-managed nodes?
+            // BaseElement adds styles via adoptedStyleSheets, so shadowRoot.children should be clean unless we added something.
+            // With empty renderTemplate, shadowRoot.children starts empty.
             
-            // If the element at this index in DOM isn't this one, move it.
+            const currentDomNode = this.shadowRoot!.children[index];
             if (currentDomNode !== element) {
                 if (currentDomNode) {
-                    this.container.insertBefore(element, currentDomNode);
+                    this.shadowRoot!.insertBefore(element, currentDomNode);
                 } else {
-                    this.container.appendChild(element);
+                    this.shadowRoot!.appendChild(element);
                 }
             }
         });
     }
 }
+
+customElements.define('list-controller', ListController);

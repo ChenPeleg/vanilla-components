@@ -1,4 +1,5 @@
 import {BaseElement} from './_core/elements/base-element.ts';
+import './_core/ListController.ts';
 
 class AppRoot extends BaseElement {
 
