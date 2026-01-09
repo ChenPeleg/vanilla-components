@@ -1,5 +1,6 @@
 import {BaseElement} from './_core/elements/base-element.ts';
 
+
 class AppRoot extends BaseElement {
 
     renderTemplate() {

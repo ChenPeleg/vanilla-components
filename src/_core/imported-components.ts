@@ -3,7 +3,6 @@
  * @readonly
  * @module imported-components
  */
-import '../_core/router/router-outlet.ts';
 import '../app-page.ts';
 import '../example-site/code/highlighted-code.ts';
 import '../example-site/components/atoms/app-button.ts';
@@ -18,13 +17,16 @@ import '../example-site/components/molecules/card-component-folded.ts';
 import '../example-site/components/molecules/code-gist.ts';
 import '../example-site/components/molecules/documentation-renderer.ts';
 import '../example-site/components/molecules/hero-section.ts';
+import '../example-site/components/molecules/list-item.ts';
 import '../example-site/components/molecules/logo-component.ts';
 import '../example-site/components/organism/code-snippet.ts';
 import '../example-site/components/organism/docs-article.ts';
 import '../example-site/components/organism/docs-page-layout.ts';
+import '../example-site/components/organism/example-panel.ts';
+import '../example-site/components/organism/examples-buttons-panel.ts';
+import '../example-site/components/organism/examples-list-panel.ts';
 import '../example-site/components/organism/main-content.ts';
 import '../example-site/components/organism/nav-bar.ts';
-import '../example-site/components/organism/example-panel.ts';
 import '../example-site/components/organism/use-case-panel.ts';
 import '../example-site/documentation/examples/code-snippets.ts';
 import '../example-site/documentation/tutorial/tutorial-code-snippets.ts';
@@ -34,6 +36,4 @@ import '../example-site/pages/home-page.ts';
 import '../example-site/pages/how-to-use-page.ts';
 import '../example-site/pages/main.layout.ts';
 import '../root.ts';
-import '../example-site/components/organism/examples-buttons-panel.ts';
-import '../example-site/components/organism/examples-list-panel.ts';
-import '../example-site/components/molecules/list-item.ts';
+import '../_core/router/router-outlet.ts';
