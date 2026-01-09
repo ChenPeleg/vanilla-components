@@ -1,16 +1,11 @@
-import {BaseElement} from '../../../_core/elements/base-element.ts';
+import {FiberElement} from '../../../_core/elements/FiberElement.ts';
 import {ListItem} from '../molecules/list-item.ts';
 
 
-class ExamplesListPanel extends BaseElement {
+class ExamplesListPanel extends FiberElement {
 
     state = {
         items: ['buy milk', 'walk the dog', 'do the laundry']
-    }
-
-    connectedCallback() {
-        super.connectedCallback();
-        this.connectActionCallback()
     }
 
     renderItem(text: string, index: number) {
@@ -24,7 +19,7 @@ class ExamplesListPanel extends BaseElement {
         console.log(actionType, id)
     }
 
-    connectActionCallback() {
+    onCommit() {
         const allListItems = this.shadowRoot?.querySelectorAll ('list-item')
         allListItems?.forEach((el    ) => {
             (el as ListItem).actionCallback = ({id, actionType}) => {
@@ -33,14 +28,13 @@ class ExamplesListPanel extends BaseElement {
         })
     }
 
-    renderTemplate() {
+    template() {
         // language=HTML
-        this.shadowRoot!.innerHTML = `
+        return `
             <div class="  w-full flex flex-col items-center justify-center p-4 h-96 gap-3 ">
                 ${this.state.items.map((item, index) => this.renderItem(item, index)).join('')}
             </div>
         `;
-        this.update();
     }
 }
 

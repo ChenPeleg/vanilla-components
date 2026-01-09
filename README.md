@@ -98,6 +98,8 @@ npm run run-on-start    # Run startup scripts
 
 All components extend the `BaseElement` class which provides:
 
+> ⚠️ **Work in Progress**: The `FiberElement` class with fiber-like reconciliation and virtual DOM support is currently under development and not yet production-ready.
+
 - Shadow DOM encapsulation
 - TailwindCSS integration
 - Type-safe element querying
