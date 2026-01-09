@@ -25,8 +25,7 @@ class ExamplesListPanel extends BaseElement {
             item.setAttribute('text', text);
             item.actionCallback = (event) => this.itemAction(event);
             return item;
-        };
-
+        }; 
         listController.keyExtractor = (item: string) => item;
         listController.items = this.state.items;
     }
