@@ -97,6 +97,7 @@ export class FiberElement extends HTMLElement implements CustomElement {
      */
     protected scheduleRender(): void {
         this.pendingTree = htmlToVNodes(this.template());
+        console.log(this)
 
         if (!this.frameId) {
             this.frameId = requestAnimationFrame(() => {
