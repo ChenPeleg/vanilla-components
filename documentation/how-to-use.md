@@ -80,42 +80,59 @@ customElements.define('text-container', TextContainer);
 
 - **Shadow DOM**: By using `this.shadowRoot`, the component's styles and structure are encapsulated, preventing conflicts with the rest of your page's CSS.
 
-#### Example 2: Interactive Button Component with Attribute Handling
+#### Example 2: Interactive Collapsible Panel with Attribute Handling
 
-A button component that reacts to attribute changes like `disabled`. This example introduces reactive attributes and component lifecycle methods:
+A collapsible panel component that opens and closes when clicked. This example introduces reactive attributes, component lifecycle methods, and action callbacks for parent-child communication:
 
 ```typescript
 import { BaseElement } from '../_core/elements/base-element.ts';
 
-class SimpleButton extends BaseElement {
+class CollapsiblePanel extends BaseElement {
     static get observedAttributes() {
-        return ['disabled'];
+        return ['open'];
     }
+
+    actionCallback = (_result: { open: boolean }) => {};
 
     connectedCallback(): void {
         super.connectedCallback();
         this.update();
+        
+        // Add click event listener to toggle panel
+        this.$<HTMLDivElement>('.panel-header').addEventListener('click', () => {
+            const isOpen = this.getAttribute('open') === 'true';
+            this.setAttribute('open', String(!isOpen));
+            this.update();
+            
+            // Notify parent via action callback
+            this.actionCallback({ open: !isOpen });
+        });
     }
 
     // Called automatically when observed attributes change
     update() {
-        const isDisabled = this.getAttribute('disabled') === 'true';
-        const button = this.$<HTMLButtonElement>('button');
-        if (button) {
-            button.disabled = isDisabled;
+        const isOpen = this.getAttribute('open') === 'true';
+        const content = this.$<HTMLDivElement>('.panel-content');
+        if (content) {
+            content.style.display = isOpen ? 'block' : 'none';
         }
     }
 
     renderTemplate() {
         this.shadowRoot!.innerHTML = `
-            <button class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
-                <slot>Click me</slot>
-            </button>
+            <div class="border rounded-lg overflow-hidden">
+                <div class="panel-header px-4 py-3 bg-blue-500 text-white cursor-pointer hover:bg-blue-600">
+                    <slot name="header">Click to toggle</slot>
+                </div>
+                <div class="panel-content p-4 bg-white" style="display: none;">
+                    <slot></slot>
+                </div>
+            </div>
         `;
     }
 }
 
-customElements.define('simple-button', SimpleButton);
+customElements.define('collapsible-panel', CollapsiblePanel);
 ```
 
 **New concepts introduced:**
@@ -128,7 +145,11 @@ customElements.define('simple-button', SimpleButton);
 
 - **Reactive updates**: The `update()` method reads the current attribute values and updates the component's internal state. This allows the component to respond dynamically when attributes change.
 
-- **Default slot content**: The `<slot>Click me</slot>` provides default content that appears if no content is provided between the component tags.
+- **Action callbacks**: The `actionCallback` property allows the component to notify its parent when the panel state changes. The parent can set this callback to respond to panel open/close events.
+
+- **Event listeners**: The click event listener toggles the panel state and triggers the action callback, demonstrating how to handle user interactions and communicate with parent components.
+
+- **Named slots**: The `<slot name="header">` allows specific content to be placed in the header, while the default `<slot>` is for the panel content.
 
 #### Example 3: Full-Featured Component
 
