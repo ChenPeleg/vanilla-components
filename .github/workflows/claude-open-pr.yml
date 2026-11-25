@@ -1,0 +1,25 @@
+name: Open Claude PR
+
+# Opens a PR for each pushed claude/** branch, authored by the Claude bot App.
+# The logic lives in ChenPeleg/skills; see that file for the setup steps.
+#
+# Needs, in this repo's Settings -> Secrets and variables -> Actions:
+#   - variable CLAUDE_BOT_CLIENT_ID   = the App's Client ID (Iv...)
+#   - secret   CLAUDE_BOT_PRIVATE_KEY = the App's private key (.pem)
+#   - optional variable CLAUDE_BOT_REVIEWERS = comma-separated logins
+# and the chen-claude-bot App installed on this repo.
+on:
+  push:
+    branches: ["claude/**"]
+
+jobs:
+  open-pr:
+    if: ${{ vars.CLAUDE_BOT_CLIENT_ID != '' }}
+    permissions:
+      contents: read
+    uses: ChenPeleg/skills/.github/workflows/claude-open-pr.yml@main
+    with:
+      client-id: ${{ vars.CLAUDE_BOT_CLIENT_ID }}
+      reviewers: ${{ vars.CLAUDE_BOT_REVIEWERS }}
+    secrets:
+      private-key: ${{ secrets.CLAUDE_BOT_PRIVATE_KEY }}
